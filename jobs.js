@@ -1,5 +1,5 @@
 window.VOX_BOARD = {
-"updated": "2026-09-24 19:22 UTC",
+"updated": "2026-09-24 20:05 UTC",
 "machines": {
   "ben-3070": "Ben's Win (RTX 3070 8GB)",
   "james-3080": "James Win (RTX 3080 10GB)",
@@ -279,7 +279,7 @@ window.VOX_BOARD = {
    {"role":"reviewed","model":"deepseek-flash","machine":"ben-3070"}
  ]},
 
-{"id": "F7k", "title": "Keep a glued build as a library object", "round": "Round 1", "column": "todo", "kind": "feature", "grade": "L", "origin": "Part of F7.", "raisedBy": "Ben", "summary": "Press K on something you glued together to save it to your library as one object.", "status": "After F7c.", "parent": "F7", "repairRounds": 0,
+{"id": "F7k", "title": "Keep a glued build as a library object", "round": "Round 1", "column": "todo", "kind": "feature", "grade": "L", "origin": "Part of F7.", "raisedBy": "Ben", "summary": "Press K on something you glued together to save it to your library as one object.", "status": "After F7c.", "parent": "F7", "blocking": ["F26"], "repairRounds": 0,
  "involved": [
    {"role":"researched","model":"Claude Opus (subagent)","machine":"ben-3070"}
  ]},
@@ -523,6 +523,8 @@ window.VOX_BOARD = {
 {"id": "F23", "title": "A main menu, and a menu on Escape", "round": "Round 1", "column": "doing", "machine": "james-3080", "dispatched": "2026-09-24 19:10", "kind": "feature", "origin": "Ben, 24 September: stacked buttons like Minecraft's -- Single Player (choose a map, you host from then on), Multiplayer (join friends' lobbies), Options, Exit Game; Escape in game: Options, Exit Lobby, Exit Game.", "raisedBy": "Ben", "summary": "A main menu (Single Player with a new or saved Box, Multiplayer with friends' games, Options, Exit) and a pause menu on Escape; the host leaving saves the Box and sends everyone back to their menu.", "status": "Approved with Ben's rulings: a menu, Single Player with new or saved Boxes, friends' games, the pause menu, and \"Box\" for \"table\" everywhere a player reads.", "repairRounds": 0, "blocking": ["F24"], "involved": []},
 
 {"id": "F24", "title": "Voxels raining behind the main menu", "round": "Round 1", "column": "todo", "kind": "feature", "origin": "Ben, 24 September: random-material voxels rain behind the menu buttons, some bounce off them, the mouse parts them like a hand under a waterfall.", "raisedBy": "Ben", "summary": "Random-material voxels rain behind the menu buttons, bounce off them, and part around the mouse; a corner slider sets the intensity, and Options can turn it all off.", "status": "Approved: waits for the menus (F23) and particle effects (F18).", "repairRounds": 0, "blockedBy": ["F23", "F18"], "involved": []},
+{"id": "F25", "title": "Pick out parts of an object", "round": "Round 1", "column": "todo", "kind": "feature", "grade": "L", "origin": "Ben, 24 September: a generated dinner table comes as one object; he wants to pick out a wine glass, keep it on its own, or make it a separate part of the table that can be glass while the table stays wood.", "raisedBy": "Ben", "summary": "A Parts tool: hover to light up the parts of an object, click to pick one, or select voxels with a colour wand (drag up and down to grow or shrink it) or a ball or cube brush, Shift to add and Ctrl to remove. Then keep the selection as its own library object, make it a separate part in place (nothing visibly changes), or give a part its own material so it breaks like glass, wood or metal.", "status": "Approved: ready to start.", "repairRounds": 0, "blocking": ["F26"], "involved": []},
+{"id": "F26", "title": "Parts that move", "round": "Round 1", "column": "todo", "kind": "feature", "grade": "L", "origin": "Ben, 24 September: once an object has parts, they could move: a glass that topples, a lid that opens, crude limbs on a character.", "raisedBy": "Ben", "summary": "Parts of an object can rotate, slide and scale (scaled to nothing, a part hides), driven by time, by a use key, or left to physics like a hinge. Parts can hang from other parts, so an arm moves its hand. Saved with the object, so it still moves when thrown out of the library.", "status": "Approved: waits for Parts (F25) and saving glued builds (F7k).", "repairRounds": 0, "blockedBy": ["F25", "F7k"], "involved": []},
 
 {"id": "D5", "title": "Only one two-program test at a time", "round": "Round 1", "column": "doing", "machine": "ben-3070", "dispatched": "2026-09-24 15:54", "kind": "feature", "grade": "S", "origin": "Ben's rule: tests that run two game or server programs at once must run alone.", "raisedBy": "Ben", "summary": "A lock so network, generation and server tests never overlap on one PC.", "status": "Approved; queued for Space Bunny.", "parent": "D1", "repairRounds": 0, "involved": [
    {"role":"implemented","model":"deepseek-flash","machine":"ben-3070"}
