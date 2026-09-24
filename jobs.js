@@ -1,5 +1,5 @@
 window.VOX_BOARD = {
-"updated": "2026-09-24 20:31 UTC",
+"updated": "2026-09-24 20:34 UTC",
 "machines": {
   "ben-3070": "Ben's Win (RTX 3070 8GB)",
   "james-3080": "James Win (RTX 3080 10GB)",
@@ -116,8 +116,8 @@ window.VOX_BOARD = {
  "involved": [
    {"role":"researched","model":"Claude Opus (subagent)","machine":"ben-3070"},
    {"role":"implemented","model":"deepseek-flash","machine":"ben-3070"},
-   {"role":"reviewed","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"},
-   {"role":"reviewed","model":"deepseek-flash","machine":"ben-3070"}
+   {"role":"reviewed","model":"deepseek-flash","machine":"ben-3070"},
+   {"role":"reviewed","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"}
  ]},
 
 {"id": "F3b3", "title": "Draw see-through voxels", "round": "Round 1", "column": "todo", "kind": "feature", "grade": "L", "origin": "The second half of F3b: the rule is no use until the game draws glass as glass.", "raisedBy": "Ben", "summary": "Glass and other see-through parts of a generated object actually look see-through in the game, with what is behind them visible through them.", "status": "Approved and ready to start, beside the rule it draws.", "parent": "F3b", "blocking": ["F3b4"], "repairRounds": 0,
@@ -296,8 +296,8 @@ window.VOX_BOARD = {
    {"role":"reviewed","model":"OpenRouter thinkingmachines/inkling:free","machine":"ben-3070"},
    {"role":"reviewed","model":"OpenRouter poolside/laguna-s-2.1:free","machine":"ben-3070"},
    {"role":"reviewed","model":"deepseek-flash","machine":"ben-3070"},
-   {"role":"reviewed","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"},
-   {"role":"repaired","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"}
+   {"role":"repaired","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"},
+   {"role":"reviewed","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"}
  ]},
 
 {"id": "F16", "title": "Bake a glued build into one object", "round": "Round 1", "column": "backlog", "kind": "feature", "origin": "Glue keeps each part's own grid, material and detail. Ben liked the idea of also offering a deliberate way to fuse a build into a single grid.", "raisedBy": "Ben", "summary": "A Bake action that fuses a glued build into one voxel grid at a resolution you choose, for when you want it to behave as a single lump, for example to carve evenly across the seams.", "status": "Backlog, after F7.", "parent": "F7", "repairRounds": 0,
@@ -313,9 +313,6 @@ window.VOX_BOARD = {
  "involved": []},
 
 {"id": "F9", "title": "Primitives: place, then scale; colour before spawning", "round": "Round 1", "column": "backlog", "kind": "feature", "origin": "Place a primitive and then scale it (growing it with more voxels, not stretching), and choose its colour before spawning.", "raisedBy": "Ben", "status": "Roadmap; Ben has more ideas.", "repairRounds": 0,
- "involved": []},
-
-{"id": "F10", "title": "Add voxels (carving in reverse)", "round": "Round 1", "column": "backlog", "kind": "feature", "origin": "Build onto objects as well as carving away from them.", "raisedBy": "Ben", "status": "Roadmap, after F7, which builds most of what it needs.", "repairRounds": 0,
  "involved": []},
 
 {"id": "F11", "title": "How good should generation be?", "round": "Round 1", "column": "backlog", "kind": "feature", "origin": "Are we losing detail by using a coarser voxel grid for too little speed gain? And which weights should ship, once F2's toggle lets everyone compare them by playing?", "raisedBy": "Ben", "status": "Roadmap: a discussion between Ben and Claude.", "repairRounds": 0,
@@ -530,11 +527,15 @@ window.VOX_BOARD = {
 {"id": "F24", "title": "Voxels raining behind the main menu", "round": "Round 1", "column": "todo", "kind": "feature", "origin": "Ben, 24 September: random-material voxels rain behind the menu buttons, some bounce off them, the mouse parts them like a hand under a waterfall.", "raisedBy": "Ben", "summary": "Random-material voxels rain behind the menu buttons, bounce off them, and part around the mouse; a corner slider sets the intensity, and Options can turn it all off.", "status": "Approved: waits for the menus (F23) and particle effects (F18).", "repairRounds": 0, "blockedBy": ["F23", "F18"], "involved": []},
 {"id": "F25", "title": "Pick out parts of an object", "round": "Round 1", "column": "todo", "kind": "feature", "grade": "L", "origin": "Ben, 24 September: a generated dinner table comes as one object; he wants to pick out a wine glass, keep it on its own, or make it a separate part of the table that can be glass while the table stays wood.", "raisedBy": "Ben", "summary": "A Parts tool: hover to light up the parts of an object, click to pick one, or select voxels with a colour wand (drag up and down to grow or shrink it) or a ball or cube brush, Shift to add and Ctrl to remove. Then keep the selection as its own library object, make it a separate part in place (nothing visibly changes), or give a part its own material so it breaks like glass, wood or metal.", "status": "Approved: ready to start.", "repairRounds": 0, "blocking": ["F26"], "involved": []},
 {"id": "F26", "title": "Parts that move", "round": "Round 1", "column": "todo", "kind": "feature", "grade": "L", "origin": "Ben, 24 September: once an object has parts, they could move: a glass that topples, a lid that opens, crude limbs on a character.", "raisedBy": "Ben", "summary": "Parts of an object can rotate, slide and scale (scaled to nothing, a part hides), driven by time, by a use key, or left to physics like a hinge. Parts can hang from other parts, so an arm moves its hand. Saved with the object, so it still moves when thrown out of the library.", "status": "Approved: waits for Parts (F25) and saving glued builds (F7k).", "repairRounds": 0, "blockedBy": ["F25", "F7k"], "involved": []},
+{"id": "F10", "title": "Sculpt: carve, grow and restore", "round": "Round 1", "column": "todo", "kind": "feature", "grade": "L", "origin": "Ben, 24 September: he wanted the opposite of carve, adding voxels to an object, and then a way to put an object back how it was made.", "raisedBy": "Ben", "summary": "The carve tool becomes Sculpt: left button carves as now, right button grows the object where you point (in the paint colour, or copying the colour next to it), and Ctrl with the right button restores it towards the way it was made, shape and colour. Grown voxels only join on to what is already there, so nothing floats loose.", "status": "Approved: ready to start. Three jobs, the first can begin now.", "repairRounds": 0, "involved": []},
+{"id": "F10a", "title": "Growing and restoring voxels: the rules", "round": "Round 1", "column": "todo", "kind": "feature", "grade": "M", "origin": "Part of F10.", "raisedBy": "Ben", "summary": "The exact, tested rules for adding voxels under a brush (only where they connect to the object, with two ways to colour them) and for restoring an object to what it was made as.", "status": "Approved: ready to start.", "parent": "F10", "repairRounds": 0, "blocking": ["F10b"], "involved": []},
+{"id": "F10b", "title": "Growing and restoring in the game and on friends' screens", "round": "Round 1", "column": "todo", "kind": "feature", "grade": "L", "origin": "Part of F10.", "raisedBy": "Ben", "summary": "The host grows or restores an object in place without it jumping or dropping quick strokes, and everyone else's copy follows exactly, including objects made of several parts.", "status": "Approved: waits for the rules (F10a) and for fast carving (B1e).", "parent": "F10", "repairRounds": 0, "blockedBy": ["F10a", "B1e"], "blocking": ["F10c"], "involved": []},
+{"id": "F10c", "title": "The Sculpt tool", "round": "Round 1", "column": "todo", "kind": "feature", "grade": "S", "origin": "Part of F10.", "raisedBy": "Ben", "summary": "The carve tool is renamed Sculpt with its buttons: left carves, right grows, Ctrl and right restores; a key chooses how grown voxels are coloured; the cursor and the hints show which action you have.", "status": "Approved: waits for the game side (F10b).", "parent": "F10", "repairRounds": 0, "blockedBy": ["F10b"], "involved": []},
 
 {"id": "D5", "title": "Only one two-program test at a time", "round": "Round 1", "column": "doing", "machine": "ben-3070", "dispatched": "2026-09-24 15:54", "kind": "feature", "grade": "S", "origin": "Ben's rule: tests that run two game or server programs at once must run alone.", "raisedBy": "Ben", "summary": "A lock so network, generation and server tests never overlap on one PC.", "status": "Approved; queued for Space Bunny.", "parent": "D1", "repairRounds": 0, "involved": [
    {"role":"implemented","model":"deepseek-flash","machine":"ben-3070"},
-   {"role":"reviewed","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"},
-   {"role":"reviewed","model":"deepseek-flash","machine":"ben-3070"}
+   {"role":"reviewed","model":"deepseek-flash","machine":"ben-3070"},
+   {"role":"reviewed","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"}
  ]},
 
 {"id": "D6", "title": "The board says where each job stands, by itself", "round": "Round 1", "column": "doing", "machine": "ben-3070", "dispatched": "2026-09-24 15:56", "kind": "feature", "grade": "S", "origin": "Card statuses went stale because they were written by hand.", "raisedBy": "Ben", "summary": "The board's sync writes each card's 'Where it stands' from claims, runs and reviews.", "status": "Approved; queued for Space Bunny.", "parent": "D1", "repairRounds": 0, "involved": [
@@ -559,6 +560,6 @@ window.VOX_BOARD = {
 
 {"id": "F24b", "title": "Settle the menu rain's intensity", "round": "Round 1", "column": "backlog", "kind": "qol", "origin": "Ben will say which slider setting felt right.", "raisedBy": "Ben", "summary": "Bake in Ben's chosen intensity and remove the slider.", "status": "Waiting for Ben's number.", "repairRounds": 0, "blockedBy": ["F24"], "involved": []},
 
-{"id": "B1e", "title": "Fast carving never drops a cut", "round": "Round 1", "column": "doing", "machine": "james-3080", "dispatched": "2026-09-24 19:10", "kind": "bug", "grade": "M", "origin": "B1c's test found the host silently drops a carve scoop while the previous piece's collision is still being built (20-620 ms), so quick carving loses cuts.", "raisedBy": "Ben", "summary": "Build a carved piece's collision after the piece is in place, so every scoop is carved.", "status": "Approved in principle; B1c is merged, so it can start.", "parent": "B1", "repairRounds": 0, "involved": [{"role": "researched", "model": "Claude Sonnet (subagent)", "machine": "james-3080"}]}
+{"id": "B1e", "title": "Fast carving never drops a cut", "round": "Round 1", "column": "doing", "machine": "james-3080", "dispatched": "2026-09-24 19:10", "kind": "bug", "grade": "M", "origin": "B1c's test found the host silently drops a carve scoop while the previous piece's collision is still being built (20-620 ms), so quick carving loses cuts.", "raisedBy": "Ben", "summary": "Build a carved piece's collision after the piece is in place, so every scoop is carved.", "status": "Approved in principle; B1c is merged, so it can start.", "parent": "B1", "blocking": ["F10b"], "repairRounds": 0, "involved": [{"role": "researched", "model": "Claude Sonnet (subagent)", "machine": "james-3080"}]}
 ]
 };
