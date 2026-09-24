@@ -1,5 +1,5 @@
 window.VOX_BOARD = {
-"updated": "2026-09-24 13:21 UTC",
+"updated": "2026-09-24 14:31 UTC",
 "machines": {
   "ben-3070": "Ben's Win (RTX 3070 8GB)",
   "james-3080": "James Win (RTX 3080 10GB)",
@@ -185,7 +185,9 @@ window.VOX_BOARD = {
 {"id": "B9", "title": "Show as joinable on Steam", "round": "Round 1", "column": "doing", "machine": "ben-3070", "dispatched": "2026-09-24 12:22", "kind": "bug", "grade": "M", "origin": "It looked as though Steam showed Ben offline, so friends couldn't join him. Ben later corrected this: his friends were offline, so nothing was broken. Kept as a nice-to-have.", "raisedBy": "Ben", "summary": "Your Steam friends list shows that you're playing VoxBox and can be joined.", "status": "Brief ready; queued.", "repairRounds": 0,
  "involved": [
    {"role":"researched","model":"Claude Opus (orchestrator)","machine":"ben-3070"},
-   {"role":"implemented","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"}
+   {"role":"reviewed","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"},
+   {"role":"implemented","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"},
+   {"role":"reviewed","model":"deepseek-flash","machine":"ben-3070"}
  ]},
 
 {"id": "B10", "title": "Other players move smoothly", "round": "Round 1", "column": "done", "machine": "james-3080", "merged": "2026-09-24", "dispatched": "2026-09-24 06:13", "kind": "bug", "grade": "L", "origin": "Other players' markers moved choppily, hopping rather than gliding.", "raisedBy": "Ben", "summary": "Other players glide instead of hopping 15 times a second. The smoothing starts at 120 ms, a first guess for Ben to tune.", "status": "Brief ready; queued.", "repairRounds": 0,
