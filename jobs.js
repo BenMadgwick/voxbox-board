@@ -1,5 +1,5 @@
 window.VOX_BOARD = {
-"updated": "2026-09-24 14:45 UTC",
+"updated": "2026-09-24 15:00 UTC",
 "machines": {
   "ben-3070": "Ben's Win (RTX 3070 8GB)",
   "james-3080": "James Win (RTX 3080 10GB)",
@@ -163,8 +163,8 @@ window.VOX_BOARD = {
    {"role":"researched","model":"Claude Opus (orchestrator)","machine":"ben-3070"},
    {"role":"implemented","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"},
    {"role":"reviewed","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"},
-   {"role":"repaired","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"},
-   {"role":"reviewed","model":"deepseek-flash","machine":"ben-3070"}
+   {"role":"reviewed","model":"deepseek-flash","machine":"ben-3070"},
+   {"role":"repaired","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"}
  ]},
 
 {"id": "Q5", "title": "A controls overlay on H", "round": "Round 1", "column": "done", "kind": "qol", "grade": "M", "origin": "Nothing was discoverable. Ben typed the controls into Discord all night, and players asked for cube brushes and a colour picker that were already in the game.", "raisedBy": "Ben, and playtesters", "summary": "Press H to see the controls, grouped, including those for the tool in your hand. It shows itself once the first time you play.", "status": "Merged. Built in one go by deepseek-flash, the cheap model, and reviewed by another flash run: it had Q and E the wrong way round (Q flies up) and no line on getting the mouse back, both fixed before merging. Checked by Claude at both screen sizes. One thing it uncovered: the game had never actually saved your settings -- fixed the same night as B15, so the controls now greet you only the first time.", "forPlaytesters": "Press H and check every line against what the keys really do -- the list is meant to be complete, so a missing or wrong line is a bug worth a /bug. Switch tools with it open and watch the middle column change.", "repairRounds": 0, "dispatched": "2026-09-22 21:42", "merged": "2026-09-22 22:20", "workMinutes": 27, "tokens": 12136064, "tokensWritten": 121906,
@@ -187,8 +187,8 @@ window.VOX_BOARD = {
  "involved": [
    {"role":"researched","model":"Claude Opus (orchestrator)","machine":"ben-3070"},
    {"role":"reviewed","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"},
-   {"role":"implemented","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"},
-   {"role":"reviewed","model":"deepseek-flash","machine":"ben-3070"}
+   {"role":"reviewed","model":"deepseek-flash","machine":"ben-3070"},
+   {"role":"implemented","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"}
  ]},
 
 {"id": "B10", "title": "Other players move smoothly", "round": "Round 1", "column": "done", "machine": "james-3080", "merged": "2026-09-24", "dispatched": "2026-09-24 06:13", "kind": "bug", "grade": "L", "origin": "Other players' markers moved choppily, hopping rather than gliding.", "raisedBy": "Ben", "summary": "Other players glide instead of hopping 15 times a second. The smoothing starts at 120 ms, a first guess for Ben to tune.", "status": "Brief ready; queued.", "repairRounds": 0,
@@ -497,7 +497,7 @@ window.VOX_BOARD = {
    {"role":"implemented","model":"deepseek-flash","machine":"ben-3070"}
  ]},
 
-{"id": "F22c", "title": "Hosting works the same with no player at the host", "round": "Round 1", "column": "todo", "machine": "james-3080", "kind": "feature", "grade": "L", "origin": "Part of F22: F22b's test found three places where the host assumed it had a player.", "raisedBy": "Ben", "summary": "Breaks and glue are announced by any host, host-run tests need no host player, and the host can lend its own GPU; every two-player test then passes with a host that has no player.", "status": "Approved; for James's Grok worker (james-3080).", "parent": "F22", "repairRounds": 0, "prio": 2, "blocking": ["F22k", "F22Lc"], "involved": [{"role": "researched", "model": "Claude Opus (orchestrator)", "machine": "ben-3070"}]},
+{"id": "F22c", "title": "Hosting works the same with no player at the host", "round": "Round 1", "column": "doing", "dispatched": "2026-09-24 15:00", "machine": "james-3080", "kind": "feature", "grade": "L", "origin": "Part of F22: F22b's test found three places where the host assumed it had a player.", "raisedBy": "Ben", "summary": "Breaks and glue are announced by any host, host-run tests need no host player, and the host can lend its own GPU; every two-player test then passes with a host that has no player.", "status": "Approved; for James's Grok worker (james-3080).", "parent": "F22", "repairRounds": 0, "prio": 2, "blocking": ["F22k", "F22Lc"], "involved": [{"role": "researched", "model": "Claude Opus (orchestrator)", "machine": "ben-3070"}]},
 
 {"id": "F23", "title": "A main menu, and a menu on Escape", "round": "Round 1", "column": "backlog", "kind": "feature", "origin": "Ben, 24 September: stacked buttons like Minecraft's -- Single Player (choose a map, you host from then on), Multiplayer (join friends' lobbies), Options, Exit Game; Escape in game: Options, Exit Lobby, Exit Game.", "raisedBy": "Ben", "summary": "Proposed; needs a design pass and Ben's approval.", "status": "Idea recorded (docs/design/F23-menus.md).", "repairRounds": 0, "blocking": ["F24"], "involved": []},
 
