@@ -1,5 +1,5 @@
 window.VOX_BOARD = {
-"updated": "2026-09-24 21:37 UTC",
+"updated": "2026-09-24 21:54 UTC",
 "machines": {
   "ben-3070": "Ben's Win (RTX 3070 8GB)",
   "james-3080": "James Win (RTX 3080 10GB)",
@@ -90,7 +90,7 @@ window.VOX_BOARD = {
    {"role":"reviewed","model":"Claude Opus","machine":"ben-3070"}
  ]},
 
-{"id": "F3", "title": "See-through objects", "round": "Round 1", "column": "doing", "kind": "feature", "origin": "The generator (TRELLIS) works out how see-through each voxel is, but the game throws that away. Ben: \"Trellis should do see-through ok\".", "raisedBy": "Ben", "summary": "Split in two: first measure whether the see-through data is good enough to be worth keeping (F3a), then build the real feature from those numbers (F3b).", "status": "F3a is done: the generator's see-through data does pick out glass. F3b, the part you will see, is designed and waiting its turn.", "repairRounds": 0,
+{"id": "F3", "title": "See-through objects", "round": "Round 1", "column": "done", "merged": "2026-09-22 05:20", "kind": "feature", "origin": "The generator (TRELLIS) works out how see-through each voxel is, but the game throws that away. Ben: \"Trellis should do see-through ok\".", "raisedBy": "Ben", "summary": "Split in two: first measure whether the see-through data is good enough to be worth keeping (F3a), then build the real feature from those numbers (F3b).", "status": "F3a is done: the generator's see-through data does pick out glass. F3b, the part you will see, is designed and waiting its turn.", "repairRounds": 0,
  "involved": [
    {"role":"researched","model":"Claude Opus (orchestrator)","machine":"ben-3070"}
  ]},
@@ -122,7 +122,9 @@ window.VOX_BOARD = {
 
 {"id": "F3b3", "title": "Draw see-through voxels", "round": "Round 1", "column": "doing", "machine": "james-3080", "dispatched": "2026-09-24 20:56", "kind": "feature", "grade": "L", "origin": "The second half of F3b: the rule is no use until the game draws glass as glass.", "raisedBy": "Ben", "summary": "Glass and other see-through parts of a generated object actually look see-through in the game, with what is behind them visible through them.", "status": "Approved and ready to start, beside the rule it draws.", "parent": "F3b", "blocking": ["F3b4", "F28b"], "repairRounds": 0,
  "involved": [
-   {"role":"researched","model":"Claude Opus (subagent)","machine":"ben-3070"}
+   {"role":"researched","model":"Claude Opus (subagent)","machine":"ben-3070"},
+   {"role":"implemented","model":"Grok (grok-4.6-build)","machine":"james-3080"},
+   {"role":"reviewed","model":"Claude Opus (orchestrator)","machine":"james-3080"}
  ]},
 
 {"id": "F3b4", "title": "The generator keeps the see-through data", "round": "Round 1", "column": "todo", "kind": "feature", "grade": "M", "origin": "The last part of F3b: the generator add-on currently throws the see-through numbers away, so a generated bottle arrives solid.", "raisedBy": "Ben", "summary": "The generator keeps each voxel's see-through value and the host decides from it, so a glass bottle arrives see-through without the picture being made again.", "status": "Approved, and waiting: its check cannot be run until the rule and the drawing are both in. It also needs a 10 GB card.", "parent": "F3b", "blockedBy": ["F3b2", "F3b3"], "repairRounds": 0,
