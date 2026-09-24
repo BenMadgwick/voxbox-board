@@ -1,5 +1,5 @@
 window.VOX_BOARD = {
-"updated": "2026-09-24 21:12 UTC",
+"updated": "2026-09-24 21:37 UTC",
 "machines": {
   "ben-3070": "Ben's Win (RTX 3070 8GB)",
   "james-3080": "James Win (RTX 3080 10GB)",
@@ -286,8 +286,8 @@ window.VOX_BOARD = {
    {"role":"researched","model":"Claude Opus (subagent)","machine":"ben-3070"}
  ]},
 
-{"id": "F7f", "title": "Glued builds stay light", "round": "Round 1", "column": "doing", "machine": "ben-3070", "dispatched": "2026-09-24 07:53", "kind": "feature", "grade": "M", "origin": "Part of F7.", "raisedBy": "Ben", "summary": "Parts that line up exactly are folded together, so big builds stay cheap to simulate and draw.", "status": "After F7c.", "parent": "F7", "repairRounds": 0,
- "involved": [
+{"id": "F7f", "title": "Glued builds stay light", "round": "Round 1", "column": "done", "merged": "2026-09-24 21:40", "machine": "ben-3070", "dispatched": "2026-09-24 07:53", "kind": "feature", "grade": "M", "origin": "Part of F7.", "raisedBy": "Ben", "summary": "Parts that line up exactly on the voxel grid -- the same size and material, whole quarter turns apart, whole voxels apart, and unpainted (or cut from the same object and put back where they were) -- are folded into one part when glued, so a wall of 64 crates is one part, not 64. Erase still restores exactly what was there.", "status": "Merged. Built and tested by script (64-crate wall -> 1 part, erase round-trip, all 24 turns in the unit test); the picture was looked at. Not yet played, and not yet tried between two players.", "parent": "F7", "repairRounds": 2,
+ "forPlaytesters": "Glue a wall of unpainted crates (C) together: it should turn into one smooth block and feel no heavier to move. Paint one crate first and glue again: that crate stays separate. Turned crates should fold too.", "workMinutes": 381, "tokens": 82369401, "tokensWritten": 905697, "involved": [
    {"role":"researched","model":"Claude Opus (subagent)","machine":"ben-3070"},
    {"role":"reviewed","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"},
    {"role":"implemented","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"},
@@ -297,7 +297,10 @@ window.VOX_BOARD = {
    {"role":"reviewed","model":"OpenRouter poolside/laguna-s-2.1:free","machine":"ben-3070"},
    {"role":"reviewed","model":"deepseek-flash","machine":"ben-3070"},
    {"role":"repaired","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"},
-   {"role":"reviewed","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"}
+   {"role":"reviewed","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"},
+   {"role":"reviewed","model":"deepseek-flash","machine":"ben-3070"},
+   {"role":"reviewed","model":"Claude Opus (orchestrator)","machine":"ben-3070"},
+   {"role":"repaired","model":"Claude Opus (orchestrator)","machine":"ben-3070"}
  ]},
 
 {"id": "F16", "title": "Bake a glued build into one object", "round": "Round 1", "column": "backlog", "kind": "feature", "origin": "Glue keeps each part's own grid, material and detail. Ben liked the idea of also offering a deliberate way to fuse a build into a single grid.", "raisedBy": "Ben", "summary": "A Bake action that fuses a glued build into one voxel grid at a resolution you choose, for when you want it to behave as a single lump, for example to carve evenly across the seams.", "status": "Backlog, after F7.", "parent": "F7", "repairRounds": 0,
