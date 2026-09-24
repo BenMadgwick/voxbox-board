@@ -1,5 +1,5 @@
 window.VOX_BOARD = {
-"updated": "2026-09-24 20:05 UTC",
+"updated": "2026-09-24 20:19 UTC",
 "machines": {
   "ben-3070": "Ben's Win (RTX 3070 8GB)",
   "james-3080": "James Win (RTX 3080 10GB)",
@@ -115,7 +115,9 @@ window.VOX_BOARD = {
 {"id": "F3b2", "title": "Work out which voxels are see-through", "round": "Round 1", "column": "doing", "machine": "ben-3070", "dispatched": "2026-09-24 15:52", "kind": "feature", "grade": "L", "origin": "The first half of F3b: something has to turn the generator's see-through numbers into a yes-or-no rule before anything can be drawn with them.", "raisedBy": "Ben", "summary": "A rule that reads an object's see-through values and decides which voxels are glass -- careful about air sealed inside an object, which reads see-through when it is not.", "status": "Approved and ready to start; it shares its measurements with the drawing half beside it.", "parent": "F3b", "blocking": ["F3b4"], "repairRounds": 0,
  "involved": [
    {"role":"researched","model":"Claude Opus (subagent)","machine":"ben-3070"},
-   {"role":"implemented","model":"deepseek-flash","machine":"ben-3070"}
+   {"role":"implemented","model":"deepseek-flash","machine":"ben-3070"},
+   {"role":"reviewed","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"},
+   {"role":"reviewed","model":"deepseek-flash","machine":"ben-3070"}
  ]},
 
 {"id": "F3b3", "title": "Draw see-through voxels", "round": "Round 1", "column": "todo", "kind": "feature", "grade": "L", "origin": "The second half of F3b: the rule is no use until the game draws glass as glass.", "raisedBy": "Ben", "summary": "Glass and other see-through parts of a generated object actually look see-through in the game, with what is behind them visible through them.", "status": "Approved and ready to start, beside the rule it draws.", "parent": "F3b", "blocking": ["F3b4"], "repairRounds": 0,
@@ -222,8 +224,8 @@ window.VOX_BOARD = {
  "involved": [
    {"role":"researched","model":"Claude Opus (subagent)","machine":"ben-3070"},
    {"role":"implemented","model":"Claude Sonnet (subagent)","machine":"james-3080"},
-   {"role":"repaired","model":"Claude Sonnet (subagent)","machine":"james-3080"},
-   {"role":"reviewed","model":"Claude Opus (orchestrator)","machine":"james-3080"}
+   {"role":"reviewed","model":"Claude Opus (orchestrator)","machine":"james-3080"},
+   {"role":"repaired","model":"Claude Sonnet (subagent)","machine":"james-3080"}
  ]},
 
 {"id": "F7", "title": "Glue makes one object", "round": "Round 1", "column": "doing", "kind": "feature", "grade": "R", "origin": "Ben asked for glue to truly merge two objects. It also absorbs two bugs: the glue preview lagged and its outline was too thin to see (B11), and objects with several welds flipped out when grabbed (B14).", "raisedBy": "Ben", "summary": "Glued objects become one solid object, so they stop fighting each other. Unglue goes away (slice separates things instead), and the preview becomes a thick glowing shell showing exactly what will join.", "status": "Five parts merged: the maths of where two objects overlap, the test that several objects can become one body, the glowing glue preview, the join itself, and breaking and editing a joined object part by part. Joining players seeing the same join is built and under review; folding parts together and keeping a build as one object are still to do.", "repairRounds": 0,
@@ -292,7 +294,10 @@ window.VOX_BOARD = {
    {"role":"reviewed","model":"deepseek-flash","machine":"ben-3070"},
    {"role":"reviewed","model":"OpenRouter nvidia/nemotron-3-ultra-550b-a55b:free","machine":"ben-3070"},
    {"role":"reviewed","model":"OpenRouter thinkingmachines/inkling:free","machine":"ben-3070"},
-   {"role":"reviewed","model":"OpenRouter poolside/laguna-s-2.1:free","machine":"ben-3070"}
+   {"role":"reviewed","model":"OpenRouter poolside/laguna-s-2.1:free","machine":"ben-3070"},
+   {"role":"reviewed","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"},
+   {"role":"repaired","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"},
+   {"role":"reviewed","model":"deepseek-flash","machine":"ben-3070"}
  ]},
 
 {"id": "F16", "title": "Bake a glued build into one object", "round": "Round 1", "column": "backlog", "kind": "feature", "origin": "Glue keeps each part's own grid, material and detail. Ben liked the idea of also offering a deliberate way to fuse a build into a single grid.", "raisedBy": "Ben", "summary": "A Bake action that fuses a glued build into one voxel grid at a resolution you choose, for when you want it to behave as a single lump, for example to carve evenly across the seams.", "status": "Backlog, after F7.", "parent": "F7", "repairRounds": 0,
@@ -527,15 +532,21 @@ window.VOX_BOARD = {
 {"id": "F26", "title": "Parts that move", "round": "Round 1", "column": "todo", "kind": "feature", "grade": "L", "origin": "Ben, 24 September: once an object has parts, they could move: a glass that topples, a lid that opens, crude limbs on a character.", "raisedBy": "Ben", "summary": "Parts of an object can rotate, slide and scale (scaled to nothing, a part hides), driven by time, by a use key, or left to physics like a hinge. Parts can hang from other parts, so an arm moves its hand. Saved with the object, so it still moves when thrown out of the library.", "status": "Approved: waits for Parts (F25) and saving glued builds (F7k).", "repairRounds": 0, "blockedBy": ["F25", "F7k"], "involved": []},
 
 {"id": "D5", "title": "Only one two-program test at a time", "round": "Round 1", "column": "doing", "machine": "ben-3070", "dispatched": "2026-09-24 15:54", "kind": "feature", "grade": "S", "origin": "Ben's rule: tests that run two game or server programs at once must run alone.", "raisedBy": "Ben", "summary": "A lock so network, generation and server tests never overlap on one PC.", "status": "Approved; queued for Space Bunny.", "parent": "D1", "repairRounds": 0, "involved": [
-   {"role":"implemented","model":"deepseek-flash","machine":"ben-3070"}
+   {"role":"implemented","model":"deepseek-flash","machine":"ben-3070"},
+   {"role":"reviewed","model":"deepseek-flash","machine":"ben-3070"},
+   {"role":"reviewed","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"}
  ]},
 
 {"id": "D6", "title": "The board says where each job stands, by itself", "round": "Round 1", "column": "doing", "machine": "ben-3070", "dispatched": "2026-09-24 15:56", "kind": "feature", "grade": "S", "origin": "Card statuses went stale because they were written by hand.", "raisedBy": "Ben", "summary": "The board's sync writes each card's 'Where it stands' from claims, runs and reviews.", "status": "Approved; queued for Space Bunny.", "parent": "D1", "repairRounds": 0, "involved": [
-   {"role":"implemented","model":"deepseek-flash","machine":"ben-3070"}
+   {"role":"implemented","model":"deepseek-flash","machine":"ben-3070"},
+   {"role":"reviewed","model":"deepseek-flash","machine":"ben-3070"},
+   {"role":"reviewed","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"}
  ]},
 
 {"id": "D7", "title": "A machine can ask a question and wait for the answer", "round": "Round 1", "column": "doing", "machine": "ben-3070", "dispatched": "2026-09-24 16:27", "kind": "feature", "grade": "M", "origin": "James's unattended machine got stuck on a decision only Ben could make, and nobody would have known.", "raisedBy": "Ben", "summary": "A stuck machine writes its question where Ben sees it (the board, status, optionally his phone), waits without retrying, does other work, and carries on when he answers.", "status": "Approved.", "parent": "D1", "repairRounds": 0, "prio": 2, "involved": [
-   {"role":"implemented","model":"deepseek-flash","machine":"ben-3070"}
+   {"role":"implemented","model":"deepseek-flash","machine":"ben-3070"},
+   {"role":"reviewed","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"},
+   {"role":"reviewed","model":"deepseek-flash","machine":"ben-3070"}
  ]},
 
 {"id": "F22g", "title": "The Dedicated app makes objects for others", "round": "Round 1", "column": "done", "merged": "2026-09-24", "dispatched": "2026-09-24 17:15", "machine": "james-3080", "kind": "feature", "grade": "M", "origin": "Part of F22.", "raisedBy": "Ben", "summary": "VoxBox Dedicated takes pictures over the network, queues them fairly, makes the objects and sends them back.", "status": "Merged; Grok built it, Opus review found and fixed one bug (idle peers dropped mid-job).", "parent": "F22", "repairRounds": 1, "involved": [{"role": "researched", "model": "Claude Opus (orchestrator)", "machine": "ben-3070"},

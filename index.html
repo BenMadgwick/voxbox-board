@@ -97,6 +97,36 @@ dialog::backdrop{background:rgba(10,15,20,.55)}
 .jl .t{flex:1;min-width:10ch}
 .kids{display:grid;gap:6px}
 footer{margin-top:36px;color:var(--muted);font-size:13px;max-width:70ch}
+.ftoggle{display:none;appearance:none;font:600 14px/1 var(--body);color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:9px 12px;cursor:pointer}
+.colpill{margin-left:auto}
+.colpill + .grade{margin-left:0}
+/* Phones (Ben, 2026-09-24): the desktop layout stays as it is; below 640 px the header shrinks,
+   the filters fold behind a button, cards are shorter, and a job opens full screen. */
+@media (max-width:640px){
+  .wrap{padding-block:14px 40px}
+  header{gap:6px;margin-bottom:12px}
+  h1{font-size:24px}
+  .cube{width:22px;height:22px}
+  .lede{display:none}
+  .stats{font-size:12px;gap:4px 10px}
+  .controls{gap:8px;margin-bottom:12px;padding-block:6px}
+  .tabs{flex:1 1 100%;flex-wrap:wrap;overflow-x:visible}   /* every column's tab in view, not scrolled off */
+  .tab{padding:8px 10px;font-size:13px}
+  .ftoggle{display:inline-flex}
+  .filters{display:none;width:100%;flex-direction:column;align-items:stretch;gap:8px}
+  .filters.open{display:flex}
+  label.round{justify-content:space-between}
+  label.round select{flex:1;min-width:0}
+  .grid{gap:10px}
+  .card{padding:12px 14px;gap:6px}
+  .card h3{font-size:15.5px}
+  .card p{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+  .meta{font-size:12px}
+  dialog{width:100%;max-width:100%;height:100%;max-height:100%;margin:0;border-radius:0}
+  .sheet{padding:0 16px 28px;gap:16px}
+  .sheet .hd{position:sticky;top:0;z-index:1;background:var(--surface);padding-top:14px;padding-bottom:8px;border-bottom:1px solid var(--line)}
+  .sheet h2{font-size:21px}
+}
 @media (prefers-reduced-motion:reduce){.card{transition:none}.card:hover{transform:none}}
 </style>
 
@@ -116,7 +146,8 @@ footer{margin-top:36px;color:var(--muted);font-size:13px;max-width:70ch}
 
   <div class="controls">
     <div class="tabs" role="tablist" id="tabs"></div>
-    <div class="filters">
+    <button class="ftoggle" id="ftoggle" aria-expanded="false" aria-controls="filters">Filters</button>
+    <div class="filters" id="filters">
       <label class="round" for="roundSel">Round <select id="roundSel"></select></label>
       <label class="round" for="machSel">Machine <select id="machSel"></select></label>
       <label class="round" for="modelSel">Model <select id="modelSel"></select></label>
@@ -134,6 +165,7 @@ footer{margin-top:36px;color:var(--muted);font-size:13px;max-width:70ch}
 <script>
 (function(){
   var COLS = [
+    {k:"all",    name:"All",         c:"var(--accent)",  blurb:"Every job in every column: in progress first, then to do, done (newest first), backlog and closed."},
     {k:"done",   name:"Done",        c:"var(--done)",    blurb:"Merged into the game. The newest first."},
     {k:"doing",  name:"In progress", c:"var(--doing)",   blurb:"Being built or researched right now."},
     {k:"todo",   name:"To do",       c:"var(--todo)",    blurb:"Approved for this round, roughly in the order they'll be picked up."},
@@ -188,7 +220,9 @@ footer{margin-top:36px;color:var(--muted);font-size:13px;max-width:70ch}
     if (!n) return "";
     return n >= 1e6 ? (n/1e6).toFixed(1).replace(/\.0$/,"") + " million" : Math.round(n/1e3) + " thousand";
   }
-  function colOf(k){ for (var i=0;i<COLS.length;i++) if (COLS[i].k===k) return COLS[i]; return COLS[0]; }
+  function colOf(k){ for (var i=1;i<COLS.length;i++) if (COLS[i].k===k) return COLS[i]; return COLS[1]; }
+  // "All" lists the columns in the order a reader cares about: what is moving, what is next, then the rest.
+  var ALL_ORDER = ["doing","todo","done","backlog","closed"];
   function inRound(j){ return state.round==="all" || j.round===state.round; }
   // A job is shown when it has any involvement at all on the chosen machine, and any
   // involvement at all by the chosen model -- machine and model are separate questions,
@@ -251,17 +285,22 @@ footer{margin-top:36px;color:var(--muted);font-size:13px;max-width:70ch}
   }
 
   function list(k){
+    if (k==="all"){
+      var out = [];
+      ALL_ORDER.forEach(function(c){ out = out.concat(list(c)); });
+      return out;
+    }
     var l = jobs.filter(function(j){ return j.column===k && shown(j); });
     if (k==="done") l = l.slice().sort(function(a,b){ return (b.merged||"").localeCompare(a.merged||""); });
     return l;
   }
 
   function renderStats(){
-    var n = {}; COLS.forEach(function(c){ n[c.k] = list(c.k).length; });
+    var n = {}; COLS.forEach(function(c){ if (c.k!=="all") n[c.k] = list(c.k).length; });
     var r = rounds.length;
     document.getElementById("stats").innerHTML =
       '<span><b>'+r+'</b> round'+(r===1?'':'s')+' so far</span>' +
-      COLS.map(function(c){ return '<span><b>'+n[c.k]+'</b> '+c.name.toLowerCase()+'</span>'; }).join("") +
+      COLS.filter(function(c){ return c.k!=="all"; }).map(function(c){ return '<span><b>'+n[c.k]+'</b> '+c.name.toLowerCase()+'</span>'; }).join("") +
       (filterNote() ? '<span>filtered to '+esc(filterNote())+' (every job it had a hand in, so machines can share a job)</span>' : '') +
       (data.updated ? '<span>updated '+esc(data.updated)+'</span>' : '');
   }
@@ -289,7 +328,7 @@ footer{margin-top:36px;color:var(--muted);font-size:13px;max-width:70ch}
     var parentLine = j.parent && byId[j.parent] ? '<span class="parentline">Part of '+esc(j.parent)+': '+esc(byId[j.parent].title)+'</span>' :
       (k.length ? '<span class="parentline">'+k.filter(function(x){return x.column==="done";}).length+' of '+k.length+' parts done</span>' : '');
     return '<button class="card" data-id="'+esc(j.id)+'" style="--c:'+c.c+'">' +
-      '<div class="top"><span class="id">'+esc(j.id)+'</span><span class="kind">'+esc(KIND[j.kind]||"")+'</span>'+(j.grade?'<span class="grade" title="'+esc(GRADE[j.grade]||"")+'">'+esc(j.grade)+'</span>':'')+prioMark(j)+'</div>' +
+      '<div class="top"><span class="id">'+esc(j.id)+'</span><span class="kind">'+esc(KIND[j.kind]||"")+'</span>'+(state.tab==="all"?'<span class="pill colpill" style="--c:'+c.c+'">'+(j.column==="closed"?"Closed":c.name)+'</span>':'')+(j.grade?'<span class="grade" title="'+esc(GRADE[j.grade]||"")+'">'+esc(j.grade)+'</span>':'')+prioMark(j)+'</div>' +
       '<h3>'+esc(j.title)+'</h3>' +
       '<div style="display:grid;gap:6px;align-content:start"><p>'+esc(text)+'</p>'+parentLine+blockLines(j)+'</div>' +
       (meta.length ? '<div class="meta">'+meta.join(' <span aria-hidden="true">·</span> ')+'</div>' : '<span></span>') +
@@ -297,14 +336,26 @@ footer{margin-top:36px;color:var(--muted);font-size:13px;max-width:70ch}
   }
 
   function renderCol(){
-    var c = colOf(state.tab), l = list(state.tab);
+    // The column's own heading; colOf() maps a job's column, and "All" is not one.
+    var c = COLS.filter(function(x){ return x.k===state.tab; })[0] || colOf(state.tab), l = list(state.tab);
     colEl.setAttribute("aria-labelledby","tab-"+c.k);
     colEl.innerHTML = '<div class="colhead"><h2>'+c.name+'</h2><p>'+c.blurb+'</p></div>' +
       (l.length ? '<div class="grid">'+l.map(card).join("")+'</div>'
                 : '<div class="empty">Nothing here'+(state.round!=="all"?' in '+esc(state.round):'')+(filterNote()?' for '+esc(filterNote()):'')+' yet. Clear the filters to see the rest.</div>');
   }
 
-  function render(){ renderStats(); renderTabs(); renderCol(); }
+  function render(){ renderStats(); renderTabs(); renderCol(); renderToggle(); }
+  // On a phone the three filters fold behind one button; it says how many are set.
+  var ftoggle = document.getElementById("ftoggle"), filtersEl = document.getElementById("filters");
+  function renderToggle(){
+    var set = (state.round!=="all") + (state.machine!=="all") + (state.model!=="all");
+    ftoggle.textContent = "Filters" + (set ? " (" + set + ")" : "");
+  }
+  ftoggle.addEventListener("click", function(){
+    var open = !filtersEl.classList.contains("open");
+    filtersEl.classList.toggle("open", open);
+    ftoggle.setAttribute("aria-expanded", String(open));
+  });
 
   document.getElementById("tabs").addEventListener("click", function(e){
     var b = e.target.closest(".tab"); if (!b) return;
