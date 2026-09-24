@@ -1,5 +1,5 @@
 window.VOX_BOARD = {
-"updated": "2026-09-24 18:00 UTC",
+"updated": "2026-09-24 18:07 UTC",
 "machines": {
   "ben-3070": "Ben's Win (RTX 3070 8GB)",
   "james-3080": "James Win (RTX 3080 10GB)",
@@ -198,7 +198,8 @@ window.VOX_BOARD = {
 
 {"id": "B10", "title": "Other players move smoothly", "round": "Round 1", "column": "done", "machine": "james-3080", "merged": "2026-09-24", "dispatched": "2026-09-24 06:13", "kind": "bug", "grade": "L", "origin": "Other players' markers moved choppily, hopping rather than gliding.", "raisedBy": "Ben", "summary": "Other players glide instead of hopping 15 times a second. The smoothing starts at 120 ms, a first guess for Ben to tune.", "status": "Brief ready; queued.", "repairRounds": 0,
  "involved": [
-   {"role":"researched","model":"Claude Opus (orchestrator)","machine":"ben-3070"}
+   {"role":"researched","model":"Claude Opus (orchestrator)","machine":"ben-3070"},
+   {"role":"implemented","model":"Claude Sonnet (subagent)","machine":"james-3080"}
  ]},
 
 {"id": "B1b", "title": "The shelf downloads in the background", "round": "Round 1", "column": "done", "kind": "bug", "grade": "L", "origin": "Part of B1: objects arrived only when first touched, so every first touch stalled.", "raisedBy": "playtesters", "summary": "When you join, the whole shelf starts downloading in the background, newest objects first, and anything you actually need jumps the queue: an object thrown in front of you appears in under a second even while the rest is still coming. Requests nobody needs any more (an object that was carved again or went away) are cancelled. The background download is capped so it cannot swamp the host's connection.", "status": "Merged. Claude fixed its test in review: it had thrown an object that was already downloading for another reason, which proved nothing. Measured properly on one PC, a thrown object appeared after 0.7 s with 1 of 19 shelf objects downloaded, and the whole 20 MB shelf arrived in about 15 s. Built and tested by script; not yet played over real WiFi.", "forPlaytesters": "Join a game with a big shelf and throw something straight away: it should appear at once, not after a pause. Place's ghost should turn from a box into the real object within a second or two. When you are done, send Ben your log files: they now say how long your shelf took to arrive.", "parent": "B1", "repairRounds": 0, "dispatched": "2026-09-22 10:36", "merged": "2026-09-22 13:31", "workMinutes": 49, "tokens": 16251622, "tokensWritten": 102181,
@@ -218,7 +219,8 @@ window.VOX_BOARD = {
 
 {"id": "B1c", "title": "Carves are replayed, not downloaded", "round": "Round 1", "column": "doing", "machine": "james-3080", "dispatched": "2026-09-24 15:38", "kind": "bug", "grade": "L", "origin": "Part of B1: carving stalled joining players' games (reported as B7).", "raisedBy": "playtesters", "summary": "Joining machines repeat each carve themselves, the way they already do for breaks and paint, instead of downloading the object after every scoop.", "status": "Brief ready.", "parent": "B1", "repairRounds": 0,
  "involved": [
-   {"role":"researched","model":"Claude Opus (subagent)","machine":"ben-3070"}
+   {"role":"researched","model":"Claude Opus (subagent)","machine":"ben-3070"},
+   {"role":"implemented","model":"Claude Sonnet (subagent)","machine":"james-3080"}
  ]},
 
 {"id": "F7", "title": "Glue makes one object", "round": "Round 1", "column": "doing", "kind": "feature", "grade": "R", "origin": "Ben asked for glue to truly merge two objects. It also absorbs two bugs: the glue preview lagged and its outline was too thin to see (B11), and objects with several welds flipped out when grabbed (B14).", "raisedBy": "Ben", "summary": "Glued objects become one solid object, so they stop fighting each other. Unglue goes away (slice separates things instead), and the preview becomes a thick glowing shell showing exactly what will join.", "status": "Five parts merged: the maths of where two objects overlap, the test that several objects can become one body, the glowing glue preview, the join itself, and breaking and editing a joined object part by part. Joining players seeing the same join is built and under review; folding parts together and keeping a build as one object are still to do.", "repairRounds": 0,
@@ -474,14 +476,16 @@ window.VOX_BOARD = {
 {"id": "F22f", "title": "Try the Steam side on a test app", "round": "Round 1", "column": "doing", "machine": "ben-3070", "dispatched": "2026-09-24 02:34", "kind": "feature", "grade": "R", "origin": "Part of F22.", "raisedBy": "Ben", "summary": "Checks, on Steam's test app, that a Dedicated app can be found and reached by friends without a server of our own.", "status": "Approved; waiting to be picked up.", "parent": "F22", "repairRounds": 0, "blocking": ["F22i"],
  "involved": [
    {"role":"researched","model":"Claude Opus (subagent)","machine":"ben-3070"},
-   {"role":"reviewed","model":"deepseek-flash","machine":"ben-3070"}
+   {"role":"reviewed","model":"deepseek-flash","machine":"ben-3070"},
+   {"role":"implemented","model":"Claude Sonnet (subagent)","machine":"ben-3070"}
  ]},
 
 {"id": "F22s", "title": "A true server build", "round": "Round 1", "column": "doing", "machine": "ben-3070", "dispatched": "2026-09-23 23:32", "kind": "feature", "grade": "L", "origin": "Part of F22.", "raisedBy": "Ben", "summary": "Builds the engine from source so the Dedicated app is a real server program with no graphics in it, for Windows and Linux.", "status": "Approved; its first step is Ben's (linking his Epic account to GitHub).", "parent": "F22", "repairRounds": 0, "blocking": ["F22o", "F22Ld"],
  "involved": [
    {"role":"researched","model":"Claude Opus (subagent)","machine":"ben-3070"},
    {"role":"implemented","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"},
-   {"role":"reviewed","model":"deepseek-flash","machine":"ben-3070"}
+   {"role":"reviewed","model":"deepseek-flash","machine":"ben-3070"},
+   {"role":"implemented","model":"Claude Sonnet (subagent)","machine":"ben-3070"}
  ]},
 
 {"id": "F22La", "title": "Making objects on Linux", "round": "Round 1", "column": "todo", "machine": "sam-linux", "kind": "feature", "grade": "M", "origin": "Part of F22.", "raisedBy": "Ben", "summary": "The generator runs on Linux, the first part of the Dedicated app there.", "status": "Approved, for the Linux machine once it joins.", "parent": "F22", "repairRounds": 0, "blocking": ["F22Ld"],
@@ -505,6 +509,8 @@ window.VOX_BOARD = {
  ]},
 
 {"id": "F22c", "title": "Hosting works the same with no player at the host", "round": "Round 1", "column": "done", "merged": "2026-09-24", "dispatched": "2026-09-24 15:00", "machine": "james-3080", "kind": "feature", "grade": "L", "origin": "Part of F22: F22b's test found three places where the host assumed it had a player.", "raisedBy": "Ben", "summary": "Breaks and glue are announced by any host, host-run tests need no host player, and the host can lend its own GPU; every two-player test then passes with a host that has no player.", "status": "Approved; for James's Grok worker (james-3080).", "parent": "F22", "repairRounds": 0, "prio": 2, "blocking": ["F22k", "F22Lc"], "involved": [{"role": "researched", "model": "Claude Opus (orchestrator)", "machine": "ben-3070"},
+   {"role":"reviewed","model":"Claude Opus (orchestrator)","machine":"james-3080"},
+   {"role":"repaired","model":"Claude Opus (orchestrator)","machine":"james-3080"},
    {"role":"implemented","model":"Grok (grok-4.7-build)","machine":"james-3080"}
  ]},
 
