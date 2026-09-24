@@ -119,11 +119,12 @@ footer{margin-top:36px;color:var(--muted);font-size:13px;max-width:70ch}
   .controls{gap:8px;margin-bottom:12px;padding-block:6px}
   .tabs{flex:1 1 100%;flex-wrap:wrap;overflow-x:visible}   /* every column's tab in view, not scrolled off */
   .tab{padding:8px 10px;font-size:13px}
-  .ftoggle{display:inline-flex}
-  .filters{display:none;width:100%;flex-direction:column;align-items:stretch;gap:8px}
-  .filters.open{display:flex}
-  label.round{justify-content:space-between}
-  label.round select{flex:1;min-width:0}
+  /* The three filters in equal thirds on one row (Ben: they fit, and the phone's own picker
+     shows the full options). The label text is hidden but still labels the select for screen
+     readers; a long choice ends in an ellipsis. */
+  .filters{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;width:100%}
+  label.round{font-size:0;gap:0;min-width:0}
+  label.round select{width:100%;min-width:0;font-size:13px;padding:7px 6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   .grid{gap:10px}
   .card{padding:12px 14px;gap:6px}
   .card h3{font-size:15.5px}
