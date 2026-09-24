@@ -1,5 +1,5 @@
 window.VOX_BOARD = {
-"updated": "2026-09-24 19:03 UTC",
+"updated": "2026-09-24 19:06 UTC",
 "machines": {
   "ben-3070": "Ben's Win (RTX 3070 8GB)",
   "james-3080": "James Win (RTX 3080 10GB)",
@@ -289,7 +289,8 @@ window.VOX_BOARD = {
    {"role":"implemented","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"},
    {"role":"reviewed","model":"deepseek-flash","machine":"ben-3070"},
    {"role":"reviewed","model":"OpenRouter nvidia/nemotron-3-ultra-550b-a55b:free","machine":"ben-3070"},
-   {"role":"reviewed","model":"OpenRouter thinkingmachines/inkling:free","machine":"ben-3070"}
+   {"role":"reviewed","model":"OpenRouter thinkingmachines/inkling:free","machine":"ben-3070"},
+   {"role":"reviewed","model":"OpenRouter poolside/laguna-s-2.1:free","machine":"ben-3070"}
  ]},
 
 {"id": "F16", "title": "Bake a glued build into one object", "round": "Round 1", "column": "backlog", "kind": "feature", "origin": "Glue keeps each part's own grid, material and detail. Ben liked the idea of also offering a deliberate way to fuse a build into a single grid.", "raisedBy": "Ben", "summary": "A Bake action that fuses a glued build into one voxel grid at a resolution you choose, for when you want it to behave as a single lump, for example to carve evenly across the seams.", "status": "Backlog, after F7.", "parent": "F7", "repairRounds": 0,
