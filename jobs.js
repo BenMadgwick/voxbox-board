@@ -1,5 +1,5 @@
 window.VOX_BOARD = {
-"updated": "2026-09-24 20:19 UTC",
+"updated": "2026-09-24 20:26 UTC",
 "machines": {
   "ben-3070": "Ben's Win (RTX 3070 8GB)",
   "james-3080": "James Win (RTX 3080 10GB)",
@@ -116,8 +116,8 @@ window.VOX_BOARD = {
  "involved": [
    {"role":"researched","model":"Claude Opus (subagent)","machine":"ben-3070"},
    {"role":"implemented","model":"deepseek-flash","machine":"ben-3070"},
-   {"role":"reviewed","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"},
-   {"role":"reviewed","model":"deepseek-flash","machine":"ben-3070"}
+   {"role":"reviewed","model":"deepseek-flash","machine":"ben-3070"},
+   {"role":"reviewed","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"}
  ]},
 
 {"id": "F3b3", "title": "Draw see-through voxels", "round": "Round 1", "column": "todo", "kind": "feature", "grade": "L", "origin": "The second half of F3b: the rule is no use until the game draws glass as glass.", "raisedBy": "Ben", "summary": "Glass and other see-through parts of a generated object actually look see-through in the game, with what is behind them visible through them.", "status": "Approved and ready to start, beside the rule it draws.", "parent": "F3b", "blocking": ["F3b4"], "repairRounds": 0,
@@ -295,8 +295,8 @@ window.VOX_BOARD = {
    {"role":"reviewed","model":"OpenRouter nvidia/nemotron-3-ultra-550b-a55b:free","machine":"ben-3070"},
    {"role":"reviewed","model":"OpenRouter thinkingmachines/inkling:free","machine":"ben-3070"},
    {"role":"reviewed","model":"OpenRouter poolside/laguna-s-2.1:free","machine":"ben-3070"},
-   {"role":"reviewed","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"},
    {"role":"repaired","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"},
+   {"role":"reviewed","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"},
    {"role":"reviewed","model":"deepseek-flash","machine":"ben-3070"}
  ]},
 
@@ -533,14 +533,14 @@ window.VOX_BOARD = {
 
 {"id": "D5", "title": "Only one two-program test at a time", "round": "Round 1", "column": "doing", "machine": "ben-3070", "dispatched": "2026-09-24 15:54", "kind": "feature", "grade": "S", "origin": "Ben's rule: tests that run two game or server programs at once must run alone.", "raisedBy": "Ben", "summary": "A lock so network, generation and server tests never overlap on one PC.", "status": "Approved; queued for Space Bunny.", "parent": "D1", "repairRounds": 0, "involved": [
    {"role":"implemented","model":"deepseek-flash","machine":"ben-3070"},
-   {"role":"reviewed","model":"deepseek-flash","machine":"ben-3070"},
-   {"role":"reviewed","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"}
+   {"role":"reviewed","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"},
+   {"role":"reviewed","model":"deepseek-flash","machine":"ben-3070"}
  ]},
 
 {"id": "D6", "title": "The board says where each job stands, by itself", "round": "Round 1", "column": "doing", "machine": "ben-3070", "dispatched": "2026-09-24 15:56", "kind": "feature", "grade": "S", "origin": "Card statuses went stale because they were written by hand.", "raisedBy": "Ben", "summary": "The board's sync writes each card's 'Where it stands' from claims, runs and reviews.", "status": "Approved; queued for Space Bunny.", "parent": "D1", "repairRounds": 0, "involved": [
    {"role":"implemented","model":"deepseek-flash","machine":"ben-3070"},
-   {"role":"reviewed","model":"deepseek-flash","machine":"ben-3070"},
-   {"role":"reviewed","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"}
+   {"role":"reviewed","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"},
+   {"role":"reviewed","model":"deepseek-flash","machine":"ben-3070"}
  ]},
 
 {"id": "D7", "title": "A machine can ask a question and wait for the answer", "round": "Round 1", "column": "doing", "machine": "ben-3070", "dispatched": "2026-09-24 16:27", "kind": "feature", "grade": "M", "origin": "James's unattended machine got stuck on a decision only Ben could make, and nobody would have known.", "raisedBy": "Ben", "summary": "A stuck machine writes its question where Ben sees it (the board, status, optionally his phone), waits without retrying, does other work, and carries on when he answers.", "status": "Approved.", "parent": "D1", "repairRounds": 0, "prio": 2, "involved": [
