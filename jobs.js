@@ -1,5 +1,5 @@
 window.VOX_BOARD = {
-"updated": "2026-09-24 15:00 UTC",
+"updated": "2026-09-24 15:06 UTC",
 "machines": {
   "ben-3070": "Ben's Win (RTX 3070 8GB)",
   "james-3080": "James Win (RTX 3080 10GB)",
@@ -187,8 +187,8 @@ window.VOX_BOARD = {
  "involved": [
    {"role":"researched","model":"Claude Opus (orchestrator)","machine":"ben-3070"},
    {"role":"reviewed","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"},
-   {"role":"reviewed","model":"deepseek-flash","machine":"ben-3070"},
-   {"role":"implemented","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"}
+   {"role":"implemented","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"},
+   {"role":"reviewed","model":"deepseek-flash","machine":"ben-3070"}
  ]},
 
 {"id": "B10", "title": "Other players move smoothly", "round": "Round 1", "column": "done", "machine": "james-3080", "merged": "2026-09-24", "dispatched": "2026-09-24 06:13", "kind": "bug", "grade": "L", "origin": "Other players' markers moved choppily, hopping rather than gliding.", "raisedBy": "Ben", "summary": "Other players glide instead of hopping 15 times a second. The smoothing starts at 120 ms, a first guess for Ben to tune.", "status": "Brief ready; queued.", "repairRounds": 0,
