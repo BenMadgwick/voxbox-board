@@ -1,5 +1,5 @@
 window.VOX_BOARD = {
-"updated": "2026-09-24 20:59 UTC",
+"updated": "2026-09-24 21:12 UTC",
 "machines": {
   "ben-3070": "Ben's Win (RTX 3070 8GB)",
   "james-3080": "James Win (RTX 3080 10GB)",
@@ -566,6 +566,8 @@ window.VOX_BOARD = {
 {"id": "B1e", "title": "Fast carving never drops a cut", "round": "Round 1", "column": "done", "machine": "james-3080", "merged": "2026-09-24", "kind": "bug", "grade": "M", "origin": "B1c's test found the host silently drops a carve scoop while the previous piece's collision is still being built (20-620 ms), so quick carving loses cuts.", "raisedBy": "Ben", "summary": "Build a carved piece's collision after the piece is in place, so every scoop is carved.", "status": "Merged; every scoop is carved (20 of 20). For Ben to play: a carved body collides as its box during a stroke.", "parent": "B1", "blocking": ["F10b"], "repairRounds": 0, "involved": [{"role": "researched", "model": "Claude Sonnet (subagent)", "machine": "james-3080"},
    {"role":"implemented","model":"Grok (grok-4.7-build)","machine":"james-3080"},
    {"role":"reviewed","model":"Claude Opus (orchestrator)","machine":"james-3080"}
- ]}
+ ]},
+
+{"id": "F23c", "title": "Menu touch-ups after the first review", "round": "Round 1", "column": "todo", "kind": "qol", "grade": "S", "origin": "Ben's answers to the questions from F23's review.", "raisedBy": "Ben", "summary": "Templates keep their name, the host's leave is a clear dialog, and a few words fixed.", "status": "Approved; for James's machine.", "parent": "F23", "repairRounds": 0, "involved": [], "machine": "james-3080"}
 ]
 };
