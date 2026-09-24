@@ -1,5 +1,5 @@
 window.VOX_BOARD = {
-"updated": "2026-09-24 17:14 UTC",
+"updated": "2026-09-24 17:15 UTC",
 "machines": {
   "ben-3070": "Ben's Win (RTX 3070 8GB)",
   "james-3080": "James Win (RTX 3080 10GB)",
@@ -522,7 +522,7 @@ window.VOX_BOARD = {
    {"role":"implemented","model":"deepseek-flash","machine":"ben-3070"}
  ]},
 
-{"id": "F22g", "title": "The Dedicated app makes objects for others", "round": "Round 1", "column": "todo", "machine": "james-3080", "kind": "feature", "grade": "M", "origin": "Part of F22.", "raisedBy": "Ben", "summary": "VoxBox Dedicated takes pictures over the network, queues them fairly, makes the objects and sends them back.", "status": "Approved; for James's machine.", "parent": "F22", "repairRounds": 0, "blocking": ["F22h", "F22m", "F22Ld"], "involved": [{"role": "researched", "model": "Claude Opus (orchestrator)", "machine": "ben-3070"}]},
+{"id": "F22g", "title": "The Dedicated app makes objects for others", "round": "Round 1", "column": "doing", "dispatched": "2026-09-24 17:15", "machine": "james-3080", "kind": "feature", "grade": "M", "origin": "Part of F22.", "raisedBy": "Ben", "summary": "VoxBox Dedicated takes pictures over the network, queues them fairly, makes the objects and sends them back.", "status": "Approved; for James's machine.", "parent": "F22", "repairRounds": 0, "blocking": ["F22h", "F22m", "F22Ld"], "involved": [{"role": "researched", "model": "Claude Opus (orchestrator)", "machine": "ben-3070"}]},
 
 {"id": "F23b", "title": "More ways to find a game", "round": "Round 1", "column": "backlog", "kind": "feature", "origin": "Ben: a public lobby browser, join codes, passwords and joining by address, later.", "raisedBy": "Ben", "summary": "Finish the Multiplayer menu beyond friends' games.", "status": "Later; needs a design.", "repairRounds": 0, "blockedBy": ["F23"], "involved": []},
 
