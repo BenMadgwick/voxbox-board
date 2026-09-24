@@ -1,5 +1,5 @@
 window.VOX_BOARD = {
-"updated": "2026-09-24 22:04 UTC",
+"updated": "2026-09-24 22:19 UTC",
 "machines": {
   "ben-3070": "Ben's Win (RTX 3070 8GB)",
   "james-3080": "James Win (RTX 3080 10GB)",
@@ -175,7 +175,8 @@ window.VOX_BOARD = {
    {"role":"repaired","model":"Claude Opus (orchestrator)","machine":"ben-3070"},
    {"role":"reviewed","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"},
    {"role":"reviewed","model":"deepseek-flash","machine":"ben-3070"},
-   {"role":"reviewed","model":"Claude Opus (orchestrator)","machine":"ben-3070"}
+   {"role":"reviewed","model":"Claude Opus (orchestrator)","machine":"ben-3070"},
+   {"role":"reviewed","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"}
  ]},
 
 {"id": "Q5", "title": "A controls overlay on H", "round": "Round 1", "column": "done", "kind": "qol", "grade": "M", "origin": "Nothing was discoverable. Ben typed the controls into Discord all night, and players asked for cube brushes and a colour picker that were already in the game.", "raisedBy": "Ben, and playtesters", "summary": "Press H to see the controls, grouped, including those for the tool in your hand. It shows itself once the first time you play.", "status": "Merged. Built in one go by deepseek-flash, the cheap model, and reviewed by another flash run: it had Q and E the wrong way round (Q flies up) and no line on getting the mouse back, both fixed before merging. Checked by Claude at both screen sizes. One thing it uncovered: the game had never actually saved your settings -- fixed the same night as B15, so the controls now greet you only the first time.", "forPlaytesters": "Press H and check every line against what the keys really do -- the list is meant to be complete, so a missing or wrong line is a bug worth a /bug. Switch tools with it open and watch the middle column change.", "repairRounds": 0, "dispatched": "2026-09-22 21:42", "merged": "2026-09-22 22:20", "workMinutes": 27, "tokens": 12136064, "tokensWritten": 121906,
@@ -194,14 +195,17 @@ window.VOX_BOARD = {
    {"role":"reviewed","model":"Claude Opus","machine":"ben-3070"}
  ]},
 
-{"id": "B9", "title": "Show as joinable on Steam", "round": "Round 1", "column": "doing", "machine": "ben-3070", "dispatched": "2026-09-24 12:22", "kind": "bug", "grade": "M", "origin": "It looked as though Steam showed Ben offline, so friends couldn't join him. Ben later corrected this: his friends were offline, so nothing was broken. Kept as a nice-to-have.", "raisedBy": "Ben", "summary": "Your Steam friends list shows that you're playing VoxBox and can be joined.", "status": "Brief ready; queued.", "repairRounds": 0,
- "involved": [
+{"id": "B9", "title": "Show as joinable on Steam", "round": "Round 1", "column": "done", "machine": "ben-3070", "dispatched": "2026-09-24 12:22", "kind": "bug", "grade": "M", "origin": "It looked as though Steam showed Ben offline, so friends couldn't join him. Ben later corrected this: his friends were offline, so nothing was broken. Kept as a nice-to-have.", "raisedBy": "Ben", "summary": "When you host over Steam, your friends list shows you hosting a VoxBox game with the player count, and friends get a Join game button on your profile that takes them into your game.", "status": "Merged. Presence set and read back checked by script; not tested: a friend actually clicking Join game (needs a second Steam account on another PC), and the lobby search listing a game from one PC.", "repairRounds": 2,
+ "merged": "2026-09-24 22:50", "forPlaytesters": "Host on Steam, then have a friend look at you in their Steam friends list: it should say you are hosting, with a Join game option that brings them straight in.", "workMinutes": 141, "tokens": 42792372, "tokensWritten": 539639, "involved": [
    {"role":"researched","model":"Claude Opus (orchestrator)","machine":"ben-3070"},
    {"role":"implemented","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"},
    {"role":"reviewed","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"},
    {"role":"repaired","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"},
    {"role":"reviewed","model":"deepseek-flash","machine":"ben-3070"},
-   {"role":"reviewed","model":"deepseek-flash","machine":"ben-3070"}
+   {"role":"reviewed","model":"deepseek-flash","machine":"ben-3070"},
+   {"role":"reviewed","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"},
+   {"role":"reviewed","model":"Claude Opus (orchestrator)","machine":"ben-3070"},
+   {"role":"repaired","model":"Claude Opus (orchestrator)","machine":"ben-3070"}
  ]},
 
 {"id": "B10", "title": "Other players move smoothly", "round": "Round 1", "column": "done", "machine": "james-3080", "merged": "2026-09-24", "dispatched": "2026-09-24 06:13", "kind": "bug", "grade": "L", "origin": "Other players' markers moved choppily, hopping rather than gliding.", "raisedBy": "Ben", "summary": "Other players glide instead of hopping 15 times a second. The smoothing starts at 120 ms, a first guess for Ben to tune.", "status": "Brief ready; queued.", "repairRounds": 0,
