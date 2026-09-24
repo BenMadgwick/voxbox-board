@@ -218,7 +218,7 @@ window.VOX_BOARD = {
    {"role":"reviewed","model":"Claude Opus","machine":"ben-3070"}
  ]},
 
-{"id": "B1c", "title": "Carves are replayed, not downloaded", "round": "Round 1", "column": "doing", "machine": "james-3080", "dispatched": "2026-09-24 15:38", "kind": "bug", "grade": "L", "origin": "Part of B1: carving stalled joining players' games (reported as B7).", "raisedBy": "playtesters", "summary": "Joining machines repeat each carve themselves, the way they already do for breaks and paint, instead of downloading the object after every scoop.", "status": "Brief ready.", "parent": "B1", "repairRounds": 0,
+{"id": "B1c", "title": "Carves are replayed, not downloaded", "round": "Round 1", "column": "done", "merged": "2026-09-24", "machine": "james-3080", "dispatched": "2026-09-24 15:38", "kind": "bug", "grade": "L", "origin": "Part of B1: carving stalled joining players' games (reported as B7).", "raisedBy": "playtesters", "summary": "Joining machines repeat each carve themselves, the way they already do for breaks and paint, instead of downloading the object after every scoop.", "status": "Merged; every scoop the host carves is replayed, none downloaded (the host's own dropped scoops are B1e).", "parent": "B1", "repairRounds": 1,
  "involved": [
    {"role":"researched","model":"Claude Opus (subagent)","machine":"ben-3070"},
    {"role":"implemented","model":"Claude Sonnet (subagent)","machine":"james-3080"}
@@ -544,6 +544,6 @@ window.VOX_BOARD = {
 
 {"id": "F24b", "title": "Settle the menu rain's intensity", "round": "Round 1", "column": "backlog", "kind": "qol", "origin": "Ben will say which slider setting felt right.", "raisedBy": "Ben", "summary": "Bake in Ben's chosen intensity and remove the slider.", "status": "Waiting for Ben's number.", "repairRounds": 0, "blockedBy": ["F24"], "involved": []},
 
-{"id": "B1e", "title": "Fast carving never drops a cut", "round": "Round 1", "column": "todo", "kind": "bug", "grade": "M", "origin": "B1c's test found the host silently drops a carve scoop while the previous piece's collision is still being built (20-620 ms), so quick carving loses cuts.", "raisedBy": "Ben", "summary": "Build a carved piece's collision after the piece is in place, so every scoop is carved.", "status": "Approved in principle; after B1c.", "parent": "B1", "repairRounds": 0, "blockedBy": ["B1c"], "involved": [{"role": "researched", "model": "Claude Sonnet (subagent)", "machine": "james-3080"}]}
+{"id": "B1e", "title": "Fast carving never drops a cut", "round": "Round 1", "column": "todo", "kind": "bug", "grade": "M", "origin": "B1c's test found the host silently drops a carve scoop while the previous piece's collision is still being built (20-620 ms), so quick carving loses cuts.", "raisedBy": "Ben", "summary": "Build a carved piece's collision after the piece is in place, so every scoop is carved.", "status": "Approved in principle; B1c is merged, so it can start.", "parent": "B1", "repairRounds": 0, "involved": [{"role": "researched", "model": "Claude Sonnet (subagent)", "machine": "james-3080"}]}
 ]
 };
