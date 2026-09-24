@@ -1,5 +1,5 @@
 window.VOX_BOARD = {
-"updated": "2026-09-24 15:49 UTC",
+"updated": "2026-09-24 15:52 UTC",
 "machines": {
   "ben-3070": "Ben's Win (RTX 3070 8GB)",
   "james-3080": "James Win (RTX 3080 10GB)",
@@ -104,7 +104,7 @@ window.VOX_BOARD = {
    {"role":"reviewed","model":"DeepSeek v4-pro","machine":"ben-3070"}
  ]},
 
-{"id": "F3b", "title": "See-through objects in the game", "round": "Round 1", "column": "todo", "kind": "feature", "origin": "The second half of F3.", "raisedBy": "Ben", "summary": "Glass and other see-through parts of a generated object actually look see-through. Designed from F3a's measurements.", "status": "Designed and split into four parts, and Ben has answered its questions. Glass becomes one see-through sheet with the scene inside visible, and TRELLIS's empty backdrops and smoke are dropped. Queued behind the jobs now running.", "parent": "F3", "repairRounds": 0,
+{"id": "F3b", "title": "See-through objects in the game", "round": "Round 1", "column": "doing", "kind": "feature", "origin": "The second half of F3.", "raisedBy": "Ben", "summary": "Glass and other see-through parts of a generated object actually look see-through. Designed from F3a's measurements.", "status": "Designed and split into four parts, and Ben has answered its questions. Glass becomes one see-through sheet with the scene inside visible, and TRELLIS's empty backdrops and smoke are dropped. Queued behind the jobs now running.", "parent": "F3", "repairRounds": 0,
  "involved": [
    {"role":"researched","model":"Claude Opus (subagent)","machine":"ben-3070"}
  ]},
@@ -112,7 +112,7 @@ window.VOX_BOARD = {
 {"id": "F3c", "title": "Air behind glass, not clear filling", "round": "Round 1", "column": "backlog", "kind": "feature", "origin": "F3b fills the space behind glass with clear glass, because telling trapped air apart reliably proved fragile. Ben would rather it were air.", "raisedBy": "Ben", "summary": "Work out reliably which voxels behind glass are air, so a bottle is hollow instead of full of clear glass.", "status": "After F3b, and after Ben finds more see-through pictures (glass, water, plastic) to test on.", "parent": "F3", "repairRounds": 0,
  "involved": []},
 
-{"id": "F3b2", "title": "Work out which voxels are see-through", "round": "Round 1", "column": "todo", "kind": "feature", "grade": "L", "origin": "The first half of F3b: something has to turn the generator's see-through numbers into a yes-or-no rule before anything can be drawn with them.", "raisedBy": "Ben", "summary": "A rule that reads an object's see-through values and decides which voxels are glass -- careful about air sealed inside an object, which reads see-through when it is not.", "status": "Approved and ready to start; it shares its measurements with the drawing half beside it.", "parent": "F3b", "blocking": ["F3b4"], "repairRounds": 0,
+{"id": "F3b2", "title": "Work out which voxels are see-through", "round": "Round 1", "column": "doing", "machine": "ben-3070", "dispatched": "2026-09-24 15:52", "kind": "feature", "grade": "L", "origin": "The first half of F3b: something has to turn the generator's see-through numbers into a yes-or-no rule before anything can be drawn with them.", "raisedBy": "Ben", "summary": "A rule that reads an object's see-through values and decides which voxels are glass -- careful about air sealed inside an object, which reads see-through when it is not.", "status": "Approved and ready to start; it shares its measurements with the drawing half beside it.", "parent": "F3b", "blocking": ["F3b4"], "repairRounds": 0,
  "involved": [
    {"role":"researched","model":"Claude Opus (subagent)","machine":"ben-3070"}
  ]},
@@ -163,9 +163,9 @@ window.VOX_BOARD = {
    {"role":"researched","model":"Claude Opus (orchestrator)","machine":"ben-3070"},
    {"role":"implemented","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"},
    {"role":"reviewed","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"},
-   {"role":"reviewed","model":"deepseek-flash","machine":"ben-3070"},
+   {"role":"reviewed","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"},
    {"role":"repaired","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"},
-   {"role":"reviewed","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"}
+   {"role":"reviewed","model":"deepseek-flash","machine":"ben-3070"}
  ]},
 
 {"id": "Q5", "title": "A controls overlay on H", "round": "Round 1", "column": "done", "kind": "qol", "grade": "M", "origin": "Nothing was discoverable. Ben typed the controls into Discord all night, and players asked for cube brushes and a colour picker that were already in the game.", "raisedBy": "Ben, and playtesters", "summary": "Press H to see the controls, grouped, including those for the tool in your hand. It shows itself once the first time you play.", "status": "Merged. Built in one go by deepseek-flash, the cheap model, and reviewed by another flash run: it had Q and E the wrong way round (Q flies up) and no line on getting the mouse back, both fixed before merging. Checked by Claude at both screen sizes. One thing it uncovered: the game had never actually saved your settings -- fixed the same night as B15, so the controls now greet you only the first time.", "forPlaytesters": "Press H and check every line against what the keys really do -- the list is meant to be complete, so a missing or wrong line is a bug worth a /bug. Switch tools with it open and watch the middle column change.", "repairRounds": 0, "dispatched": "2026-09-22 21:42", "merged": "2026-09-22 22:20", "workMinutes": 27, "tokens": 12136064, "tokensWritten": 121906,
@@ -188,8 +188,8 @@ window.VOX_BOARD = {
  "involved": [
    {"role":"researched","model":"Claude Opus (orchestrator)","machine":"ben-3070"},
    {"role":"repaired","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"},
-   {"role":"implemented","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"},
    {"role":"reviewed","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"},
+   {"role":"implemented","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"},
    {"role":"reviewed","model":"deepseek-flash","machine":"ben-3070"}
  ]},
 
