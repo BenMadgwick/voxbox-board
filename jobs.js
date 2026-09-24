@@ -1,5 +1,5 @@
 window.VOX_BOARD = {
-"updated": "2026-09-24 17:23 UTC",
+"updated": "2026-09-24 18:00 UTC",
 "machines": {
   "ben-3070": "Ben's Win (RTX 3070 8GB)",
   "james-3080": "James Win (RTX 3080 10GB)",
@@ -114,7 +114,8 @@ window.VOX_BOARD = {
 
 {"id": "F3b2", "title": "Work out which voxels are see-through", "round": "Round 1", "column": "doing", "machine": "ben-3070", "dispatched": "2026-09-24 15:52", "kind": "feature", "grade": "L", "origin": "The first half of F3b: something has to turn the generator's see-through numbers into a yes-or-no rule before anything can be drawn with them.", "raisedBy": "Ben", "summary": "A rule that reads an object's see-through values and decides which voxels are glass -- careful about air sealed inside an object, which reads see-through when it is not.", "status": "Approved and ready to start; it shares its measurements with the drawing half beside it.", "parent": "F3b", "blocking": ["F3b4"], "repairRounds": 0,
  "involved": [
-   {"role":"researched","model":"Claude Opus (subagent)","machine":"ben-3070"}
+   {"role":"researched","model":"Claude Opus (subagent)","machine":"ben-3070"},
+   {"role":"implemented","model":"deepseek-flash","machine":"ben-3070"}
  ]},
 
 {"id": "F3b3", "title": "Draw see-through voxels", "round": "Round 1", "column": "todo", "kind": "feature", "grade": "L", "origin": "The second half of F3b: the rule is no use until the game draws glass as glass.", "raisedBy": "Ben", "summary": "Glass and other see-through parts of a generated object actually look see-through in the game, with what is behind them visible through them.", "status": "Approved and ready to start, beside the rule it draws.", "parent": "F3b", "blocking": ["F3b4"], "repairRounds": 0,
@@ -472,7 +473,8 @@ window.VOX_BOARD = {
 
 {"id": "F22f", "title": "Try the Steam side on a test app", "round": "Round 1", "column": "doing", "machine": "ben-3070", "dispatched": "2026-09-24 02:34", "kind": "feature", "grade": "R", "origin": "Part of F22.", "raisedBy": "Ben", "summary": "Checks, on Steam's test app, that a Dedicated app can be found and reached by friends without a server of our own.", "status": "Approved; waiting to be picked up.", "parent": "F22", "repairRounds": 0, "blocking": ["F22i"],
  "involved": [
-   {"role":"researched","model":"Claude Opus (subagent)","machine":"ben-3070"}
+   {"role":"researched","model":"Claude Opus (subagent)","machine":"ben-3070"},
+   {"role":"reviewed","model":"deepseek-flash","machine":"ben-3070"}
  ]},
 
 {"id": "F22s", "title": "A true server build", "round": "Round 1", "column": "doing", "machine": "ben-3070", "dispatched": "2026-09-23 23:32", "kind": "feature", "grade": "L", "origin": "Part of F22.", "raisedBy": "Ben", "summary": "Builds the engine from source so the Dedicated app is a real server program with no graphics in it, for Windows and Linux.", "status": "Approved; its first step is Ben's (linking his Epic account to GitHub).", "parent": "F22", "repairRounds": 0, "blocking": ["F22o", "F22Ld"],
