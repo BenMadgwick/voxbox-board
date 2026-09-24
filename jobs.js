@@ -1,5 +1,5 @@
 window.VOX_BOARD = {
-"updated": "2026-09-24 18:49 UTC",
+"updated": "2026-09-24 19:03 UTC",
 "machines": {
   "ben-3070": "Ben's Win (RTX 3070 8GB)",
   "james-3080": "James Win (RTX 3080 10GB)",
@@ -288,8 +288,8 @@ window.VOX_BOARD = {
    {"role":"reviewed","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"},
    {"role":"implemented","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"},
    {"role":"reviewed","model":"deepseek-flash","machine":"ben-3070"},
-   {"role":"reviewed","model":"OpenRouter thinkingmachines/inkling:free","machine":"ben-3070"},
-   {"role":"reviewed","model":"OpenRouter nvidia/nemotron-3-ultra-550b-a55b:free","machine":"ben-3070"}
+   {"role":"reviewed","model":"OpenRouter nvidia/nemotron-3-ultra-550b-a55b:free","machine":"ben-3070"},
+   {"role":"reviewed","model":"OpenRouter thinkingmachines/inkling:free","machine":"ben-3070"}
  ]},
 
 {"id": "F16", "title": "Bake a glued build into one object", "round": "Round 1", "column": "backlog", "kind": "feature", "origin": "Glue keeps each part's own grid, material and detail. Ben liked the idea of also offering a deliberate way to fuse a build into a single grid.", "raisedBy": "Ben", "summary": "A Bake action that fuses a glued build into one voxel grid at a resolution you choose, for when you want it to behave as a single lump, for example to carve evenly across the seams.", "status": "Backlog, after F7.", "parent": "F7", "repairRounds": 0,
@@ -533,7 +533,9 @@ window.VOX_BOARD = {
    {"role":"implemented","model":"deepseek-flash","machine":"ben-3070"}
  ]},
 
-{"id": "F22g", "title": "The Dedicated app makes objects for others", "round": "Round 1", "column": "doing", "dispatched": "2026-09-24 17:15", "machine": "james-3080", "kind": "feature", "grade": "M", "origin": "Part of F22.", "raisedBy": "Ben", "summary": "VoxBox Dedicated takes pictures over the network, queues them fairly, makes the objects and sends them back.", "status": "Approved; for James's machine.", "parent": "F22", "repairRounds": 0, "blocking": ["F22h", "F22m", "F22Ld"], "involved": [{"role": "researched", "model": "Claude Opus (orchestrator)", "machine": "ben-3070"},
+{"id": "F22g", "title": "The Dedicated app makes objects for others", "round": "Round 1", "column": "done", "merged": "2026-09-24", "dispatched": "2026-09-24 17:15", "machine": "james-3080", "kind": "feature", "grade": "M", "origin": "Part of F22.", "raisedBy": "Ben", "summary": "VoxBox Dedicated takes pictures over the network, queues them fairly, makes the objects and sends them back.", "status": "Approved; for James's machine.", "parent": "F22", "repairRounds": 0, "blocking": ["F22h", "F22m", "F22Ld"], "involved": [{"role": "researched", "model": "Claude Opus (orchestrator)", "machine": "ben-3070"},
+   {"role":"reviewed","model":"Claude Opus (orchestrator)","machine":"james-3080"},
+   {"role":"repaired","model":"Claude Opus (orchestrator)","machine":"james-3080"},
    {"role":"implemented","model":"Grok (grok-4.7-build)","machine":"james-3080"}
  ]},
 
