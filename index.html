@@ -1,0 +1,379 @@
+<title>VoxBox Jobs Board</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Figtree:wght@400;500;600&family=JetBrains+Mono:wght@500;700&display=swap">
+<style>
+:root{
+  --ground:#edf0f3; --surface:#ffffff; --sunk:#e3e8ed; --ink:#17202b; --muted:#566476; --line:#d3dae2;
+  --accent:#0e7c86; --accent-ink:#ffffff;
+  --done:#2c8a57; --doing:#b87211; --todo:#3461c4; --backlog:#6f5fa3; --closed:#7d8794;
+  --tile-top:#ffffff; --tile-side:#c6d0da;
+  --shadow:0 1px 2px rgba(23,32,43,.06),0 6px 18px rgba(23,32,43,.06);
+  --display:"Bricolage Grotesque","Segoe UI",system-ui,sans-serif;
+  --body:"Figtree","Segoe UI",system-ui,-apple-system,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --ground:#0f141a; --surface:#172029; --sunk:#1e2833; --ink:#e5eaf0; --muted:#98a6b5; --line:#2a3642;
+    --accent:#4cc0c8; --accent-ink:#06282b;
+    --done:#5cc58a; --doing:#e6a547; --todo:#7ea2f0; --backlog:#a898dc; --closed:#95a0ad;
+    --tile-top:#243140; --tile-side:#0a0f14;
+    --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 22px rgba(0,0,0,.25);
+  }
+}
+:root[data-theme="dark"]{
+  --ground:#0f141a; --surface:#172029; --sunk:#1e2833; --ink:#e5eaf0; --muted:#98a6b5; --line:#2a3642;
+  --accent:#4cc0c8; --accent-ink:#06282b;
+  --done:#5cc58a; --doing:#e6a547; --todo:#7ea2f0; --backlog:#a898dc; --closed:#95a0ad;
+  --tile-top:#243140; --tile-side:#0a0f14;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 22px rgba(0,0,0,.25);
+}
+*{box-sizing:border-box}
+body{background:var(--ground);color:var(--ink);font:15px/1.5 var(--body);}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 64px}
+header{display:grid;gap:10px;margin-bottom:22px}
+.brand{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.cube{width:30px;height:30px;flex:none}
+h1{font:800 clamp(26px,5vw,38px)/1.05 var(--display);letter-spacing:-.02em;margin:0;text-wrap:balance}
+.lede{margin:0;color:var(--muted);max-width:68ch}
+.stats{display:flex;flex-wrap:wrap;gap:6px 14px;font:500 13px/1.4 var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.stats b{color:var(--ink);font-weight:700}
+.controls{display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px;justify-content:space-between;margin-bottom:18px;position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--ground);padding-block:10px}
+.tabs{display:flex;min-width:0;gap:4px;background:var(--sunk);padding:4px;border-radius:10px;overflow-x:auto;max-width:100%;scrollbar-width:none}
+.tab{appearance:none;border:0;background:transparent;color:var(--muted);font:600 14px/1 var(--body);padding:9px 12px;border-radius:7px;cursor:pointer;white-space:nowrap;display:flex;align-items:center;gap:7px}
+.tab:hover{color:var(--ink)}
+.tab[aria-selected="true"]{background:var(--surface);color:var(--ink);box-shadow:0 1px 2px rgba(0,0,0,.12)}
+.tab .dot{width:8px;height:8px;border-radius:2px;background:var(--c)}
+.tab .n{font:500 12px/1 var(--mono);color:var(--muted)}
+.tab:focus-visible,.card:focus-visible,select:focus-visible,.close:focus-visible,.jl:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.filters{display:flex;min-width:0;max-width:100%;flex-wrap:wrap;align-items:center;gap:10px 16px}
+label.round{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--muted)}
+select{max-width:100%;font:500 14px var(--body);color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:7px 10px}
+.colhead{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin:0 0 14px}
+.colhead h2{font:700 20px/1.2 var(--display);margin:0}
+.colhead p{margin:0;color:var(--muted);font-size:14px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr));gap:14px}
+.card{all:unset;box-sizing:border-box;display:grid;grid-template-rows:auto auto 1fr auto;gap:8px;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 16px;cursor:pointer;box-shadow:var(--shadow);transition:transform .15s ease,border-color .15s ease}
+.card:hover{transform:translateY(-2px);border-color:var(--c)}
+.top{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.id{font:700 13px/1 var(--mono);color:var(--ink);background:var(--tile-top);border:1px solid var(--line);border-radius:5px;padding:5px 7px;box-shadow:2px 2px 0 var(--tile-side),inset 0 -2px 0 var(--c)}
+.kind{font:600 11px/1 var(--body);text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+.grade{margin-left:auto;font:500 11px/1 var(--mono);color:var(--muted);border:1px solid var(--line);border-radius:4px;padding:3px 5px}
+.card h3{font:600 16.5px/1.3 var(--body);margin:0;text-wrap:balance}
+.card p{margin:0;color:var(--muted);font-size:14px}
+.meta{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:12.5px;color:var(--muted);border-top:1px dashed var(--line);padding-top:9px}
+.meta .who{color:var(--ink);font-weight:600}
+.meta .on{color:var(--muted)}
+.chip{display:inline-flex;align-items:center;gap:5px;font:500 12px/1 var(--body);padding:5px 8px;border-radius:999px;background:var(--sunk);color:var(--ink);white-space:nowrap}
+.chip.m::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--mc)}
+.mpill{font:500 12px/1 var(--body);padding:5px 8px;border-radius:999px;border:1px solid var(--line);color:var(--muted);white-space:nowrap}
+.invs{display:grid;gap:7px}
+.inv{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.inv .role{font:600 11.5px/1 var(--body);text-transform:uppercase;letter-spacing:.08em;color:var(--muted);min-width:10ch}
+.parentline{font-size:12.5px;color:var(--muted)}
+.wait{color:var(--doing);font-weight:600}
+.pr{font:600 11px/1 var(--body);letter-spacing:.04em;color:var(--c);border:1px solid currentColor;border-radius:4px;padding:4px 6px;white-space:nowrap}
+.empty{padding:28px;border:1px dashed var(--line);border-radius:12px;color:var(--muted);text-align:center}
+.pill{display:inline-flex;align-items:center;gap:6px;font:600 12px/1 var(--body);padding:5px 9px;border-radius:999px;color:var(--c);background:color-mix(in srgb,var(--c) 14%,transparent)}
+.pill::before{content:"";width:7px;height:7px;border-radius:2px;background:var(--c)}
+dialog{border:0;padding:0;background:var(--surface);color:var(--ink);width:min(680px,100% - 24px);max-height:min(88vh,100% - 24px);border-radius:14px;box-shadow:0 20px 60px rgba(0,0,0,.35)}
+dialog::backdrop{background:rgba(10,15,20,.55)}
+.sheet{padding:22px 22px 26px;display:grid;gap:18px}
+.sheet .hd{display:grid;gap:10px}
+.sheet .row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.sheet h2{font:800 clamp(22px,4.5vw,28px)/1.15 var(--display);margin:0;letter-spacing:-.01em;text-wrap:balance}
+.close{margin-left:auto;appearance:none;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:8px;width:34px;height:34px;font-size:18px;line-height:1;cursor:pointer}
+.sec h4{font:600 11.5px/1 var(--body);text-transform:uppercase;letter-spacing:.09em;color:var(--muted);margin:0 0 7px}
+.sec p{margin:0;max-width:65ch}
+.origin{background:var(--sunk);border-radius:10px;padding:12px 14px}
+.origin .by{display:block;margin-top:6px;font-size:13px;color:var(--muted)}
+.try{border-left:3px solid var(--accent);padding-left:12px}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,190px),1fr));gap:12px 18px}
+.facts .v{font-weight:600}
+.facts .v.mono{font:500 13.5px/1.4 var(--mono)}
+.jl{all:unset;cursor:pointer;display:flex;gap:10px;align-items:center;padding:8px 10px;border-radius:8px;border:1px solid var(--line);flex-wrap:wrap}
+.jl:hover{border-color:var(--accent)}
+.jl .t{flex:1;min-width:10ch}
+.kids{display:grid;gap:6px}
+footer{margin-top:36px;color:var(--muted);font-size:13px;max-width:70ch}
+@media (prefers-reduced-motion:reduce){.card{transition:none}.card:hover{transform:none}}
+</style>
+
+<div class="wrap">
+  <header>
+    <div class="brand">
+      <svg class="cube" viewBox="0 0 30 30" aria-hidden="true">
+        <path d="M15 2 27 8.5 15 15 3 8.5Z" fill="var(--accent)"/>
+        <path d="M3 8.5 15 15v13L3 21.5Z" fill="var(--accent)" opacity=".65"/>
+        <path d="M27 8.5 15 15v13l12-6.5Z" fill="var(--accent)" opacity=".4"/>
+      </svg>
+      <h1>VoxBox jobs board</h1>
+    </div>
+    <p class="lede">Every change to VoxBox starts as something a playtester said. Here is each one: what prompted it, what changed, who built it and who checked it, and which machine did each part. Several machines work this backlog now, so the Machine filter shows what any one of them has been up to.</p>
+    <div class="stats" id="stats"></div>
+  </header>
+
+  <div class="controls">
+    <div class="tabs" role="tablist" id="tabs"></div>
+    <div class="filters">
+      <label class="round" for="roundSel">Round <select id="roundSel"></select></label>
+      <label class="round" for="machSel">Machine <select id="machSel"></select></label>
+      <label class="round" for="modelSel">Model <select id="modelSel"></select></label>
+    </div>
+  </div>
+
+  <section id="col" aria-live="polite"></section>
+
+  <footer id="foot"></footer>
+</div>
+
+<dialog id="dlg" aria-labelledby="dlgTitle"><div class="sheet" id="sheet"></div></dialog>
+
+<script src="jobs.js"></script>
+<script>
+(function(){
+  var COLS = [
+    {k:"done",   name:"Done",        c:"var(--done)",    blurb:"Merged into the game. The newest first."},
+    {k:"doing",  name:"In progress", c:"var(--doing)",   blurb:"Being built or researched right now."},
+    {k:"todo",   name:"To do",       c:"var(--todo)",    blurb:"Approved for this round, roughly in the order they'll be picked up."},
+    {k:"backlog",name:"Backlog",     c:"var(--backlog)", blurb:"Approved for later rounds, or waiting for a discussion."},
+    {k:"closed", name:"Closed",      c:"var(--closed)",  blurb:"Folded into another job, or dropped."}
+  ];
+  var KIND = {bug:"Bug", qol:"Quality of life", feature:"Feature"};
+  var GRADE = {S:"Small", M:"Medium", L:"Large", R:"Research first"};
+  // Each model family keeps one colour, so a reader can follow a model across cards.
+  function modelColour(m){
+    m = (m||"").toLowerCase();
+    if (m.indexOf("claude")>=0) return "#c8743a";
+    if (m.indexOf("glm")>=0) return "#3a78d4";
+    if (m.indexOf("deepseek")>=0) return "#2e9b8f";
+    if (m.indexOf("grok")>=0) return "#7b5cd6";
+    if (m.indexOf("openrouter")>=0) return "#c24f86";
+    return "#8a8a8a";
+  }
+
+  var data = window.VOX_BOARD;
+  var colEl = document.getElementById("col");
+  if (!data || !data.jobs){
+    colEl.innerHTML = '<div class="empty">The job list didn\'t load. Reload the page to try again.</div>';
+    return;
+  }
+  var jobs = data.jobs, byId = {};
+  jobs.forEach(function(j){ byId[j.id] = j; });
+
+  // The tab and the round are remembered between visits. The machine and model filters are
+  // not: a headless render asks for what it wants with ?machine= / ?model=, and a filter
+  // remembered from an earlier visit would quietly override it. ?tab= names the column for
+  // the same reason -- the interesting cards are usually not in Done.
+  var state = {tab:"done", round:"all", machine:"all", model:"all"};
+  try { var saved = JSON.parse(localStorage.getItem("voxboard") || "{}"); if (saved.tab) state.tab = saved.tab; if (saved.round) state.round = saved.round; } catch(e){}
+  function query(name){ var m = new RegExp("[?&]" + name + "=([^&]*)").exec(location.search); return m ? decodeURIComponent(m[1]) : ""; }
+  if (query("machine")) state.machine = query("machine");
+  if (query("model")) state.model = query("model");
+  if (query("tab")) state.tab = query("tab");
+  if (!COLS.some(function(c){ return c.k === state.tab; })) state.tab = "done";
+  function save(){ try { localStorage.setItem("voxboard", JSON.stringify({tab:state.tab, round:state.round})); } catch(e){} }
+
+  function esc(s){ return String(s==null?"":s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];}); }
+  var MON = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+  function when(s){
+    if (!s) return "";
+    var m = /^(\d{4})-(\d\d)-(\d\d)(?:[ T](\d\d:\d\d))?/.exec(s);
+    if (!m) return esc(s);
+    return (+m[3]) + " " + MON[+m[2]-1] + (m[4] ? ", " + m[4] + " UTC" : "");
+  }
+  // Token counts span 0.3 to 50 million, so they read best in millions to one decimal.
+  function tok(n){
+    if (!n) return "";
+    return n >= 1e6 ? (n/1e6).toFixed(1).replace(/\.0$/,"") + " million" : Math.round(n/1e3) + " thousand";
+  }
+  function colOf(k){ for (var i=0;i<COLS.length;i++) if (COLS[i].k===k) return COLS[i]; return COLS[0]; }
+  function inRound(j){ return state.round==="all" || j.round===state.round; }
+  // A job is shown when it has any involvement at all on the chosen machine, and any
+  // involvement at all by the chosen model -- machine and model are separate questions,
+  // not the same entry.
+  // "machine" is the job's owner (its claim, or the machine its brief is for), written by
+  // tools/board_sync.ps1: a job claimed or queued for a machine counts there even before
+  // anyone on that machine has touched it.
+  function onMachine(j){ return state.machine==="all" || j.machine===state.machine || (j.involved||[]).some(function(e){ return e.machine===state.machine; }); }
+  function onModel(j){ return state.model==="all" || (j.involved||[]).some(function(e){ return e.model===state.model; }); }
+  function shown(j){ return inRound(j) && onMachine(j) && onModel(j); }
+  function kids(id){ return jobs.filter(function(j){ return j.parent===id; }); }
+  function roleOf(j, role){ return (j.involved||[]).filter(function(e){ return e.role===role; }); }
+  function lastOf(j, role){ var l = roleOf(j, role); return l.length ? l[l.length-1] : null; }
+  // A job's order of work, in the same small print as "Part of ...": what it cannot start
+  // without, and what cannot start without it (docs/design/D4-blocked-and-prio.md). The ids
+  // are the ones on the cards, so a reader can find either end.
+  function blockLines(j){
+    var out = '';
+    if (j.blockedBy && j.blockedBy.length) out += '<span class="parentline wait">Blocked by '+esc(j.blockedBy.join(', '))+'</span>';
+    if (j.blocking && j.blocking.length) out += '<span class="parentline">Blocking '+esc(j.blocking.join(', '))+'</span>';
+    return out;
+  }
+  // A job more urgent than the rest says so on its card; 1 is the resting value and shows nothing.
+  function prioMark(j){
+    if (!j.prio || j.prio <= 1) return '';
+    return '<span class="pr" title="Priority '+esc(j.prio)+' of 1 upwards: the higher, the sooner">Prio '+esc(j.prio)+'</span>';
+  }
+
+  // Rounds
+  var sel = document.getElementById("roundSel");
+  var rounds = (data.rounds||[]).map(function(r){ return r.name; });
+  sel.innerHTML = '<option value="all">All rounds</option>' + rounds.map(function(r){ return '<option value="'+esc(r)+'">'+esc(r)+'</option>'; }).join("");
+  if (state.round!=="all" && rounds.indexOf(state.round)<0) state.round="all";
+  sel.value = state.round;
+  sel.addEventListener("change", function(){ state.round = sel.value; save(); render(); });
+
+  // The machines come from the board's own map, so the labels are the only thing a reader
+  // ever sees; the models are whatever the jobs actually used.
+  var machines = data.machines || {};
+  function machineLabel(id){ return machines[id] || id; }
+  var models = [];
+  jobs.forEach(function(j){ (j.involved||[]).forEach(function(e){ if (e.model && models.indexOf(e.model)<0) models.push(e.model); }); });
+  models.sort();
+  var machSel = document.getElementById("machSel");
+  machSel.innerHTML = '<option value="all">All machines</option>' + Object.keys(machines).map(function(k){ return '<option value="'+esc(k)+'">'+esc(machineLabel(k))+'</option>'; }).join("");
+  if (state.machine!=="all" && !machines[state.machine]) state.machine = "all";
+  machSel.value = state.machine;
+  machSel.addEventListener("change", function(){ state.machine = machSel.value; render(); });
+  var modelSel = document.getElementById("modelSel");
+  modelSel.innerHTML = '<option value="all">All models</option>' + models.map(function(m){ return '<option value="'+esc(m)+'">'+esc(m)+'</option>'; }).join("");
+  if (state.model!=="all" && models.indexOf(state.model)<0) state.model = "all";
+  modelSel.value = state.model;
+  modelSel.addEventListener("change", function(){ state.model = modelSel.value; render(); });
+
+  function filterNote(){
+    var bits = [];
+    if (state.machine!=="all") bits.push(machineLabel(state.machine));
+    if (state.model!=="all") bits.push(state.model);
+    return bits.join(", ");
+  }
+
+  function list(k){
+    var l = jobs.filter(function(j){ return j.column===k && shown(j); });
+    if (k==="done") l = l.slice().sort(function(a,b){ return (b.merged||"").localeCompare(a.merged||""); });
+    return l;
+  }
+
+  function renderStats(){
+    var n = {}; COLS.forEach(function(c){ n[c.k] = list(c.k).length; });
+    var r = rounds.length;
+    document.getElementById("stats").innerHTML =
+      '<span><b>'+r+'</b> round'+(r===1?'':'s')+' so far</span>' +
+      COLS.map(function(c){ return '<span><b>'+n[c.k]+'</b> '+c.name.toLowerCase()+'</span>'; }).join("") +
+      (filterNote() ? '<span>filtered to '+esc(filterNote())+' (every job it had a hand in, so machines can share a job)</span>' : '') +
+      (data.updated ? '<span>updated '+esc(data.updated)+'</span>' : '');
+  }
+
+  function renderTabs(){
+    document.getElementById("tabs").innerHTML = COLS.map(function(c){
+      return '<button class="tab" role="tab" id="tab-'+c.k+'" aria-selected="'+(state.tab===c.k)+'" data-k="'+c.k+'" style="--c:'+c.c+'"><span class="dot"></span>'+c.name+' <span class="n">'+list(c.k).length+'</span></button>';
+    }).join("");
+  }
+
+  function card(j){
+    var c = colOf(j.column);
+    var text = j.column==="closed" ? (j.closedAs||"") : (j.summary || j.origin);
+    var meta = [];
+    var impl = lastOf(j,"implemented"), res = roleOf(j,"researched")[0];
+    if (impl) meta.push('Built by <span class="who">'+esc(impl.model)+'</span> <span class="on">on '+esc(machineLabel(impl.machine))+'</span>');
+    else if (res && (j.column==="doing"||j.column==="todo")) meta.push('Researched by <span class="who">'+esc(res.model)+'</span> <span class="on">on '+esc(machineLabel(res.machine))+'</span>');
+    if (!impl && j.machine && (j.column==="doing"||j.column==="todo")) meta.push((j.column==="doing"?'Being built on ':'For ')+'<span class="who">'+esc(machineLabel(j.machine))+'</span>');
+    var nrev = roleOf(j,"reviewed").length;
+    if (nrev) meta.push(nrev+' review'+(nrev===1?'':'s'));
+    if (j.column==="done" && j.tokens) meta.push(tok(j.tokens).replace(" million","M").replace(" thousand","k")+' tokens');
+    if (j.column==="done" && j.merged) meta.push(when(j.merged).split(",")[0]);
+    else if (j.status && j.column!=="closed") meta.push(esc(j.status.split(/(?<=\.)\s/)[0]));
+    var k = kids(j.id).filter(function(x){return x.column!=="closed";});
+    var parentLine = j.parent && byId[j.parent] ? '<span class="parentline">Part of '+esc(j.parent)+': '+esc(byId[j.parent].title)+'</span>' :
+      (k.length ? '<span class="parentline">'+k.filter(function(x){return x.column==="done";}).length+' of '+k.length+' parts done</span>' : '');
+    return '<button class="card" data-id="'+esc(j.id)+'" style="--c:'+c.c+'">' +
+      '<div class="top"><span class="id">'+esc(j.id)+'</span><span class="kind">'+esc(KIND[j.kind]||"")+'</span>'+(j.grade?'<span class="grade" title="'+esc(GRADE[j.grade]||"")+'">'+esc(j.grade)+'</span>':'')+prioMark(j)+'</div>' +
+      '<h3>'+esc(j.title)+'</h3>' +
+      '<div style="display:grid;gap:6px;align-content:start"><p>'+esc(text)+'</p>'+parentLine+blockLines(j)+'</div>' +
+      (meta.length ? '<div class="meta">'+meta.join(' <span aria-hidden="true">·</span> ')+'</div>' : '<span></span>') +
+      '</button>';
+  }
+
+  function renderCol(){
+    var c = colOf(state.tab), l = list(state.tab);
+    colEl.setAttribute("aria-labelledby","tab-"+c.k);
+    colEl.innerHTML = '<div class="colhead"><h2>'+c.name+'</h2><p>'+c.blurb+'</p></div>' +
+      (l.length ? '<div class="grid">'+l.map(card).join("")+'</div>'
+                : '<div class="empty">Nothing here'+(state.round!=="all"?' in '+esc(state.round):'')+(filterNote()?' for '+esc(filterNote()):'')+' yet. Clear the filters to see the rest.</div>');
+  }
+
+  function render(){ renderStats(); renderTabs(); renderCol(); }
+
+  document.getElementById("tabs").addEventListener("click", function(e){
+    var b = e.target.closest(".tab"); if (!b) return;
+    state.tab = b.getAttribute("data-k"); save(); render();
+  });
+  colEl.addEventListener("click", function(e){
+    var b = e.target.closest(".card"); if (b) open(b.getAttribute("data-id"));
+  });
+
+  // Detail
+  var dlg = document.getElementById("dlg"), sheet = document.getElementById("sheet");
+  var ROLE = {researched:"Researched", implemented:"Built", repaired:"Repaired", reviewed:"Reviewed"};
+  function chip(m){ return '<span class="chip m" style="--mc:'+modelColour(m)+'">'+esc(m)+'</span>'; }
+  // Every entry names the machine that did it, because a job can be split across machines
+  // and one machine's model can review another machine's work.
+  function involvement(inv){
+    if (!inv || !inv.length) return "";
+    var rows = inv.map(function(e){
+      return '<div class="inv"><span class="role">'+esc(ROLE[e.role]||e.role)+'</span>' +
+        chip(e.model) +
+        (e.machine ? '<span class="mpill">'+esc(machineLabel(e.machine))+'</span>' : '') + '</div>';
+    }).join("");
+    return '<div class="sec"><h4>Who did what, in order</h4><div class="invs">'+rows+'</div></div>';
+  }
+  function jobLink(j){ var c = colOf(j.column); return '<button class="jl" data-id="'+esc(j.id)+'"><span class="id" style="--c:'+c.c+'">'+esc(j.id)+'</span><span class="t">'+esc(j.title)+'</span><span class="pill" style="--c:'+c.c+'">'+(j.column==="closed"?"Closed":c.name)+'</span></button>'; }
+  function fact(label, v, mono){ return v ? '<div class="sec"><h4>'+label+'</h4><div class="v'+(mono?' mono':'')+'">'+v+'</div></div>' : ''; }
+
+  function open(id){
+    var j = byId[id]; if (!j) return;
+    var c = colOf(j.column), k = kids(j.id), p = j.parent && byId[j.parent];
+    var h = '';
+    h += '<div class="hd"><div class="row"><span class="id" style="--c:'+c.c+'">'+esc(j.id)+'</span><span class="pill" style="--c:'+c.c+'">'+(j.column==="closed"?"Closed":c.name)+'</span><span class="kind">'+esc(KIND[j.kind]||"")+' · '+esc(j.round)+'</span><button class="close" id="dlgClose" aria-label="Close">×</button></div>';
+    h += '<h2 id="dlgTitle">'+esc(j.title)+'</h2></div>';
+    if (j.origin) h += '<div class="sec origin"><h4>What prompted it</h4><p>'+esc(j.origin)+'</p>'+(j.raisedBy?'<span class="by">Raised by '+esc(j.raisedBy)+'</span>':'')+'</div>';
+    if (j.closedAs) h += '<div class="sec"><h4>Closed</h4><p>'+esc(j.closedAs)+'</p></div>';
+    if (j.summary) h += '<div class="sec"><h4>'+(j.column==="done"?"What changed":"What it will change")+'</h4><p>'+esc(j.summary)+'</p></div>';
+    if (j.status) h += '<div class="sec"><h4>Where it stands</h4><p>'+esc(j.status)+'</p></div>';
+    if (j.blockedBy && j.blockedBy.length) h += '<div class="sec"><h4>Blocked by</h4><p>'+esc(j.blockedBy.join(', '))+' -- it cannot start until '+esc(j.blockedBy.length>1?"those jobs are":"that job is")+' merged.</p></div>';
+    if (j.blocking && j.blocking.length) h += '<div class="sec"><h4>Blocking</h4><p>'+esc(j.blocking.join(', '))+' -- '+esc(j.blocking.length>1?"those jobs cannot":"that job cannot")+' start until this one is merged.</p></div>';
+    if (j.forPlaytesters) h += '<div class="sec try"><h4>Try this next playtest</h4><p>'+esc(j.forPlaytesters)+'</p></div>';
+    h += involvement(j.involved);
+    var facts = fact("Size", j.grade ? esc(j.grade)+' · '+esc(GRADE[j.grade]||"") : "") +
+      fact("Priority", (j.prio && j.prio>1) ? 'Prio '+esc(j.prio)+' (higher is more urgent)' : "", true) +
+      fact("Repair rounds", j.column==="done" ? String(j.repairRounds||0) : "", true) +
+      fact("Started", when(j.dispatched), true) +
+      fact("Merged", when(j.merged), true) +
+      fact("Worker time", j.workMinutes ? j.workMinutes+' min' : "", true) +
+      fact("Worker tokens", j.tokens ? tok(j.tokens)+' read and written<br>'+tok(j.tokensWritten)+' written' : "", true);
+    if (facts) h += '<div class="facts">'+facts+'</div>';
+    if (p) h += '<div class="sec"><h4>Part of</h4><div class="kids">'+jobLink(p)+'</div></div>';
+    if (k.length) h += '<div class="sec"><h4>'+(j.column==="closed"?"Related":"Parts and folded-in reports")+'</h4><div class="kids">'+k.map(jobLink).join("")+'</div></div>';
+    sheet.innerHTML = h;
+    sheet.scrollTop = 0;
+    if (!dlg.open) dlg.showModal();
+    try { history.replaceState(null, "", "#job=" + encodeURIComponent(j.id)); } catch(e){}
+  }
+  sheet.addEventListener("click", function(e){
+    if (e.target.closest("#dlgClose")) { dlg.close(); return; }
+    var b = e.target.closest(".jl"); if (b) open(b.getAttribute("data-id"));
+  });
+  dlg.addEventListener("click", function(e){ if (e.target===dlg) dlg.close(); });
+  dlg.addEventListener("close", function(){ try { history.replaceState(null, "", location.pathname + location.search); } catch(e){} });
+
+  document.getElementById("foot").innerHTML =
+    (data.rounds||[]).map(function(r){ return '<p><b>'+esc(r.name)+'</b> came from '+esc(r.from)+'.</p>'; }).join("") +
+    '<p>Jobs are built by AI models running on several machines, reviewed by one or more others, and checked by Claude before they are merged. Worker tokens measure how big a job was: nearly all of them are the model re-reading the code and its own notes on every step, and the smaller "written" figure is what it produced. Checks by Claude are not counted. Anything marked "not yet played" has only been tested by script, so your playtest is the real test.</p>';
+
+  render();
+  var m = /job=([^&]+)/.exec(location.hash);
+  if (m && byId[decodeURIComponent(m[1])]) open(decodeURIComponent(m[1]));
+})();
+</script>
