@@ -1,5 +1,5 @@
 window.VOX_BOARD = {
-"updated": "2026-09-24 15:52 UTC",
+"updated": "2026-09-24 15:54 UTC",
 "machines": {
   "ben-3070": "Ben's Win (RTX 3070 8GB)",
   "james-3080": "James Win (RTX 3080 10GB)",
@@ -187,9 +187,9 @@ window.VOX_BOARD = {
 {"id": "B9", "title": "Show as joinable on Steam", "round": "Round 1", "column": "doing", "machine": "ben-3070", "dispatched": "2026-09-24 12:22", "kind": "bug", "grade": "M", "origin": "It looked as though Steam showed Ben offline, so friends couldn't join him. Ben later corrected this: his friends were offline, so nothing was broken. Kept as a nice-to-have.", "raisedBy": "Ben", "summary": "Your Steam friends list shows that you're playing VoxBox and can be joined.", "status": "Brief ready; queued.", "repairRounds": 0,
  "involved": [
    {"role":"researched","model":"Claude Opus (orchestrator)","machine":"ben-3070"},
-   {"role":"repaired","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"},
-   {"role":"reviewed","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"},
    {"role":"implemented","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"},
+   {"role":"reviewed","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"},
+   {"role":"repaired","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"},
    {"role":"reviewed","model":"deepseek-flash","machine":"ben-3070"}
  ]},
 
