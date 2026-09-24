@@ -1,5 +1,5 @@
 window.VOX_BOARD = {
-"updated": "2026-09-24 16:02 UTC",
+"updated": "2026-09-24 16:28 UTC",
 "machines": {
   "ben-3070": "Ben's Win (RTX 3070 8GB)",
   "james-3080": "James Win (RTX 3080 10GB)",
@@ -512,7 +512,7 @@ window.VOX_BOARD = {
 
 {"id": "D6", "title": "The board says where each job stands, by itself", "round": "Round 1", "column": "doing", "machine": "ben-3070", "dispatched": "2026-09-24 15:56", "kind": "feature", "grade": "S", "origin": "Card statuses went stale because they were written by hand.", "raisedBy": "Ben", "summary": "The board's sync writes each card's 'Where it stands' from claims, runs and reviews.", "status": "Approved; queued for Space Bunny.", "parent": "D1", "repairRounds": 0, "involved": []},
 
-{"id": "D7", "title": "A machine can ask a question and wait for the answer", "round": "Round 1", "column": "todo", "kind": "feature", "grade": "M", "origin": "James's unattended machine got stuck on a decision only Ben could make, and nobody would have known.", "raisedBy": "Ben", "summary": "A stuck machine writes its question where Ben sees it (the board, status, optionally his phone), waits without retrying, does other work, and carries on when he answers.", "status": "Approved.", "parent": "D1", "repairRounds": 0, "prio": 2, "involved": []},
+{"id": "D7", "title": "A machine can ask a question and wait for the answer", "round": "Round 1", "column": "doing", "machine": "ben-3070", "dispatched": "2026-09-24 16:27", "kind": "feature", "grade": "M", "origin": "James's unattended machine got stuck on a decision only Ben could make, and nobody would have known.", "raisedBy": "Ben", "summary": "A stuck machine writes its question where Ben sees it (the board, status, optionally his phone), waits without retrying, does other work, and carries on when he answers.", "status": "Approved.", "parent": "D1", "repairRounds": 0, "prio": 2, "involved": []},
 
 {"id": "F22g", "title": "The Dedicated app makes objects for others", "round": "Round 1", "column": "todo", "machine": "james-3080", "kind": "feature", "grade": "M", "origin": "Part of F22.", "raisedBy": "Ben", "summary": "VoxBox Dedicated takes pictures over the network, queues them fairly, makes the objects and sends them back.", "status": "Approved; for James's machine.", "parent": "F22", "repairRounds": 0, "blocking": ["F22h", "F22m", "F22Ld"], "involved": [{"role": "researched", "model": "Claude Opus (orchestrator)", "machine": "ben-3070"}]},
 
