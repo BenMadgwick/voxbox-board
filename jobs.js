@@ -1,5 +1,5 @@
 window.VOX_BOARD = {
-"updated": "2026-09-24 22:41 UTC",
+"updated": "2026-09-24 22:48 UTC",
 "machines": {
   "ben-3070": "Ben's Win (RTX 3070 8GB)",
   "james-3080": "James Win (RTX 3080 10GB)",
@@ -118,7 +118,8 @@ window.VOX_BOARD = {
    {"role":"implemented","model":"deepseek-flash","machine":"ben-3070"},
    {"role":"reviewed","model":"deepseek-flash","machine":"ben-3070"},
    {"role":"reviewed","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"},
-   {"role":"reviewed","model":"Claude Opus (orchestrator)","machine":"ben-3070"}
+   {"role":"reviewed","model":"Claude Opus (orchestrator)","machine":"ben-3070"},
+   {"role":"reviewed","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"}
  ]},
 
 {"id": "F3b3", "title": "Draw see-through voxels", "round": "Round 1", "column": "done", "statusAuto": "merged:2026-09-25", "merged": "2026-09-25", "machine": "james-3080", "dispatched": "2026-09-24 20:56", "kind": "feature", "grade": "L", "origin": "The second half of F3b: the rule is no use until the game draws glass as glass.", "raisedBy": "Ben", "summary": "The game can now draw see-through voxels as glass: a faintly tinted, glossy shell with what is inside drawn clearly through it. Everything opaque looks exactly as before. Painting glass makes it opaque; breaking a jar gives glass shards. Nothing on the shelf is see-through yet: that comes when the generator keeps the data (F3b4).", "status": "Merged. Seen in screenshots of the new glass demo (jars with a red ball inside); not yet played. How opaque glass is at least (vox.GlassMin 0.25) is a first guess, not tuned.", "forPlaytesters": "Nothing to see in normal play yet. With -VoxDemo=glass: three jars beside the goblin; is the ball clear through the glass, and does the glass read as glass? The painted stripe on the second jar seems to land on its far side.", "workMinutes": 77, "parent": "F3b", "repairRounds": 0,
@@ -498,11 +499,12 @@ window.VOX_BOARD = {
    {"role":"repaired","model":"deepseek-flash","machine":"ben-3070"}
  ]},
 
-{"id": "F22f", "title": "Try the Steam side on a test app", "round": "Round 1", "column": "doing", "statusAuto": "building:Claude Sonnet (subagent)@ben-3070", "machine": "ben-3070", "dispatched": "2026-09-24 02:34", "kind": "feature", "grade": "R", "origin": "Part of F22.", "raisedBy": "Ben", "summary": "Checks, on Steam's test app, that a Dedicated app can be found and reached by friends without a server of our own.", "status": "Being built by Claude Sonnet (subagent) on Ben's Win (RTX 3070 8GB).", "parent": "F22", "repairRounds": 0, "blocking": ["F22i"],
- "involved": [
+{"id": "F22f", "title": "Try the Steam side on a test app", "round": "Round 1", "column": "done", "statusAuto": "merged:2026-09-24", "machine": "ben-3070", "dispatched": "2026-09-24 02:34", "kind": "feature", "grade": "R", "origin": "Part of F22.", "raisedBy": "Ben", "summary": "A test of what Steam gives a dedicated server: players can connect to it directly and prove they own the game, and a megabyte goes each way fine -- but a server without its own Steam login is never listed, so finding one needs a different plan.", "status": "Merged (a spike; nothing changes in the game). Needs Ben to choose how servers are found: a Steam login token per server, or Steam lobbies.", "parent": "F22", "repairRounds": 0, "blocking": ["F22i"],
+ "merged": "2026-09-24 23:30", "forPlaytesters": "Nothing to play.", "workMinutes": 6, "tokens": 5105111, "tokensWritten": 63688, "involved": [
    {"role":"researched","model":"Claude Opus (subagent)","machine":"ben-3070"},
    {"role":"reviewed","model":"deepseek-flash","machine":"ben-3070"},
-   {"role":"implemented","model":"Claude Sonnet (subagent)","machine":"ben-3070"}
+   {"role":"implemented","model":"Claude Sonnet (subagent)","machine":"ben-3070"},
+   {"role":"reviewed","model":"Claude Opus (orchestrator)","machine":"ben-3070"}
  ]},
 
 {"id": "F22s", "title": "A true server build", "round": "Round 1", "column": "doing", "statusAuto": "building:OpenRouter stealth/space-bunny-alpha@ben-3070", "machine": "ben-3070", "dispatched": "2026-09-23 23:32", "kind": "feature", "grade": "L", "origin": "Part of F22.", "raisedBy": "Ben", "summary": "Builds the engine from source so the Dedicated app is a real server program with no graphics in it, for Windows and Linux.", "status": "Being built by OpenRouter stealth/space-bunny-alpha on Ben's Win (RTX 3070 8GB).", "parent": "F22", "repairRounds": 0, "blocking": ["F22o", "F22Ld"],
@@ -577,11 +579,12 @@ window.VOX_BOARD = {
    {"role":"reviewed","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"}
  ]},
 
-{"id": "D7", "title": "A machine can ask a question and wait for the answer", "round": "Round 1", "column": "doing", "statusAuto": "reviewed:2", "machine": "ben-3070", "dispatched": "2026-09-24 16:27", "kind": "feature", "grade": "M", "origin": "James's unattended machine got stuck on a decision only Ben could make, and nobody would have known.", "raisedBy": "Ben", "summary": "A stuck machine writes its question where Ben sees it (the board, status, optionally his phone), waits without retrying, does other work, and carries on when he answers.", "status": "Built; reviewed by 2 models; waiting for the orchestrator's check.", "parent": "D1", "repairRounds": 0, "prio": 2, "involved": [
+{"id": "D7", "title": "A machine can ask a question and wait for the answer", "round": "Round 1", "column": "doing", "statusAuto": "repaired:OpenRouter stealth/space-bunny-alpha@ben-3070", "machine": "ben-3070", "dispatched": "2026-09-24 16:27", "kind": "feature", "grade": "M", "origin": "James's unattended machine got stuck on a decision only Ben could make, and nobody would have known.", "raisedBy": "Ben", "summary": "A stuck machine writes its question where Ben sees it (the board, status, optionally his phone), waits without retrying, does other work, and carries on when he answers.", "status": "In its repair round.", "parent": "D1", "repairRounds": 0, "prio": 2, "involved": [
    {"role":"implemented","model":"deepseek-flash","machine":"ben-3070"},
    {"role":"reviewed","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"},
    {"role":"reviewed","model":"deepseek-flash","machine":"ben-3070"},
-   {"role":"reviewed","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"}
+   {"role":"reviewed","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"},
+   {"role":"repaired","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"}
  ]},
 
 {"id": "F22g", "title": "The Dedicated app makes objects for others", "round": "Round 1", "column": "done", "statusAuto": "merged:2026-09-24", "merged": "2026-09-24", "dispatched": "2026-09-24 17:15", "machine": "james-3080", "kind": "feature", "grade": "M", "origin": "Part of F22.", "raisedBy": "Ben", "summary": "VoxBox Dedicated takes pictures over the network, queues them fairly, makes the objects and sends them back.", "status": "Merged; Grok built it, Opus review found and fixed one bug (idle peers dropped mid-job).", "parent": "F22", "repairRounds": 1, "involved": [{"role": "researched", "model": "Claude Opus (orchestrator)", "machine": "ben-3070"},
