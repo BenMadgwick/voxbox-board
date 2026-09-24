@@ -1,5 +1,5 @@
 window.VOX_BOARD = {
-"updated": "2026-09-24 18:17 UTC",
+"updated": "2026-09-24 18:18 UTC",
 "machines": {
   "ben-3070": "Ben's Win (RTX 3070 8GB)",
   "james-3080": "James Win (RTX 3080 10GB)",
@@ -536,6 +536,8 @@ window.VOX_BOARD = {
 
 {"id": "F23b", "title": "More ways to find a game", "round": "Round 1", "column": "backlog", "kind": "feature", "origin": "Ben: a public lobby browser, join codes, passwords and joining by address, later.", "raisedBy": "Ben", "summary": "Finish the Multiplayer menu beyond friends' games.", "status": "Later; needs a design.", "repairRounds": 0, "blockedBy": ["F23"], "involved": []},
 
-{"id": "F24b", "title": "Settle the menu rain's intensity", "round": "Round 1", "column": "backlog", "kind": "qol", "origin": "Ben will say which slider setting felt right.", "raisedBy": "Ben", "summary": "Bake in Ben's chosen intensity and remove the slider.", "status": "Waiting for Ben's number.", "repairRounds": 0, "blockedBy": ["F24"], "involved": []}
+{"id": "F24b", "title": "Settle the menu rain's intensity", "round": "Round 1", "column": "backlog", "kind": "qol", "origin": "Ben will say which slider setting felt right.", "raisedBy": "Ben", "summary": "Bake in Ben's chosen intensity and remove the slider.", "status": "Waiting for Ben's number.", "repairRounds": 0, "blockedBy": ["F24"], "involved": []},
+
+{"id": "B1e", "title": "Fast carving never drops a cut", "round": "Round 1", "column": "todo", "kind": "bug", "grade": "M", "origin": "B1c's test found the host silently drops a carve scoop while the previous piece's collision is still being built (20-620 ms), so quick carving loses cuts.", "raisedBy": "Ben", "summary": "Build a carved piece's collision after the piece is in place, so every scoop is carved.", "status": "Approved in principle; after B1c.", "parent": "B1", "repairRounds": 0, "blockedBy": ["B1c"], "involved": [{"role": "researched", "model": "Claude Sonnet (subagent)", "machine": "james-3080"}]}
 ]
 };
