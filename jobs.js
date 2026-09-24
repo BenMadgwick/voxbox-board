@@ -1,5 +1,5 @@
 window.VOX_BOARD = {
-"updated": "2026-09-24 18:37 UTC",
+"updated": "2026-09-24 18:49 UTC",
 "machines": {
   "ben-3070": "Ben's Win (RTX 3070 8GB)",
   "james-3080": "James Win (RTX 3080 10GB)",
@@ -199,7 +199,8 @@ window.VOX_BOARD = {
 {"id": "B10", "title": "Other players move smoothly", "round": "Round 1", "column": "done", "machine": "james-3080", "merged": "2026-09-24", "dispatched": "2026-09-24 06:13", "kind": "bug", "grade": "L", "origin": "Other players' markers moved choppily, hopping rather than gliding.", "raisedBy": "Ben", "summary": "Other players glide instead of hopping 15 times a second. The smoothing starts at 120 ms, a first guess for Ben to tune.", "status": "Brief ready; queued.", "repairRounds": 0,
  "involved": [
    {"role":"researched","model":"Claude Opus (orchestrator)","machine":"ben-3070"},
-   {"role":"implemented","model":"Claude Sonnet (subagent)","machine":"james-3080"}
+   {"role":"implemented","model":"Claude Sonnet (subagent)","machine":"james-3080"},
+   {"role":"reviewed","model":"Claude Opus (orchestrator)","machine":"james-3080"}
  ]},
 
 {"id": "B1b", "title": "The shelf downloads in the background", "round": "Round 1", "column": "done", "kind": "bug", "grade": "L", "origin": "Part of B1: objects arrived only when first touched, so every first touch stalled.", "raisedBy": "playtesters", "summary": "When you join, the whole shelf starts downloading in the background, newest objects first, and anything you actually need jumps the queue: an object thrown in front of you appears in under a second even while the rest is still coming. Requests nobody needs any more (an object that was carved again or went away) are cancelled. The background download is capped so it cannot swamp the host's connection.", "status": "Merged. Claude fixed its test in review: it had thrown an object that was already downloading for another reason, which proved nothing. Measured properly on one PC, a thrown object appeared after 0.7 s with 1 of 19 shelf objects downloaded, and the whole 20 MB shelf arrived in about 15 s. Built and tested by script; not yet played over real WiFi.", "forPlaytesters": "Join a game with a big shelf and throw something straight away: it should appear at once, not after a pause. Place's ghost should turn from a box into the real object within a second or two. When you are done, send Ben your log files: they now say how long your shelf took to arrive.", "parent": "B1", "repairRounds": 0, "dispatched": "2026-09-22 10:36", "merged": "2026-09-22 13:31", "workMinutes": 49, "tokens": 16251622, "tokensWritten": 102181,
