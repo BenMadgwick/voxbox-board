@@ -1,5 +1,5 @@
 window.VOX_BOARD = {
-"updated": "2026-09-24 19:11 UTC",
+"updated": "2026-09-24 19:22 UTC",
 "machines": {
   "ben-3070": "Ben's Win (RTX 3070 8GB)",
   "james-3080": "James Win (RTX 3080 10GB)",
@@ -222,8 +222,8 @@ window.VOX_BOARD = {
  "involved": [
    {"role":"researched","model":"Claude Opus (subagent)","machine":"ben-3070"},
    {"role":"implemented","model":"Claude Sonnet (subagent)","machine":"james-3080"},
-   {"role":"reviewed","model":"Claude Opus (orchestrator)","machine":"james-3080"},
-   {"role":"repaired","model":"Claude Sonnet (subagent)","machine":"james-3080"}
+   {"role":"repaired","model":"Claude Sonnet (subagent)","machine":"james-3080"},
+   {"role":"reviewed","model":"Claude Opus (orchestrator)","machine":"james-3080"}
  ]},
 
 {"id": "F7", "title": "Glue makes one object", "round": "Round 1", "column": "doing", "kind": "feature", "grade": "R", "origin": "Ben asked for glue to truly merge two objects. It also absorbs two bugs: the glue preview lagged and its outline was too thin to see (B11), and objects with several welds flipped out when grabbed (B14).", "raisedBy": "Ben", "summary": "Glued objects become one solid object, so they stop fighting each other. Unglue goes away (slice separates things instead), and the preview becomes a thick glowing shell showing exactly what will join.", "status": "Five parts merged: the maths of where two objects overlap, the test that several objects can become one body, the glowing glue preview, the join itself, and breaking and editing a joined object part by part. Joining players seeing the same join is built and under review; folding parts together and keeping a build as one object are still to do.", "repairRounds": 0,
