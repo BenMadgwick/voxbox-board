@@ -163,8 +163,8 @@ window.VOX_BOARD = {
    {"role":"reviewed","model":"GLM-5.3-Flash","machine":"ben-3070"}
  ]},
 
-{"id": "Q2", "title": "Panels stay near the middle on ultrawide screens", "round": "Round 1", "column": "doing", "machine": "ben-3070", "dispatched": "2026-09-24 08:32", "kind": "qol", "grade": "M", "origin": "On a 32:9 monitor the shelf panel and the Options panel sat so far apart that reading one and then the other was a neck-turn.", "raisedBy": "a playtester", "summary": "On screens wider than 16:9, panels line up with a centred 16:9 area instead of the far edges. Nothing moves on ordinary screens.", "status": "Brief ready; queued.", "repairRounds": 0,
- "involved": [
+{"id": "Q2", "title": "Panels stay near the middle on ultrawide screens", "round": "Round 1", "column": "done", "machine": "ben-3070", "dispatched": "2026-09-24 08:32", "kind": "qol", "grade": "M", "origin": "On a 32:9 monitor the shelf panel and the Options panel sat so far apart that reading one and then the other was a neck-turn.", "raisedBy": "a playtester", "summary": "On a screen wider than 16:9 the shelf panel, the Options panel and the chat sit at the edges of a centred 16:9 area instead of the far screen edges, and follow a window resize. Nothing moves on a 16:9 screen.", "status": "Merged. Built and tested by script; 32:9 and 16:9 screenshots looked at. Not yet played on a real ultrawide; the Back button on the menus Options page was fixed but not looked at.", "repairRounds": 2,
+ "merged": "2026-09-24 22:25", "forPlaytesters": "On an ultrawide monitor: the shelf (Tab) and Options (O) panels should both be within an easy glance of the middle, and the chat box should sit under the chat lines.", "workMinutes": 112, "tokens": 38467813, "tokensWritten": 717672, "involved": [
    {"role":"researched","model":"Claude Opus (orchestrator)","machine":"ben-3070"},
    {"role":"implemented","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"},
    {"role":"reviewed","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"},
@@ -172,8 +172,10 @@ window.VOX_BOARD = {
    {"role":"reviewed","model":"deepseek-flash","machine":"ben-3070"},
    {"role":"reviewed","model":"deepseek-flash","machine":"ben-3070"},
    {"role":"repaired","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"},
+   {"role":"repaired","model":"Claude Opus (orchestrator)","machine":"ben-3070"},
    {"role":"reviewed","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"},
-   {"role":"reviewed","model":"deepseek-flash","machine":"ben-3070"}
+   {"role":"reviewed","model":"deepseek-flash","machine":"ben-3070"},
+   {"role":"reviewed","model":"Claude Opus (orchestrator)","machine":"ben-3070"}
  ]},
 
 {"id": "Q5", "title": "A controls overlay on H", "round": "Round 1", "column": "done", "kind": "qol", "grade": "M", "origin": "Nothing was discoverable. Ben typed the controls into Discord all night, and players asked for cube brushes and a colour picker that were already in the game.", "raisedBy": "Ben, and playtesters", "summary": "Press H to see the controls, grouped, including those for the tool in your hand. It shows itself once the first time you play.", "status": "Merged. Built in one go by deepseek-flash, the cheap model, and reviewed by another flash run: it had Q and E the wrong way round (Q flies up) and no line on getting the mouse back, both fixed before merging. Checked by Claude at both screen sizes. One thing it uncovered: the game had never actually saved your settings -- fixed the same night as B15, so the controls now greet you only the first time.", "forPlaytesters": "Press H and check every line against what the keys really do -- the list is meant to be complete, so a missing or wrong line is a bug worth a /bug. Switch tools with it open and watch the middle column change.", "repairRounds": 0, "dispatched": "2026-09-22 21:42", "merged": "2026-09-22 22:20", "workMinutes": 27, "tokens": 12136064, "tokensWritten": 121906,
@@ -305,8 +307,8 @@ window.VOX_BOARD = {
    {"role":"reviewed","model":"deepseek-flash","machine":"ben-3070"},
    {"role":"reviewed","model":"Claude Opus (orchestrator)","machine":"ben-3070"},
    {"role":"repaired","model":"Claude Opus (orchestrator)","machine":"ben-3070"},
-   {"role":"reviewed","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"},
-   {"role":"reviewed","model":"deepseek-flash","machine":"ben-3070"}
+   {"role":"reviewed","model":"deepseek-flash","machine":"ben-3070"},
+   {"role":"reviewed","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"}
  ]},
 
 {"id": "F16", "title": "Bake a glued build into one object", "round": "Round 1", "column": "backlog", "kind": "feature", "origin": "Glue keeps each part's own grid, material and detail. Ben liked the idea of also offering a deliberate way to fuse a build into a single grid.", "raisedBy": "Ben", "summary": "A Bake action that fuses a glued build into one voxel grid at a resolution you choose, for when you want it to behave as a single lump, for example to carve evenly across the seams.", "status": "Backlog, after F7.", "parent": "F7", "repairRounds": 0,
