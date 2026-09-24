@@ -1,5 +1,5 @@
 window.VOX_BOARD = {
-"updated": "2026-09-24 12:51 UTC",
+"updated": "2026-09-24 13:20 UTC",
 "machines": {
   "ben-3070": "Ben's Win (RTX 3070 8GB)",
   "james-3080": "James Win (RTX 3080 10GB)",
@@ -184,7 +184,8 @@ window.VOX_BOARD = {
 
 {"id": "B9", "title": "Show as joinable on Steam", "round": "Round 1", "column": "doing", "machine": "ben-3070", "dispatched": "2026-09-24 12:22", "kind": "bug", "grade": "M", "origin": "It looked as though Steam showed Ben offline, so friends couldn't join him. Ben later corrected this: his friends were offline, so nothing was broken. Kept as a nice-to-have.", "raisedBy": "Ben", "summary": "Your Steam friends list shows that you're playing VoxBox and can be joined.", "status": "Brief ready; queued.", "repairRounds": 0,
  "involved": [
-   {"role":"researched","model":"Claude Opus (orchestrator)","machine":"ben-3070"}
+   {"role":"researched","model":"Claude Opus (orchestrator)","machine":"ben-3070"},
+   {"role":"implemented","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"}
  ]},
 
 {"id": "B10", "title": "Other players move smoothly", "round": "Round 1", "column": "done", "machine": "james-3080", "merged": "2026-09-24", "dispatched": "2026-09-24 06:13", "kind": "bug", "grade": "L", "origin": "Other players' markers moved choppily, hopping rather than gliding.", "raisedBy": "Ben", "summary": "Other players glide instead of hopping 15 times a second. The smoothing starts at 120 ms, a first guess for Ben to tune.", "status": "Brief ready; queued.", "repairRounds": 0,
@@ -469,7 +470,8 @@ window.VOX_BOARD = {
 
 {"id": "F22s", "title": "A true server build", "round": "Round 1", "column": "doing", "machine": "ben-3070", "dispatched": "2026-09-23 23:32", "kind": "feature", "grade": "L", "origin": "Part of F22.", "raisedBy": "Ben", "summary": "Builds the engine from source so the Dedicated app is a real server program with no graphics in it, for Windows and Linux.", "status": "Approved; its first step is Ben's (linking his Epic account to GitHub).", "parent": "F22", "repairRounds": 0, "blocking": ["F22o", "F22Ld"],
  "involved": [
-   {"role":"researched","model":"Claude Opus (subagent)","machine":"ben-3070"}
+   {"role":"researched","model":"Claude Opus (subagent)","machine":"ben-3070"},
+   {"role":"implemented","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"}
  ]},
 
 {"id": "F22La", "title": "Making objects on Linux", "round": "Round 1", "column": "todo", "machine": "sam-linux", "kind": "feature", "grade": "M", "origin": "Part of F22.", "raisedBy": "Ben", "summary": "The generator runs on Linux, the first part of the Dedicated app there.", "status": "Approved, for the Linux machine once it joins.", "parent": "F22", "repairRounds": 0, "blocking": ["F22Ld"],
