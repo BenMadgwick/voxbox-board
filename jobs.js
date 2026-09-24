@@ -1,5 +1,5 @@
 window.VOX_BOARD = {
-"updated": "2026-09-24 22:31 UTC",
+"updated": "2026-09-24 22:41 UTC",
 "machines": {
   "ben-3070": "Ben's Win (RTX 3070 8GB)",
   "james-3080": "James Win (RTX 3080 10GB)",
@@ -112,12 +112,13 @@ window.VOX_BOARD = {
 {"id": "F3c", "title": "Air behind glass, not clear filling", "round": "Round 1", "column": "backlog", "kind": "feature", "origin": "F3b fills the space behind glass with clear glass, because telling trapped air apart reliably proved fragile. Ben would rather it were air.", "raisedBy": "Ben", "summary": "Work out reliably which voxels behind glass are air, so a bottle is hollow instead of full of clear glass.", "status": "After F3b, and after Ben finds more see-through pictures (glass, water, plastic) to test on.", "parent": "F3", "repairRounds": 0,
  "involved": []},
 
-{"id": "F3b2", "title": "Work out which voxels are see-through", "round": "Round 1", "column": "doing", "statusAuto": "reviewed:2", "machine": "ben-3070", "dispatched": "2026-09-24 15:52", "kind": "feature", "grade": "L", "origin": "The first half of F3b: something has to turn the generator's see-through numbers into a yes-or-no rule before anything can be drawn with them.", "raisedBy": "Ben", "summary": "A rule that reads an object's see-through values and decides which voxels are glass -- careful about air sealed inside an object, which reads see-through when it is not.", "status": "Built; reviewed by 2 models; waiting for the orchestrator's check.", "parent": "F3b", "blocking": ["F3b4"], "repairRounds": 0,
- "involved": [
+{"id": "F3b2", "title": "Work out which voxels are see-through", "round": "Round 1", "column": "done", "statusAuto": "merged:2026-09-24", "machine": "ben-3070", "dispatched": "2026-09-24 15:52", "kind": "feature", "grade": "L", "origin": "The first half of F3b: something has to turn the generator's see-through numbers into a yes-or-no rule before anything can be drawn with them.", "raisedBy": "Ben", "summary": "The game can now tell which outer voxels of a generated object are glass and which are empty space the generator filled in, and rebuild the inside to match. Nothing uses it yet: hooking it into generation is the next part (F3b4).", "status": "Merged. Checked against the 22 real pictures from F3a; nothing to see in the game yet.", "parent": "F3b", "blocking": ["F3b4"], "repairRounds": 0,
+ "merged": "2026-09-24 23:15", "forPlaytesters": "Nothing to play yet.", "workMinutes": 42, "tokens": 15446547, "tokensWritten": 299651, "involved": [
    {"role":"researched","model":"Claude Opus (subagent)","machine":"ben-3070"},
    {"role":"implemented","model":"deepseek-flash","machine":"ben-3070"},
    {"role":"reviewed","model":"deepseek-flash","machine":"ben-3070"},
-   {"role":"reviewed","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"}
+   {"role":"reviewed","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"},
+   {"role":"reviewed","model":"Claude Opus (orchestrator)","machine":"ben-3070"}
  ]},
 
 {"id": "F3b3", "title": "Draw see-through voxels", "round": "Round 1", "column": "done", "statusAuto": "merged:2026-09-25", "merged": "2026-09-25", "machine": "james-3080", "dispatched": "2026-09-24 20:56", "kind": "feature", "grade": "L", "origin": "The second half of F3b: the rule is no use until the game draws glass as glass.", "raisedBy": "Ben", "summary": "The game can now draw see-through voxels as glass: a faintly tinted, glossy shell with what is inside drawn clearly through it. Everything opaque looks exactly as before. Painting glass makes it opaque; breaking a jar gives glass shards. Nothing on the shelf is see-through yet: that comes when the generator keeps the data (F3b4).", "status": "Merged. Seen in screenshots of the new glass demo (jars with a red ball inside); not yet played. How opaque glass is at least (vox.GlassMin 0.25) is a first guess, not tuned.", "forPlaytesters": "Nothing to see in normal play yet. With -VoxDemo=glass: three jars beside the goblin; is the ball clear through the glass, and does the glass read as glass? The painted stripe on the second jar seems to land on its far side.", "workMinutes": 77, "parent": "F3b", "repairRounds": 0,
@@ -572,13 +573,15 @@ window.VOX_BOARD = {
    {"role":"reviewed","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"},
    {"role":"reviewed","model":"deepseek-flash","machine":"ben-3070"},
    {"role":"repaired","model":"Claude Opus (orchestrator)","machine":"ben-3070"},
-   {"role":"reviewed","model":"Claude Opus (orchestrator)","machine":"ben-3070"}
+   {"role":"reviewed","model":"Claude Opus (orchestrator)","machine":"ben-3070"},
+   {"role":"reviewed","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"}
  ]},
 
 {"id": "D7", "title": "A machine can ask a question and wait for the answer", "round": "Round 1", "column": "doing", "statusAuto": "reviewed:2", "machine": "ben-3070", "dispatched": "2026-09-24 16:27", "kind": "feature", "grade": "M", "origin": "James's unattended machine got stuck on a decision only Ben could make, and nobody would have known.", "raisedBy": "Ben", "summary": "A stuck machine writes its question where Ben sees it (the board, status, optionally his phone), waits without retrying, does other work, and carries on when he answers.", "status": "Built; reviewed by 2 models; waiting for the orchestrator's check.", "parent": "D1", "repairRounds": 0, "prio": 2, "involved": [
    {"role":"implemented","model":"deepseek-flash","machine":"ben-3070"},
    {"role":"reviewed","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"},
-   {"role":"reviewed","model":"deepseek-flash","machine":"ben-3070"}
+   {"role":"reviewed","model":"deepseek-flash","machine":"ben-3070"},
+   {"role":"reviewed","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"}
  ]},
 
 {"id": "F22g", "title": "The Dedicated app makes objects for others", "round": "Round 1", "column": "done", "statusAuto": "merged:2026-09-24", "merged": "2026-09-24", "dispatched": "2026-09-24 17:15", "machine": "james-3080", "kind": "feature", "grade": "M", "origin": "Part of F22.", "raisedBy": "Ben", "summary": "VoxBox Dedicated takes pictures over the network, queues them fairly, makes the objects and sends them back.", "status": "Merged; Grok built it, Opus review found and fixed one bug (idle peers dropped mid-job).", "parent": "F22", "repairRounds": 1, "involved": [{"role": "researched", "model": "Claude Opus (orchestrator)", "machine": "ben-3070"},
