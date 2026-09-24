@@ -1,5 +1,5 @@
 window.VOX_BOARD = {
-"updated": "2026-09-24 20:34 UTC",
+"updated": "2026-09-24 20:36 UTC",
 "machines": {
   "ben-3070": "Ben's Win (RTX 3070 8GB)",
   "james-3080": "James Win (RTX 3080 10GB)",
@@ -78,7 +78,7 @@ window.VOX_BOARD = {
    {"role":"reviewed","model":"Claude Opus","machine":"ben-3070"}
  ]},
 
-{"id": "B1", "title": "Objects arrive before you need them", "round": "Round 1", "column": "doing", "kind": "bug", "grade": "R", "origin": "Joining players saw invisible objects that still collided, and empty shelf entries. Place failed for them, a painted couch vanished and came back, collisions juddered and caught up a second or two later, and carving and breaking stalled their game. All of it had one cause: a joining machine only fetched an object's voxels at the moment it needed them.", "raisedBy": "playtesters", "summary": "Researched first, then split into four jobs: placing works on joining machines (done), the shelf downloads in the background, carves are replayed rather than downloaded, and received objects are kept on disk.", "status": "Research done; 3 of 4 parts merged: place works for joining players, the shelf downloads in the background, and received objects are kept on disk. Repeating carves instead of downloading them is still to do. Note: Ben hosted the playtest over WiFi, which makes every lag report harder to read.", "forPlaytesters": "If you can, host one session from a wired connection, so we can tell game lag from WiFi lag.", "repairRounds": 0,
+{"id": "B1", "title": "Objects arrive before you need them", "round": "Round 1", "column": "done", "merged": "2026-09-24", "kind": "bug", "grade": "R", "origin": "Joining players saw invisible objects that still collided, and empty shelf entries. Place failed for them, a painted couch vanished and came back, collisions juddered and caught up a second or two later, and carving and breaking stalled their game. All of it had one cause: a joining machine only fetched an object's voxels at the moment it needed them.", "raisedBy": "playtesters", "summary": "Researched first, then split into four jobs: placing works on joining machines (done), the shelf downloads in the background, carves are replayed rather than downloaded, and received objects are kept on disk.", "status": "Research done; 3 of 4 parts merged: place works for joining players, the shelf downloads in the background, and received objects are kept on disk. Repeating carves instead of downloading them is still to do. Note: Ben hosted the playtest over WiFi, which makes every lag report harder to read.", "forPlaytesters": "If you can, host one session from a wired connection, so we can tell game lag from WiFi lag.", "repairRounds": 0,
  "involved": [
    {"role":"researched","model":"Claude Opus (subagent)","machine":"ben-3070"}
  ]},
@@ -116,8 +116,8 @@ window.VOX_BOARD = {
  "involved": [
    {"role":"researched","model":"Claude Opus (subagent)","machine":"ben-3070"},
    {"role":"implemented","model":"deepseek-flash","machine":"ben-3070"},
-   {"role":"reviewed","model":"deepseek-flash","machine":"ben-3070"},
-   {"role":"reviewed","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"}
+   {"role":"reviewed","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"},
+   {"role":"reviewed","model":"deepseek-flash","machine":"ben-3070"}
  ]},
 
 {"id": "F3b3", "title": "Draw see-through voxels", "round": "Round 1", "column": "todo", "kind": "feature", "grade": "L", "origin": "The second half of F3b: the rule is no use until the game draws glass as glass.", "raisedBy": "Ben", "summary": "Glass and other see-through parts of a generated object actually look see-through in the game, with what is behind them visible through them.", "status": "Approved and ready to start, beside the rule it draws.", "parent": "F3b", "blocking": ["F3b4"], "repairRounds": 0,
@@ -295,9 +295,9 @@ window.VOX_BOARD = {
    {"role":"reviewed","model":"OpenRouter nvidia/nemotron-3-ultra-550b-a55b:free","machine":"ben-3070"},
    {"role":"reviewed","model":"OpenRouter thinkingmachines/inkling:free","machine":"ben-3070"},
    {"role":"reviewed","model":"OpenRouter poolside/laguna-s-2.1:free","machine":"ben-3070"},
-   {"role":"reviewed","model":"deepseek-flash","machine":"ben-3070"},
    {"role":"repaired","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"},
-   {"role":"reviewed","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"}
+   {"role":"reviewed","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"},
+   {"role":"reviewed","model":"deepseek-flash","machine":"ben-3070"}
  ]},
 
 {"id": "F16", "title": "Bake a glued build into one object", "round": "Round 1", "column": "backlog", "kind": "feature", "origin": "Glue keeps each part's own grid, material and detail. Ben liked the idea of also offering a deliberate way to fuse a build into a single grid.", "raisedBy": "Ben", "summary": "A Bake action that fuses a glued build into one voxel grid at a resolution you choose, for when you want it to behave as a single lump, for example to carve evenly across the seams.", "status": "Backlog, after F7.", "parent": "F7", "repairRounds": 0,
@@ -560,6 +560,9 @@ window.VOX_BOARD = {
 
 {"id": "F24b", "title": "Settle the menu rain's intensity", "round": "Round 1", "column": "backlog", "kind": "qol", "origin": "Ben will say which slider setting felt right.", "raisedBy": "Ben", "summary": "Bake in Ben's chosen intensity and remove the slider.", "status": "Waiting for Ben's number.", "repairRounds": 0, "blockedBy": ["F24"], "involved": []},
 
-{"id": "B1e", "title": "Fast carving never drops a cut", "round": "Round 1", "column": "doing", "machine": "james-3080", "dispatched": "2026-09-24 19:10", "kind": "bug", "grade": "M", "origin": "B1c's test found the host silently drops a carve scoop while the previous piece's collision is still being built (20-620 ms), so quick carving loses cuts.", "raisedBy": "Ben", "summary": "Build a carved piece's collision after the piece is in place, so every scoop is carved.", "status": "Approved in principle; B1c is merged, so it can start.", "parent": "B1", "blocking": ["F10b"], "repairRounds": 0, "involved": [{"role": "researched", "model": "Claude Sonnet (subagent)", "machine": "james-3080"}]}
+{"id": "B1e", "title": "Fast carving never drops a cut", "round": "Round 1", "column": "done", "machine": "james-3080", "merged": "2026-09-24", "kind": "bug", "grade": "M", "origin": "B1c's test found the host silently drops a carve scoop while the previous piece's collision is still being built (20-620 ms), so quick carving loses cuts.", "raisedBy": "Ben", "summary": "Build a carved piece's collision after the piece is in place, so every scoop is carved.", "status": "Approved in principle; B1c is merged, so it can start.", "parent": "B1", "blocking": ["F10b"], "repairRounds": 0, "involved": [{"role": "researched", "model": "Claude Sonnet (subagent)", "machine": "james-3080"},
+   {"role":"implemented","model":"Grok (grok-4.7-build)","machine":"james-3080"},
+   {"role":"reviewed","model":"Claude Opus (orchestrator)","machine":"james-3080"}
+ ]}
 ]
 };
