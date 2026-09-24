@@ -1,5 +1,5 @@
 window.VOX_BOARD = {
-"updated": "2026-09-24 20:37 UTC",
+"updated": "2026-09-24 20:54 UTC",
 "machines": {
   "ben-3070": "Ben's Win (RTX 3070 8GB)",
   "james-3080": "James Win (RTX 3080 10GB)",
@@ -522,7 +522,8 @@ window.VOX_BOARD = {
    {"role":"implemented","model":"Grok (grok-4.7-build)","machine":"james-3080"}
  ]},
 
-{"id": "F23", "title": "A main menu, and a menu on Escape", "round": "Round 1", "column": "doing", "machine": "james-3080", "dispatched": "2026-09-24 19:10", "kind": "feature", "origin": "Ben, 24 September: stacked buttons like Minecraft's -- Single Player (choose a map, you host from then on), Multiplayer (join friends' lobbies), Options, Exit Game; Escape in game: Options, Exit Lobby, Exit Game.", "raisedBy": "Ben", "summary": "A main menu (Single Player with a new or saved Box, Multiplayer with friends' games, Options, Exit) and a pause menu on Escape; the host leaving saves the Box and sends everyone back to their menu.", "status": "Approved with Ben's rulings: a menu, Single Player with new or saved Boxes, friends' games, the pause menu, and \"Box\" for \"table\" everywhere a player reads.", "repairRounds": 0, "blocking": ["F24"], "involved": [
+{"id": "F23", "title": "A main menu, and a menu on Escape", "round": "Round 1", "column": "done", "merged": "2026-09-24", "machine": "james-3080", "dispatched": "2026-09-24 19:10", "kind": "feature", "origin": "Ben, 24 September: stacked buttons like Minecraft's -- Single Player (choose a map, you host from then on), Multiplayer (join friends' lobbies), Options, Exit Game; Escape in game: Options, Exit Lobby, Exit Game.", "raisedBy": "Ben", "summary": "A main menu (Single Player with a new or saved Box, Multiplayer with friends' games, Options, Exit) and a pause menu on Escape; the host leaving saves the Box and sends everyone back to their menu.", "status": "Approved with Ben's rulings: a menu, Single Player with new or saved Boxes, friends' games, the pause menu, and \"Box\" for \"table\" everywhere a player reads.", "repairRounds": 0, "blocking": ["F24"], "involved": [
+   {"role":"reviewed","model":"Claude Opus (orchestrator)","machine":"james-3080"},
    {"role":"implemented","model":"Claude Sonnet (subagent)","machine":"james-3080"}
  ]},
 
