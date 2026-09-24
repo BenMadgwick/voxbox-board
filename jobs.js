@@ -1,5 +1,5 @@
 window.VOX_BOARD = {
-"updated": "2026-09-24 16:50 UTC",
+"updated": "2026-09-24 17:14 UTC",
 "machines": {
   "ben-3070": "Ben's Win (RTX 3070 8GB)",
   "james-3080": "James Win (RTX 3080 10GB)",
@@ -502,7 +502,9 @@ window.VOX_BOARD = {
    {"role":"implemented","model":"deepseek-flash","machine":"ben-3070"}
  ]},
 
-{"id": "F22c", "title": "Hosting works the same with no player at the host", "round": "Round 1", "column": "doing", "dispatched": "2026-09-24 15:00", "machine": "james-3080", "kind": "feature", "grade": "L", "origin": "Part of F22: F22b's test found three places where the host assumed it had a player.", "raisedBy": "Ben", "summary": "Breaks and glue are announced by any host, host-run tests need no host player, and the host can lend its own GPU; every two-player test then passes with a host that has no player.", "status": "Approved; for James's Grok worker (james-3080).", "parent": "F22", "repairRounds": 0, "prio": 2, "blocking": ["F22k", "F22Lc"], "involved": [{"role": "researched", "model": "Claude Opus (orchestrator)", "machine": "ben-3070"}]},
+{"id": "F22c", "title": "Hosting works the same with no player at the host", "round": "Round 1", "column": "done", "merged": "2026-09-24", "dispatched": "2026-09-24 15:00", "machine": "james-3080", "kind": "feature", "grade": "L", "origin": "Part of F22: F22b's test found three places where the host assumed it had a player.", "raisedBy": "Ben", "summary": "Breaks and glue are announced by any host, host-run tests need no host player, and the host can lend its own GPU; every two-player test then passes with a host that has no player.", "status": "Approved; for James's Grok worker (james-3080).", "parent": "F22", "repairRounds": 0, "prio": 2, "blocking": ["F22k", "F22Lc"], "involved": [{"role": "researched", "model": "Claude Opus (orchestrator)", "machine": "ben-3070"},
+   {"role":"implemented","model":"Grok (grok-4.7-build)","machine":"james-3080"}
+ ]},
 
 {"id": "F23", "title": "A main menu, and a menu on Escape", "round": "Round 1", "column": "todo", "kind": "feature", "origin": "Ben, 24 September: stacked buttons like Minecraft's -- Single Player (choose a map, you host from then on), Multiplayer (join friends' lobbies), Options, Exit Game; Escape in game: Options, Exit Lobby, Exit Game.", "raisedBy": "Ben", "summary": "A main menu (Single Player with a new or saved Box, Multiplayer with friends' games, Options, Exit) and a pause menu on Escape; the host leaving saves the Box and sends everyone back to their menu.", "status": "Approved with Ben's rulings: a menu, Single Player with new or saved Boxes, friends' games, the pause menu, and \"Box\" for \"table\" everywhere a player reads.", "repairRounds": 0, "blocking": ["F24"], "involved": []},
 
