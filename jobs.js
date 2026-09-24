@@ -1,5 +1,5 @@
 window.VOX_BOARD = {
-"updated": "2026-09-24 15:57 UTC",
+"updated": "2026-09-24 16:02 UTC",
 "machines": {
   "ben-3070": "Ben's Win (RTX 3070 8GB)",
   "james-3080": "James Win (RTX 3080 10GB)",
@@ -165,6 +165,7 @@ window.VOX_BOARD = {
    {"role":"reviewed","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"},
    {"role":"reviewed","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"},
    {"role":"reviewed","model":"deepseek-flash","machine":"ben-3070"},
+   {"role":"reviewed","model":"deepseek-flash","machine":"ben-3070"},
    {"role":"repaired","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"}
  ]},
 
@@ -187,10 +188,11 @@ window.VOX_BOARD = {
 {"id": "B9", "title": "Show as joinable on Steam", "round": "Round 1", "column": "doing", "machine": "ben-3070", "dispatched": "2026-09-24 12:22", "kind": "bug", "grade": "M", "origin": "It looked as though Steam showed Ben offline, so friends couldn't join him. Ben later corrected this: his friends were offline, so nothing was broken. Kept as a nice-to-have.", "raisedBy": "Ben", "summary": "Your Steam friends list shows that you're playing VoxBox and can be joined.", "status": "Brief ready; queued.", "repairRounds": 0,
  "involved": [
    {"role":"researched","model":"Claude Opus (orchestrator)","machine":"ben-3070"},
+   {"role":"implemented","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"},
+   {"role":"reviewed","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"},
    {"role":"repaired","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"},
    {"role":"reviewed","model":"deepseek-flash","machine":"ben-3070"},
-   {"role":"reviewed","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"},
-   {"role":"implemented","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"}
+   {"role":"reviewed","model":"deepseek-flash","machine":"ben-3070"}
  ]},
 
 {"id": "B10", "title": "Other players move smoothly", "round": "Round 1", "column": "done", "machine": "james-3080", "merged": "2026-09-24", "dispatched": "2026-09-24 06:13", "kind": "bug", "grade": "L", "origin": "Other players' markers moved choppily, hopping rather than gliding.", "raisedBy": "Ben", "summary": "Other players glide instead of hopping 15 times a second. The smoothing starts at 120 ms, a first guess for Ben to tune.", "status": "Brief ready; queued.", "repairRounds": 0,
@@ -476,7 +478,8 @@ window.VOX_BOARD = {
 {"id": "F22s", "title": "A true server build", "round": "Round 1", "column": "doing", "machine": "ben-3070", "dispatched": "2026-09-23 23:32", "kind": "feature", "grade": "L", "origin": "Part of F22.", "raisedBy": "Ben", "summary": "Builds the engine from source so the Dedicated app is a real server program with no graphics in it, for Windows and Linux.", "status": "Approved; its first step is Ben's (linking his Epic account to GitHub).", "parent": "F22", "repairRounds": 0, "blocking": ["F22o", "F22Ld"],
  "involved": [
    {"role":"researched","model":"Claude Opus (subagent)","machine":"ben-3070"},
-   {"role":"implemented","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"}
+   {"role":"implemented","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"},
+   {"role":"reviewed","model":"deepseek-flash","machine":"ben-3070"}
  ]},
 
 {"id": "F22La", "title": "Making objects on Linux", "round": "Round 1", "column": "todo", "machine": "sam-linux", "kind": "feature", "grade": "M", "origin": "Part of F22.", "raisedBy": "Ben", "summary": "The generator runs on Linux, the first part of the Dedicated app there.", "status": "Approved, for the Linux machine once it joins.", "parent": "F22", "repairRounds": 0, "blocking": ["F22Ld"],
@@ -501,8 +504,20 @@ window.VOX_BOARD = {
 
 {"id": "F22c", "title": "Hosting works the same with no player at the host", "round": "Round 1", "column": "doing", "dispatched": "2026-09-24 15:00", "machine": "james-3080", "kind": "feature", "grade": "L", "origin": "Part of F22: F22b's test found three places where the host assumed it had a player.", "raisedBy": "Ben", "summary": "Breaks and glue are announced by any host, host-run tests need no host player, and the host can lend its own GPU; every two-player test then passes with a host that has no player.", "status": "Approved; for James's Grok worker (james-3080).", "parent": "F22", "repairRounds": 0, "prio": 2, "blocking": ["F22k", "F22Lc"], "involved": [{"role": "researched", "model": "Claude Opus (orchestrator)", "machine": "ben-3070"}]},
 
-{"id": "F23", "title": "A main menu, and a menu on Escape", "round": "Round 1", "column": "backlog", "kind": "feature", "origin": "Ben, 24 September: stacked buttons like Minecraft's -- Single Player (choose a map, you host from then on), Multiplayer (join friends' lobbies), Options, Exit Game; Escape in game: Options, Exit Lobby, Exit Game.", "raisedBy": "Ben", "summary": "Proposed; needs a design pass and Ben's approval.", "status": "Idea recorded (docs/design/F23-menus.md).", "repairRounds": 0, "blocking": ["F24"], "involved": []},
+{"id": "F23", "title": "A main menu, and a menu on Escape", "round": "Round 1", "column": "todo", "kind": "feature", "origin": "Ben, 24 September: stacked buttons like Minecraft's -- Single Player (choose a map, you host from then on), Multiplayer (join friends' lobbies), Options, Exit Game; Escape in game: Options, Exit Lobby, Exit Game.", "raisedBy": "Ben", "summary": "A main menu (Single Player with a new or saved Box, Multiplayer with friends' games, Options, Exit) and a pause menu on Escape; the host leaving saves the Box and sends everyone back to their menu.", "status": "Approved with Ben's rulings: a menu, Single Player with new or saved Boxes, friends' games, the pause menu, and \"Box\" for \"table\" everywhere a player reads.", "repairRounds": 0, "blocking": ["F24"], "involved": []},
 
-{"id": "F24", "title": "Voxels raining behind the main menu", "round": "Round 1", "column": "backlog", "kind": "feature", "origin": "Ben, 24 September: random-material voxels rain behind the menu buttons, some bounce off them, the mouse parts them like a hand under a waterfall.", "raisedBy": "Ben", "summary": "Proposed; waits for the menus (F23) and particle effects (F18).", "status": "Idea recorded (docs/design/F24-menu-voxel-rain.md).", "repairRounds": 0, "blockedBy": ["F23", "F18"], "involved": []}
+{"id": "F24", "title": "Voxels raining behind the main menu", "round": "Round 1", "column": "todo", "kind": "feature", "origin": "Ben, 24 September: random-material voxels rain behind the menu buttons, some bounce off them, the mouse parts them like a hand under a waterfall.", "raisedBy": "Ben", "summary": "Random-material voxels rain behind the menu buttons, bounce off them, and part around the mouse; a corner slider sets the intensity, and Options can turn it all off.", "status": "Approved: waits for the menus (F23) and particle effects (F18).", "repairRounds": 0, "blockedBy": ["F23", "F18"], "involved": []},
+
+{"id": "D5", "title": "Only one two-program test at a time", "round": "Round 1", "column": "doing", "machine": "ben-3070", "dispatched": "2026-09-24 15:54", "kind": "feature", "grade": "S", "origin": "Ben's rule: tests that run two game or server programs at once must run alone.", "raisedBy": "Ben", "summary": "A lock so network, generation and server tests never overlap on one PC.", "status": "Approved; queued for Space Bunny.", "parent": "D1", "repairRounds": 0, "involved": []},
+
+{"id": "D6", "title": "The board says where each job stands, by itself", "round": "Round 1", "column": "doing", "machine": "ben-3070", "dispatched": "2026-09-24 15:56", "kind": "feature", "grade": "S", "origin": "Card statuses went stale because they were written by hand.", "raisedBy": "Ben", "summary": "The board's sync writes each card's 'Where it stands' from claims, runs and reviews.", "status": "Approved; queued for Space Bunny.", "parent": "D1", "repairRounds": 0, "involved": []},
+
+{"id": "D7", "title": "A machine can ask a question and wait for the answer", "round": "Round 1", "column": "todo", "kind": "feature", "grade": "M", "origin": "James's unattended machine got stuck on a decision only Ben could make, and nobody would have known.", "raisedBy": "Ben", "summary": "A stuck machine writes its question where Ben sees it (the board, status, optionally his phone), waits without retrying, does other work, and carries on when he answers.", "status": "Approved.", "parent": "D1", "repairRounds": 0, "prio": 2, "involved": []},
+
+{"id": "F22g", "title": "The Dedicated app makes objects for others", "round": "Round 1", "column": "todo", "machine": "james-3080", "kind": "feature", "grade": "M", "origin": "Part of F22.", "raisedBy": "Ben", "summary": "VoxBox Dedicated takes pictures over the network, queues them fairly, makes the objects and sends them back.", "status": "Approved; for James's machine.", "parent": "F22", "repairRounds": 0, "blocking": ["F22h", "F22m", "F22Ld"], "involved": [{"role": "researched", "model": "Claude Opus (orchestrator)", "machine": "ben-3070"}]},
+
+{"id": "F23b", "title": "More ways to find a game", "round": "Round 1", "column": "backlog", "kind": "feature", "origin": "Ben: a public lobby browser, join codes, passwords and joining by address, later.", "raisedBy": "Ben", "summary": "Finish the Multiplayer menu beyond friends' games.", "status": "Later; needs a design.", "repairRounds": 0, "blockedBy": ["F23"], "involved": []},
+
+{"id": "F24b", "title": "Settle the menu rain's intensity", "round": "Round 1", "column": "backlog", "kind": "qol", "origin": "Ben will say which slider setting felt right.", "raisedBy": "Ben", "summary": "Bake in Ben's chosen intensity and remove the slider.", "status": "Waiting for Ben's number.", "repairRounds": 0, "blockedBy": ["F24"], "involved": []}
 ]
 };
