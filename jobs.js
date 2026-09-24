@@ -1,5 +1,5 @@
 window.VOX_BOARD = {
-"updated": "2026-09-24 19:10 UTC",
+"updated": "2026-09-24 19:11 UTC",
 "machines": {
   "ben-3070": "Ben's Win (RTX 3070 8GB)",
   "james-3080": "James Win (RTX 3080 10GB)",
@@ -222,8 +222,8 @@ window.VOX_BOARD = {
  "involved": [
    {"role":"researched","model":"Claude Opus (subagent)","machine":"ben-3070"},
    {"role":"implemented","model":"Claude Sonnet (subagent)","machine":"james-3080"},
-   {"role":"repaired","model":"Claude Sonnet (subagent)","machine":"james-3080"},
-   {"role":"reviewed","model":"Claude Opus (orchestrator)","machine":"james-3080"}
+   {"role":"reviewed","model":"Claude Opus (orchestrator)","machine":"james-3080"},
+   {"role":"repaired","model":"Claude Sonnet (subagent)","machine":"james-3080"}
  ]},
 
 {"id": "F7", "title": "Glue makes one object", "round": "Round 1", "column": "doing", "kind": "feature", "grade": "R", "origin": "Ben asked for glue to truly merge two objects. It also absorbs two bugs: the glue preview lagged and its outline was too thin to see (B11), and objects with several welds flipped out when grabbed (B14).", "raisedBy": "Ben", "summary": "Glued objects become one solid object, so they stop fighting each other. Unglue goes away (slice separates things instead), and the preview becomes a thick glowing shell showing exactly what will join.", "status": "Five parts merged: the maths of where two objects overlap, the test that several objects can become one body, the glowing glue preview, the join itself, and breaking and editing a joined object part by part. Joining players seeing the same join is built and under review; folding parts together and keeping a build as one object are still to do.", "repairRounds": 0,
@@ -520,7 +520,7 @@ window.VOX_BOARD = {
    {"role":"implemented","model":"Grok (grok-4.7-build)","machine":"james-3080"}
  ]},
 
-{"id": "F23", "title": "A main menu, and a menu on Escape", "round": "Round 1", "column": "todo", "kind": "feature", "origin": "Ben, 24 September: stacked buttons like Minecraft's -- Single Player (choose a map, you host from then on), Multiplayer (join friends' lobbies), Options, Exit Game; Escape in game: Options, Exit Lobby, Exit Game.", "raisedBy": "Ben", "summary": "A main menu (Single Player with a new or saved Box, Multiplayer with friends' games, Options, Exit) and a pause menu on Escape; the host leaving saves the Box and sends everyone back to their menu.", "status": "Approved with Ben's rulings: a menu, Single Player with new or saved Boxes, friends' games, the pause menu, and \"Box\" for \"table\" everywhere a player reads.", "repairRounds": 0, "blocking": ["F24"], "involved": []},
+{"id": "F23", "title": "A main menu, and a menu on Escape", "round": "Round 1", "column": "doing", "machine": "james-3080", "dispatched": "2026-09-24 19:10", "kind": "feature", "origin": "Ben, 24 September: stacked buttons like Minecraft's -- Single Player (choose a map, you host from then on), Multiplayer (join friends' lobbies), Options, Exit Game; Escape in game: Options, Exit Lobby, Exit Game.", "raisedBy": "Ben", "summary": "A main menu (Single Player with a new or saved Box, Multiplayer with friends' games, Options, Exit) and a pause menu on Escape; the host leaving saves the Box and sends everyone back to their menu.", "status": "Approved with Ben's rulings: a menu, Single Player with new or saved Boxes, friends' games, the pause menu, and \"Box\" for \"table\" everywhere a player reads.", "repairRounds": 0, "blocking": ["F24"], "involved": []},
 
 {"id": "F24", "title": "Voxels raining behind the main menu", "round": "Round 1", "column": "todo", "kind": "feature", "origin": "Ben, 24 September: random-material voxels rain behind the menu buttons, some bounce off them, the mouse parts them like a hand under a waterfall.", "raisedBy": "Ben", "summary": "Random-material voxels rain behind the menu buttons, bounce off them, and part around the mouse; a corner slider sets the intensity, and Options can turn it all off.", "status": "Approved: waits for the menus (F23) and particle effects (F18).", "repairRounds": 0, "blockedBy": ["F23", "F18"], "involved": []},
 
@@ -546,6 +546,6 @@ window.VOX_BOARD = {
 
 {"id": "F24b", "title": "Settle the menu rain's intensity", "round": "Round 1", "column": "backlog", "kind": "qol", "origin": "Ben will say which slider setting felt right.", "raisedBy": "Ben", "summary": "Bake in Ben's chosen intensity and remove the slider.", "status": "Waiting for Ben's number.", "repairRounds": 0, "blockedBy": ["F24"], "involved": []},
 
-{"id": "B1e", "title": "Fast carving never drops a cut", "round": "Round 1", "column": "todo", "kind": "bug", "grade": "M", "origin": "B1c's test found the host silently drops a carve scoop while the previous piece's collision is still being built (20-620 ms), so quick carving loses cuts.", "raisedBy": "Ben", "summary": "Build a carved piece's collision after the piece is in place, so every scoop is carved.", "status": "Approved in principle; B1c is merged, so it can start.", "parent": "B1", "repairRounds": 0, "involved": [{"role": "researched", "model": "Claude Sonnet (subagent)", "machine": "james-3080"}]}
+{"id": "B1e", "title": "Fast carving never drops a cut", "round": "Round 1", "column": "doing", "machine": "james-3080", "dispatched": "2026-09-24 19:10", "kind": "bug", "grade": "M", "origin": "B1c's test found the host silently drops a carve scoop while the previous piece's collision is still being built (20-620 ms), so quick carving loses cuts.", "raisedBy": "Ben", "summary": "Build a carved piece's collision after the piece is in place, so every scoop is carved.", "status": "Approved in principle; B1c is merged, so it can start.", "parent": "B1", "repairRounds": 0, "involved": [{"role": "researched", "model": "Claude Sonnet (subagent)", "machine": "james-3080"}]}
 ]
 };
