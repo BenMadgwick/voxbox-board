@@ -533,7 +533,7 @@ window.VOX_BOARD = {
    {"role":"implemented","model":"deepseek-flash","machine":"ben-3070"}
  ]},
 
-{"id": "F22g", "title": "The Dedicated app makes objects for others", "round": "Round 1", "column": "done", "merged": "2026-09-24", "dispatched": "2026-09-24 17:15", "machine": "james-3080", "kind": "feature", "grade": "M", "origin": "Part of F22.", "raisedBy": "Ben", "summary": "VoxBox Dedicated takes pictures over the network, queues them fairly, makes the objects and sends them back.", "status": "Approved; for James's machine.", "parent": "F22", "repairRounds": 0, "blocking": ["F22h", "F22m", "F22Ld"], "involved": [{"role": "researched", "model": "Claude Opus (orchestrator)", "machine": "ben-3070"},
+{"id": "F22g", "title": "The Dedicated app makes objects for others", "round": "Round 1", "column": "done", "merged": "2026-09-24", "dispatched": "2026-09-24 17:15", "machine": "james-3080", "kind": "feature", "grade": "M", "origin": "Part of F22.", "raisedBy": "Ben", "summary": "VoxBox Dedicated takes pictures over the network, queues them fairly, makes the objects and sends them back.", "status": "Merged; Grok built it, Opus review found and fixed one bug (idle peers dropped mid-job).", "parent": "F22", "repairRounds": 1, "involved": [{"role": "researched", "model": "Claude Opus (orchestrator)", "machine": "ben-3070"},
    {"role":"reviewed","model":"Claude Opus (orchestrator)","machine":"james-3080"},
    {"role":"repaired","model":"Claude Opus (orchestrator)","machine":"james-3080"},
    {"role":"implemented","model":"Grok (grok-4.7-build)","machine":"james-3080"}
