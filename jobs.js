@@ -1,5 +1,5 @@
 window.VOX_BOARD = {
-"updated": "2026-09-24 22:19 UTC",
+"updated": "2026-09-24 22:28 UTC",
 "machines": {
   "ben-3070": "Ben's Win (RTX 3070 8GB)",
   "james-3080": "James Win (RTX 3080 10GB)",
@@ -205,7 +205,8 @@ window.VOX_BOARD = {
    {"role":"reviewed","model":"deepseek-flash","machine":"ben-3070"},
    {"role":"reviewed","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"},
    {"role":"reviewed","model":"Claude Opus (orchestrator)","machine":"ben-3070"},
-   {"role":"repaired","model":"Claude Opus (orchestrator)","machine":"ben-3070"}
+   {"role":"repaired","model":"Claude Opus (orchestrator)","machine":"ben-3070"},
+   {"role":"reviewed","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"}
  ]},
 
 {"id": "B10", "title": "Other players move smoothly", "round": "Round 1", "column": "done", "machine": "james-3080", "merged": "2026-09-24", "dispatched": "2026-09-24 06:13", "kind": "bug", "grade": "L", "origin": "Other players' markers moved choppily, hopping rather than gliding.", "raisedBy": "Ben", "summary": "Other players glide instead of hopping 15 times a second. The smoothing starts at 120 ms, a first guess for Ben to tune.", "status": "Brief ready; queued.", "repairRounds": 0,
@@ -557,9 +558,12 @@ window.VOX_BOARD = {
 {"id": "F28b", "title": "Draw layered and invisible glass", "round": "Round 1", "column": "todo", "kind": "feature", "raisedBy": "Ben", "repairRounds": 0, "grade": "M", "origin": "Part of F28. Meant to be folded into F3b3, which was already being built.", "summary": "Red glass painted over blue shows both colours, and voxels painted fully clear are not drawn at all, while still solid.", "status": "Approved: waits for the glass drawing (F3b3).", "parent": "F28", "involved": []},
 {"id": "F28c", "title": "Aim through glass and at depth", "round": "Round 1", "column": "todo", "kind": "feature", "raisedBy": "Ben", "repairRounds": 0, "grade": "M", "origin": "Part of F28.", "summary": "Hold Alt and paint, erase or carve aim through see-through voxels to the first solid one; Alt and the wheel move the brush a voxel deeper or nearer, shown as an x-ray ball with the depth beside the crosshair.", "status": "Approved: waits for painting with opacity (F28a).", "parent": "F28", "blockedBy": ["F28a"], "involved": []},
 
-{"id": "D5", "title": "Only one two-program test at a time", "round": "Round 1", "column": "doing", "machine": "ben-3070", "dispatched": "2026-09-24 15:54", "kind": "feature", "grade": "S", "origin": "Ben's rule: tests that run two game or server programs at once must run alone.", "raisedBy": "Ben", "summary": "A lock so network, generation and server tests never overlap on one PC.", "status": "Approved; queued for Space Bunny.", "parent": "D1", "repairRounds": 0, "involved": [
+{"id": "D5", "title": "Only one two-program test at a time", "round": "Round 1", "column": "done", "machine": "ben-3070", "dispatched": "2026-09-24 15:54", "kind": "feature", "grade": "S", "origin": "Ben's rule: tests that run two game or server programs at once must run alone.", "raisedBy": "Ben", "summary": "Tests that start two copies of the game (net_test, steam_test, null_lend_test) now take turns on a PC: a second one waits, says which run it is waiting for, and if the first is killed it tidies up the programs that run left behind before starting.", "status": "Merged. Checked for real with two net tests, including killing the first mid-run.", "parent": "D1", "repairRounds": 1, "merged": "2026-09-24 23:30", "forPlaytesters": "Nothing to play: this keeps the machines that build the game from tripping over each other.", "workMinutes": 32, "tokens": 5926091, "tokensWritten": 153995, "involved": [
    {"role":"implemented","model":"deepseek-flash","machine":"ben-3070"},
    {"role":"reviewed","model":"deepseek-flash","machine":"ben-3070"},
+   {"role":"reviewed","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"},
+   {"role":"repaired","model":"Claude Opus (orchestrator)","machine":"ben-3070"},
+   {"role":"reviewed","model":"Claude Opus (orchestrator)","machine":"ben-3070"},
    {"role":"reviewed","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"}
  ]},
 
