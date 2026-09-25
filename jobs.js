@@ -1,5 +1,5 @@
 window.VOX_BOARD = {
-"updated": "2026-09-24 22:48 UTC",
+"updated": "2026-09-25 00:38 UTC",
 "machines": {
   "ben-3070": "Ben's Win (RTX 3070 8GB)",
   "james-3080": "James Win (RTX 3080 10GB)",
@@ -507,12 +507,13 @@ window.VOX_BOARD = {
    {"role":"reviewed","model":"Claude Opus (orchestrator)","machine":"ben-3070"}
  ]},
 
-{"id": "F22s", "title": "A true server build", "round": "Round 1", "column": "doing", "statusAuto": "building:OpenRouter stealth/space-bunny-alpha@ben-3070", "machine": "ben-3070", "dispatched": "2026-09-23 23:32", "kind": "feature", "grade": "L", "origin": "Part of F22.", "raisedBy": "Ben", "summary": "Builds the engine from source so the Dedicated app is a real server program with no graphics in it, for Windows and Linux.", "status": "Being built by OpenRouter stealth/space-bunny-alpha on Ben's Win (RTX 3070 8GB).", "parent": "F22", "repairRounds": 0, "blocking": ["F22o", "F22Ld"],
+{"id": "F22s", "title": "A true server build", "round": "Round 1", "column": "doing", "statusAuto": "reviewed:1", "machine": "ben-3070", "dispatched": "2026-09-23 23:32", "kind": "feature", "grade": "L", "origin": "Part of F22.", "raisedBy": "Ben", "summary": "Builds the engine from source so the Dedicated app is a real server program with no graphics in it, for Windows and Linux.", "status": "Built; reviewed by 1 model; waiting for the orchestrator's check.", "parent": "F22", "repairRounds": 0, "blocking": ["F22o", "F22Ld"],
  "involved": [
    {"role":"researched","model":"Claude Opus (subagent)","machine":"ben-3070"},
    {"role":"implemented","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"},
    {"role":"reviewed","model":"deepseek-flash","machine":"ben-3070"},
-   {"role":"implemented","model":"Claude Sonnet (subagent)","machine":"ben-3070"}
+   {"role":"implemented","model":"Claude Sonnet (subagent)","machine":"ben-3070"},
+   {"role":"reviewed","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"}
  ]},
 
 {"id": "F22La", "title": "Making objects on Linux", "round": "Round 1", "column": "todo", "machine": "sam-linux", "kind": "feature", "grade": "M", "origin": "Part of F22.", "raisedBy": "Ben", "summary": "The generator runs on Linux, the first part of the Dedicated app there.", "status": "Approved, for the Linux machine once it joins.", "parent": "F22", "repairRounds": 0, "blocking": ["F22Ld"],
@@ -579,12 +580,14 @@ window.VOX_BOARD = {
    {"role":"reviewed","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"}
  ]},
 
-{"id": "D7", "title": "A machine can ask a question and wait for the answer", "round": "Round 1", "column": "doing", "statusAuto": "repaired:OpenRouter stealth/space-bunny-alpha@ben-3070", "machine": "ben-3070", "dispatched": "2026-09-24 16:27", "kind": "feature", "grade": "M", "origin": "James's unattended machine got stuck on a decision only Ben could make, and nobody would have known.", "raisedBy": "Ben", "summary": "A stuck machine writes its question where Ben sees it (the board, status, optionally his phone), waits without retrying, does other work, and carries on when he answers.", "status": "In its repair round.", "parent": "D1", "repairRounds": 0, "prio": 2, "involved": [
+{"id": "D7", "title": "A machine can ask a question and wait for the answer", "round": "Round 1", "column": "done", "merged": "2026-09-25", "statusAuto": "merged:2026-09-25", "machine": "ben-3070", "dispatched": "2026-09-24 16:27", "kind": "feature", "grade": "M", "origin": "James's unattended machine got stuck on a decision only Ben could make, and nobody would have known.", "raisedBy": "Ben", "summary": "A stuck machine writes its question where Ben sees it (the board, status, optionally his phone), waits without retrying, does other work, and carries on when he answers.", "status": "Merged 2026-09-25.", "parent": "D1", "repairRounds": 0, "prio": 2, "involved": [
    {"role":"implemented","model":"deepseek-flash","machine":"ben-3070"},
    {"role":"reviewed","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"},
    {"role":"reviewed","model":"deepseek-flash","machine":"ben-3070"},
    {"role":"reviewed","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"},
-   {"role":"repaired","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"}
+   {"role":"repaired","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"},
+   {"role":"reviewed","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"},
+   {"role":"repaired","model":"Claude Opus (orchestrator)","machine":"ben-3070"}
  ]},
 
 {"id": "F22g", "title": "The Dedicated app makes objects for others", "round": "Round 1", "column": "done", "statusAuto": "merged:2026-09-24", "merged": "2026-09-24", "dispatched": "2026-09-24 17:15", "machine": "james-3080", "kind": "feature", "grade": "M", "origin": "Part of F22.", "raisedBy": "Ben", "summary": "VoxBox Dedicated takes pictures over the network, queues them fairly, makes the objects and sends them back.", "status": "Merged; Grok built it, Opus review found and fixed one bug (idle peers dropped mid-job).", "parent": "F22", "repairRounds": 1, "involved": [{"role": "researched", "model": "Claude Opus (orchestrator)", "machine": "ben-3070"},

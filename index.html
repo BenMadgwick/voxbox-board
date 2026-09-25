@@ -81,6 +81,10 @@ select{max-width:100%;font:500 14px var(--body);color:var(--ink);background:var(
 .parentline{font-size:12.5px;color:var(--muted)}
 .wait{color:var(--doing);font-weight:600}
 .pr{font:600 11px/1 var(--body);letter-spacing:.04em;color:var(--c);border:1px solid currentColor;border-radius:4px;padding:4px 6px;white-space:nowrap}
+/* A job whose machine is waiting on Ben's answer (docs/round/questions/): the badge says so
+   on the card, and the question itself is shown in place of the usual summary line. */
+.needben{font:700 11px/1 var(--body);text-transform:uppercase;letter-spacing:.08em;color:var(--doing);border:1px solid currentColor;border-radius:4px;padding:4px 6px;white-space:nowrap}
+.ask{border-left:3px solid var(--doing);padding-left:10px;color:var(--ink);font-size:13.5px}
 .empty{padding:28px;border:1px dashed var(--line);border-radius:12px;color:var(--muted);text-align:center}
 .pill{display:inline-flex;align-items:center;gap:6px;font:600 12px/1 var(--body);padding:5px 9px;border-radius:999px;color:var(--c);background:color-mix(in srgb,var(--c) 14%,transparent)}
 .pill::before{content:"";width:7px;height:7px;border-radius:2px;background:var(--c)}
@@ -258,6 +262,10 @@ footer{margin-top:36px;color:var(--muted);font-size:13px;max-width:70ch}
     if (!j.prio || j.prio <= 1) return '';
     return '<span class="pr" title="Priority '+esc(j.prio)+' of 1 upwards: the higher, the sooner">Prio '+esc(j.prio)+'</span>';
   }
+  // A job whose machine is waiting on an answer (board_sync copies the question from
+  // docs/round/questions/): the card says who has to answer, and asks the question itself.
+  function needBenMark(j){ return j.question ? '<span class="needben" title="Ben has been asked; the job cannot go on until he answers">Needs Ben</span>' : ''; }
+  function needBenLine(j){ return j.question ? '<span class="ask">Waiting for Ben\'s answer: '+esc(j.question)+'</span>' : ''; }
 
   // Rounds
   var sel = document.getElementById("roundSel");
@@ -336,9 +344,9 @@ footer{margin-top:36px;color:var(--muted);font-size:13px;max-width:70ch}
     var parentLine = j.parent && byId[j.parent] ? '<span class="parentline">Part of '+esc(j.parent)+': '+esc(byId[j.parent].title)+'</span>' :
       (k.length ? '<span class="parentline">'+k.filter(function(x){return x.column==="done";}).length+' of '+k.length+' parts done</span>' : '');
     return '<button class="card" data-id="'+esc(j.id)+'" style="--c:'+c.c+'">' +
-      '<div class="top"><span class="id">'+esc(j.id)+'</span><span class="kind">'+esc(KIND[j.kind]||"")+'</span>'+(state.tab==="all"?'<span class="pill colpill" style="--c:'+c.c+'">'+(j.column==="closed"?"Closed":c.name)+'</span>':'')+(j.grade?'<span class="grade" title="'+esc(GRADE[j.grade]||"")+'">'+esc(j.grade)+'</span>':'')+prioMark(j)+'</div>' +
+      '<div class="top"><span class="id">'+esc(j.id)+'</span><span class="kind">'+esc(KIND[j.kind]||"")+'</span>'+(state.tab==="all"?'<span class="pill colpill" style="--c:'+c.c+'">'+(j.column==="closed"?"Closed":c.name)+'</span>':'')+(j.grade?'<span class="grade" title="'+esc(GRADE[j.grade]||"")+'">'+esc(j.grade)+'</span>':'')+prioMark(j)+needBenMark(j)+'</div>' +
       '<h3>'+esc(j.title)+'</h3>' +
-      '<div style="display:grid;gap:6px;align-content:start"><p>'+esc(text)+'</p>'+parentLine+blockLines(j)+'</div>' +
+      '<div style="display:grid;gap:6px;align-content:start"><p>'+esc(text)+'</p>'+needBenLine(j)+parentLine+blockLines(j)+'</div>' +
       (meta.length ? '<div class="meta">'+meta.join(' <span aria-hidden="true">·</span> ')+'</div>' : '<span></span>') +
       '</button>';
   }
@@ -401,6 +409,7 @@ footer{margin-top:36px;color:var(--muted);font-size:13px;max-width:70ch}
     if (j.closedAs) h += '<div class="sec"><h4>Closed</h4><p>'+esc(j.closedAs)+'</p></div>';
     if (j.summary) h += '<div class="sec"><h4>'+(j.column==="done"?"What changed":"What it will change")+'</h4><p>'+esc(j.summary)+'</p></div>';
     if (j.status) h += '<div class="sec"><h4>Where it stands</h4><p>'+esc(j.status)+'</p></div>';
+    if (j.question) h += '<div class="sec origin"><h4>Needs Ben</h4><p>'+esc(j.question)+'</p><span class="by">The machine building this job cannot go on until Ben answers.</span></div>';
     if (j.blockedBy && j.blockedBy.length) h += '<div class="sec"><h4>Blocked by</h4><p>'+esc(j.blockedBy.join(', '))+' -- it cannot start until '+esc(j.blockedBy.length>1?"those jobs are":"that job is")+' merged.</p></div>';
     if (j.blocking && j.blocking.length) h += '<div class="sec"><h4>Blocking</h4><p>'+esc(j.blocking.join(', '))+' -- '+esc(j.blocking.length>1?"those jobs cannot":"that job cannot")+' start until this one is merged.</p></div>';
     if (j.forPlaytesters) h += '<div class="sec try"><h4>Try this next playtest</h4><p>'+esc(j.forPlaytesters)+'</p></div>';
