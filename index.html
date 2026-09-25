@@ -64,6 +64,14 @@ select{max-width:100%;font:500 14px var(--body);color:var(--ink);background:var(
 .card{all:unset;box-sizing:border-box;display:grid;grid-template-rows:auto auto 1fr auto;gap:8px;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 16px;cursor:pointer;box-shadow:var(--shadow);transition:transform .15s ease,border-color .15s ease}
 .card:hover{transform:translateY(-2px);border-color:var(--c)}
 .top{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+/* A card's head is the state bar over the id row, or just the id row: the two are one grid
+   child so that a job with no tasks has exactly the same spacing as one with them. */
+.head{display:grid;gap:6px}
+/* The state bar (docs/design/D11-board-parents.md): one segment per state, in proportion to
+   how many of this job's tasks are in it -- a card for F10 is a third done, a third in
+   progress, a third to do. Closed tasks are left out unless they are all there is. */
+.bar{display:flex;gap:2px;height:7px;border-radius:4px;overflow:hidden;background:var(--sunk)}
+.bar i{display:block;height:100%;background:var(--bc)}
 .id{font:700 13px/1 var(--mono);color:var(--ink);background:var(--tile-top);border:1px solid var(--line);border-radius:5px;padding:5px 7px;box-shadow:2px 2px 0 var(--tile-side),inset 0 -2px 0 var(--c)}
 .kind{font:600 11px/1 var(--body);text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
 .grade{margin-left:auto;font:500 11px/1 var(--mono);color:var(--muted);border:1px solid var(--line);border-radius:4px;padding:3px 5px}
@@ -107,6 +115,11 @@ dialog::backdrop{background:rgba(10,15,20,.55)}
 .jl:hover{border-color:var(--accent)}
 .jl .t{flex:1;min-width:10ch}
 .kids{display:grid;gap:6px}
+/* The opened card's parts, at every depth: a grouping holds its own children, and the
+   nesting is a small indent rather than a rule, so a deep tree still reads as one list. */
+.tree{display:grid;gap:7px;margin-top:6px}
+.tr{display:grid;gap:5px;padding:8px;border:1px dashed var(--line);border-radius:9px;background:var(--sunk)}
+.tr .jl{background:var(--surface)}
 footer{margin-top:36px;color:var(--muted);font-size:13px;max-width:70ch}
 .ftoggle{display:none;appearance:none;font:600 14px/1 var(--body);color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:9px 12px;cursor:pointer}
 .colpill{margin-left:auto}
@@ -174,6 +187,7 @@ footer{margin-top:36px;color:var(--muted);font-size:13px;max-width:70ch}
 <dialog id="dlg" aria-labelledby="dlgTitle"><div class="sheet" id="sheet"></div></dialog>
 
 <script src="jobs.js"></script>
+<script src="derive.js"></script>
 <script>
 (function(){
   var COLS = [
@@ -199,13 +213,13 @@ footer{margin-top:36px;color:var(--muted);font-size:13px;max-width:70ch}
   }
 
   var data = window.VOX_BOARD;
+  var D = window.VoxBoardDerive;   // docs/round/board/derive.js: the tree rules, shared with tools/board_check.js
   var colEl = document.getElementById("col");
-  if (!data || !data.jobs){
+  if (!data || !data.jobs || !D){
     colEl.innerHTML = '<div class="empty">The job list didn\'t load. Reload the page to try again.</div>';
     return;
   }
-  var jobs = data.jobs, byId = {};
-  jobs.forEach(function(j){ byId[j.id] = j; });
+  var jobs = data.jobs, byId = D.byIdOf(jobs);
 
   // The tab and the round are remembered between visits. The machine and model filters are
   // not: a headless render asks for what it wants with ?machine= / ?model=, and a filter
@@ -246,8 +260,21 @@ footer{margin-top:36px;color:var(--muted);font-size:13px;max-width:70ch}
   // anyone on that machine has touched it.
   function onMachine(j){ return state.machine==="all" || j.machine===state.machine || (j.involved||[]).some(function(e){ return e.machine===state.machine; }); }
   function onModel(j){ return state.model==="all" || (j.involved||[]).some(function(e){ return e.model===state.model; }); }
-  function shown(j){ return inRound(j) && onMachine(j) && onModel(j); }
-  function kids(id){ return jobs.filter(function(j){ return j.parent===id; }); }
+  // Only a top-level job is a card (docs/design/D11-board-parents.md), so a card stands for
+  // everything under it: a filter that matches any job in the tree brings the whole card back,
+  // at any depth. Otherwise picking a machine would hide the parents whose work is that
+  // machine's, which is most of what that machine has been up to.
+  function anyUnder(id, test){
+    var kids = D.childrenOf(jobs, id);
+    for (var i=0;i<kids.length;i++){ if (test(kids[i]) || anyUnder(kids[i].id, test)) return true; }
+    return false;
+  }
+  function matches(j){ return inRound(j) && onMachine(j) && onModel(j); }
+  function shown(j){
+    if (state.round==="all" && state.machine==="all" && state.model==="all") return true;
+    return matches(j) || anyUnder(j.id, matches);
+  }
+  function kids(id){ return D.childrenOf(jobs, id); }
   function roleOf(j, role){ return (j.involved||[]).filter(function(e){ return e.role===role; }); }
   function lastOf(j, role){ var l = roleOf(j, role); return l.length ? l[l.length-1] : null; }
   // A job's order of work, in the same small print as "Part of ...": what it cannot start
@@ -266,8 +293,32 @@ footer{margin-top:36px;color:var(--muted);font-size:13px;max-width:70ch}
   }
   // A job whose machine is waiting on an answer (board_sync copies the question from
   // docs/round/questions/): the card says who has to answer, and asks the question itself.
-  function needBenMark(j){ return j.question ? '<span class="needben" title="Ben has been asked; the job cannot go on until he answers">Needs Ben</span>' : ''; }
-  function needBenLine(j){ return j.question ? '<span class="ask">Waiting for Ben\'s answer: '+esc(j.question)+'</span>' : ''; }
+  // The badge bubbles: a top-level card carries it when anything beneath it, at any depth, is
+  // waiting, and names which one (docs/design/D11-board-parents.md) -- F22 is not the job
+  // being asked about, F22s is, and a reader who only ever sees cards has to be told so.
+  function needBenMark(j){
+    var w = D.questionUnder(jobs, j.id);
+    if (!w) return '';
+    var where = w.id===j.id ? '' : ' ('+esc(w.id)+' is waiting)';
+    return '<span class="needben" title="Ben has been asked'+where+'; nothing under this job can go on until he answers">Needs Ben</span>';
+  }
+  function needBenLine(j){
+    var w = D.questionUnder(jobs, j.id);
+    if (!w) return '';
+    var pre = w.id===j.id ? 'Waiting for Ben\'s answer: ' : esc(w.id)+' is waiting for Ben\'s answer: ';
+    return '<span class="ask">'+pre+esc(w.question)+'</span>';
+  }
+  // The state bar for a job with tasks under it, and nothing at all for one without: a
+  // single task's state is already the card's column, and a bar one segment wide says less.
+  // The tooltip is the numbers, so the colours are not the only way to read it.
+  function barHTML(j){
+    var bar = D.barOf(jobs, j.id);
+    if (!bar) return '';
+    var title = D.barTitle(bar);
+    return '<div class="bar" role="img" aria-label="'+esc(title)+'" title="'+esc(title)+'">' +
+      bar.segments.map(function(s){ return '<i style="flex:'+s.n+';--bc:var(--'+s.state+')"></i>'; }).join('') +
+      '</div>';
+  }
 
   // Rounds
   var sel = document.getElementById("roundSel");
@@ -308,7 +359,10 @@ footer{margin-top:36px;color:var(--muted);font-size:13px;max-width:70ch}
       ALL_ORDER.forEach(function(c){ out = out.concat(list(c)); });
       return out;
     }
-    var l = jobs.filter(function(j){ return j.column===k && shown(j); });
+    // Top-level jobs only, in every tab including All: a child is not a card of its own, it
+    // is part of the card above it. Every count on the page comes from here, so they are
+    // counts of cards.
+    var l = D.topLevel(jobs).filter(function(j){ return j.column===k && shown(j); });
     if (k==="done") l = l.slice().sort(function(a,b){ return (b.merged||"").localeCompare(a.merged||""); });
     return l;
   }
@@ -342,13 +396,10 @@ footer{margin-top:36px;color:var(--muted);font-size:13px;max-width:70ch}
     if (j.column==="done" && j.tokens) meta.push(tok(j.tokens).replace(" million","M").replace(" thousand","k")+' tokens');
     if (j.column==="done" && j.merged) meta.push(when(j.merged).split(",")[0]);
     else if (j.status && j.column!=="closed") meta.push(esc(j.status.split(/(?<=\.)\s/)[0]));
-    var k = kids(j.id).filter(function(x){return x.column!=="closed";});
-    var parentLine = j.parent && byId[j.parent] ? '<span class="parentline">Part of '+esc(j.parent)+': '+esc(byId[j.parent].title)+'</span>' :
-      (k.length ? '<span class="parentline">'+k.filter(function(x){return x.column==="done";}).length+' of '+k.length+' parts done</span>' : '');
     return '<button class="card" data-id="'+esc(j.id)+'" style="--c:'+c.c+'">' +
-      '<div class="top"><span class="id">'+esc(j.id)+'</span><span class="kind">'+esc(KIND[j.kind]||"")+'</span>'+(state.tab==="all"?'<span class="pill colpill" style="--c:'+c.c+'">'+(j.column==="closed"?"Closed":c.name)+'</span>':'')+(j.grade?'<span class="grade" title="'+esc(GRADE[j.grade]||"")+'">'+esc(j.grade)+'</span>':'')+prioMark(j)+needBenMark(j)+'</div>' +
+      '<div class="head">'+barHTML(j)+'<div class="top"><span class="id">'+esc(j.id)+'</span><span class="kind">'+esc(KIND[j.kind]||"")+'</span>'+(state.tab==="all"?'<span class="pill colpill" style="--c:'+c.c+'">'+(j.column==="closed"?"Closed":c.name)+'</span>':'')+(j.grade?'<span class="grade" title="'+esc(GRADE[j.grade]||"")+'">'+esc(j.grade)+'</span>':'')+prioMark(j)+needBenMark(j)+'</div></div>' +
       '<h3>'+esc(j.title)+'</h3>' +
-      '<div style="display:grid;gap:6px;align-content:start"><p>'+esc(text)+'</p>'+needBenLine(j)+parentLine+blockLines(j)+'</div>' +
+      '<div style="display:grid;gap:6px;align-content:start"><p>'+esc(text)+'</p>'+needBenLine(j)+blockLines(j)+'</div>' +
       (meta.length ? '<div class="meta">'+meta.join(' <span aria-hidden="true">·</span> ')+'</div>' : '<span></span>') +
       '</button>';
   }
@@ -401,11 +452,26 @@ footer{margin-top:36px;color:var(--muted);font-size:13px;max-width:70ch}
   function jobLink(j){ var c = colOf(j.column); return '<button class="jl" data-id="'+esc(j.id)+'"><span class="id" style="--c:'+c.c+'">'+esc(j.id)+'</span><span class="t">'+esc(j.title)+'</span><span class="pill" style="--c:'+c.c+'">'+(j.column==="closed"?"Closed":c.name)+'</span></button>'; }
   function fact(label, v, mono){ return v ? '<div class="sec"><h4>'+label+'</h4><div class="v'+(mono?' mono':'')+'">'+v+'</div></div>' : ''; }
 
+  // Everything under a job, at every depth: a grouping holds its own children, so F1 opens
+  // as F1a (with F1a1 and F1a2 under it) and F1b, not as a flat list of leaves. Each row
+  // carries its own state pill, and a grouping carries its own bar, which counts only the
+  // tasks under that grouping. Each row still opens the full record, as before.
+  function jobTree(id, depth){
+    var under = kids(id);
+    if (!under.length) return '';
+    return '<div class="tree" style="margin-left:'+(depth ? 10 : 0)+'px">' + under.map(function(k){
+      return '<div class="tr">'+jobLink(k)+barHTML(k)+
+        (D.questionUnder(jobs, k.id) ? ' '+needBenMark(k) : '')+jobTree(k.id, depth+1)+'</div>';
+    }).join("") + '</div>';
+  }
+
   function open(id){
     var j = byId[id]; if (!j) return;
-    var c = colOf(j.column), k = kids(j.id), p = j.parent && byId[j.parent];
+    var c = colOf(j.column), k = kids(j.id), p = j.parent && byId[j.parent], w = D.questionUnder(jobs, j.id);
+    var row = '<div class="row"><span class="id" style="--c:'+c.c+'">'+esc(j.id)+'</span><span class="pill" style="--c:'+c.c+'">'+(j.column==="closed"?"Closed":c.name)+'</span><span class="kind">'+esc(KIND[j.kind]||"")+' · '+esc(j.round)+'</span><button class="close" id="dlgClose" aria-label="Close">×</button></div>';
     var h = '';
-    h += '<div class="hd"><div class="row"><span class="id" style="--c:'+c.c+'">'+esc(j.id)+'</span><span class="pill" style="--c:'+c.c+'">'+(j.column==="closed"?"Closed":c.name)+'</span><span class="kind">'+esc(KIND[j.kind]||"")+' · '+esc(j.round)+'</span><button class="close" id="dlgClose" aria-label="Close">×</button></div>';
+    // The header is the card's own: its state bar over the id row, when it has tasks.
+    h += '<div class="hd">'+(barHTML(j) ? '<div class="head">'+barHTML(j)+row+'</div>' : row);
     h += '<h2 id="dlgTitle">'+esc(j.title)+'</h2></div>';
     if (j.origin) h += '<div class="sec origin"><h4>What prompted it</h4><p>'+esc(j.origin)+'</p>'+(j.raisedBy?'<span class="by">Raised by '+esc(j.raisedBy)+'</span>':'')+'</div>';
     if (j.closedAs) h += '<div class="sec"><h4>Closed</h4><p>'+esc(j.closedAs)+'</p></div>';
@@ -413,7 +479,7 @@ footer{margin-top:36px;color:var(--muted);font-size:13px;max-width:70ch}
     if (j.fleshedInto && byId[j.fleshedInto]) h += '<div class="sec"><h4>Fleshed out into</h4><div class="kids">'+jobLink(byId[j.fleshedInto])+'</div></div>';
     if (j.summary) h += '<div class="sec"><h4>'+(j.column==="done"?"What changed":"What it will change")+'</h4><p>'+esc(j.summary)+'</p></div>';
     if (j.status) h += '<div class="sec"><h4>Where it stands</h4><p>'+esc(j.status)+'</p></div>';
-    if (j.question) h += '<div class="sec origin"><h4>Needs Ben</h4><p>'+esc(j.question)+'</p><span class="by">The machine building this job cannot go on until Ben answers.</span></div>';
+    if (w) h += '<div class="sec origin"><h4>Needs Ben'+(w.id===j.id ? '' : ' &mdash; '+esc(w.id)+' is waiting')+'</h4><p>'+esc(w.question)+'</p><span class="by">The machine building this job cannot go on until Ben answers.</span></div>';
     if (j.blockedBy && j.blockedBy.length) h += '<div class="sec"><h4>Blocked by</h4><p>'+esc(j.blockedBy.join(', '))+' -- it cannot start until '+esc(j.blockedBy.length>1?"those jobs are":"that job is")+' merged.</p></div>';
     if (j.blocking && j.blocking.length) h += '<div class="sec"><h4>Blocking</h4><p>'+esc(j.blocking.join(', '))+' -- '+esc(j.blocking.length>1?"those jobs cannot":"that job cannot")+' start until this one is merged.</p></div>';
     if (j.forPlaytesters) h += '<div class="sec try"><h4>Try this next playtest</h4><p>'+esc(j.forPlaytesters)+'</p></div>';
@@ -427,7 +493,7 @@ footer{margin-top:36px;color:var(--muted);font-size:13px;max-width:70ch}
       fact("Worker tokens", j.tokens ? tok(j.tokens)+' read and written<br>'+tok(j.tokensWritten)+' written' : "", true);
     if (facts) h += '<div class="facts">'+facts+'</div>';
     if (p) h += '<div class="sec"><h4>Part of</h4><div class="kids">'+jobLink(p)+'</div></div>';
-    if (k.length) h += '<div class="sec"><h4>'+(j.column==="closed"?"Related":"Parts and folded-in reports")+'</h4><div class="kids">'+k.map(jobLink).join("")+'</div></div>';
+    if (k.length) h += '<div class="sec"><h4>'+(j.column==="closed"?"Related":"Parts and folded-in reports")+'</h4><div class="kids">'+jobTree(j.id, 0)+'</div></div>';
     sheet.innerHTML = h;
     sheet.scrollTop = 0;
     if (!dlg.open) dlg.showModal();
