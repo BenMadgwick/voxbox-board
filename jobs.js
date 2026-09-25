@@ -242,7 +242,7 @@ window.VOX_BOARD = {
    {"role":"repaired","model":"Claude Sonnet (subagent)","machine":"james-3080"}
  ]},
 
-{"id": "F7", "title": "Glue makes one object", "round": "Round 1", "column": "doing", "statusAuto": "tasks:7/11", "kind": "feature", "grade": "R", "origin": "Ben asked for glue to truly merge two objects. It also absorbs two bugs: the glue preview lagged and its outline was too thin to see (B11), and objects with several welds flipped out when grabbed (B14).", "raisedBy": "Ben", "summary": "Glued objects become one solid object, so they stop fighting each other. Unglue goes away (slice separates things instead), and the preview becomes a thick glowing shell showing exactly what will join.", "status": "7 of 11 tasks done.", "repairRounds": 0,
+{"id": "F7", "title": "Glue makes one object", "round": "Round 1", "column": "doing", "machine": "james-3080", "statusAuto": "tasks:7/11", "kind": "feature", "grade": "R", "origin": "Ben asked for glue to truly merge two objects. It also absorbs two bugs: the glue preview lagged and its outline was too thin to see (B11), and objects with several welds flipped out when grabbed (B14).", "raisedBy": "Ben", "summary": "Glued objects become one solid object, so they stop fighting each other. Unglue goes away (slice separates things instead), and the preview becomes a thick glowing shell showing exactly what will join.", "status": "7 of 11 tasks done.", "repairRounds": 0,
  "involved": [
    {"role":"researched","model":"Claude Opus (subagent)","machine":"ben-3070"}
  ]},
