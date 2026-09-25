@@ -612,6 +612,12 @@ window.VOX_BOARD = {
    {"role":"reviewed","model":"Claude Opus (orchestrator)","machine":"james-3080"}
  ]},
 
+{"id": "D8", "title": "A scout for free AI models", "round": "Round 1", "column": "done", "merged": "2026-09-25", "statusAuto": "merged:2026-09-25", "machine": "ben-3070", "dispatched": "2026-09-25 01:05", "kind": "feature", "grade": "M", "origin": "Free and stealth models come and go weekly, and each one we tried by hand cost an evening.", "raisedBy": "Ben", "summary": "Every 12 hours ben-3070 lists the free and stealth models on OpenRouter, researches new ones, and keeps one shared record of what each is good for; every machine's status shows the ones worth using.", "status": "Merged 2026-09-25. Running every 12 hours on ben-3070.", "parent": "D1", "repairRounds": 1, "prio": 2, "workMinutes": 76, "tokens": 8550212, "tokensWritten": 104651, "involved": [
+   {"role":"implemented","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"},
+   {"role":"reviewed","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"},
+   {"role":"repaired","model":"Claude Opus (orchestrator)","machine":"ben-3070"}
+ ]},
+
 {"id": "F23c", "title": "Menu touch-ups after the first review", "round": "Round 1", "column": "todo", "kind": "qol", "grade": "S", "origin": "Ben's answers to the questions from F23's review.", "raisedBy": "Ben", "summary": "Templates keep their name, the host's leave is a clear dialog, and a few words fixed.", "status": "Approved; for James's machine.", "parent": "F23", "repairRounds": 0, "involved": [], "machine": "james-3080"}
 ]
 };
