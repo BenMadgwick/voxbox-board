@@ -1,5 +1,5 @@
 window.VOX_BOARD = {
-"updated": "2026-09-25 18:38 UTC",
+"updated": "2026-09-25 20:41 UTC",
 "machines": {
   "ben-3070": "Ben's Win (RTX 3070 8GB)",
   "james-3080": "James Win (RTX 3080 10GB)",
@@ -129,7 +129,7 @@ window.VOX_BOARD = {
    {"role":"reviewed","model":"Claude Opus (orchestrator)","machine":"james-3080"}
  ]},
 
-{"id": "F3b4", "title": "The generator keeps the see-through data", "round": "Round 1", "column": "doing", "statusAuto": "building:OpenRouter stealth/space-bunny-alpha@james-3080", "machine": "james-3080", "dispatched": "2026-09-25 07:27", "kind": "feature", "grade": "M", "origin": "The last part of F3b: the generator add-on currently throws the see-through numbers away, so a generated bottle arrives solid.", "raisedBy": "Ben", "summary": "The generator keeps each voxel's see-through value and the host decides from it, so a glass bottle arrives see-through without the picture being made again.", "status": "Being built by OpenRouter stealth/space-bunny-alpha on James Win (RTX 3080 10GB).", "parent": "F3b", "blockedBy": [], "repairRounds": 0,
+{"id": "F3b4", "title": "The generator keeps the see-through data", "round": "Round 1", "column": "doing", "statusAuto": "building:OpenRouter stealth/space-bunny-alpha@james-3080", "machine": "ben-3070", "dispatched": "2026-09-25 07:27", "kind": "feature", "grade": "M", "origin": "The last part of F3b: the generator add-on currently throws the see-through numbers away, so a generated bottle arrives solid.", "raisedBy": "Ben", "summary": "The generator keeps each voxel's see-through value and the host decides from it, so a glass bottle arrives see-through without the picture being made again.", "status": "Being built by OpenRouter stealth/space-bunny-alpha on James Win (RTX 3080 10GB).", "parent": "F3b", "blockedBy": [], "repairRounds": 0,
  "involved": [
    {"role":"researched","model":"Claude Opus (subagent)","machine":"ben-3070"},
    {"role":"implemented","model":"OpenRouter stealth/space-bunny-alpha","machine":"james-3080"}
@@ -295,7 +295,7 @@ window.VOX_BOARD = {
    {"role":"reviewed","model":"deepseek-flash","machine":"ben-3070"}
  ]},
 
-{"id": "F7k", "title": "Keep a glued build as a library object", "round": "Round 1", "column": "todo", "machine": "james-3080", "kind": "feature", "grade": "L", "origin": "Part of F7.", "raisedBy": "Ben", "summary": "Press K on something you glued together to save it to your library as one object.", "status": "After F7c.", "parent": "F7", "blocking": ["F26"], "repairRounds": 0,
+{"id": "F7k", "title": "Keep a glued build as a library object", "round": "Round 1", "column": "todo", "kind": "feature", "grade": "L", "origin": "Part of F7.", "raisedBy": "Ben", "summary": "Press K on something you glued together to save it to your library as one object.", "status": "After F7c.", "parent": "F7", "blocking": ["F26"], "repairRounds": 0,
  "involved": [
    {"role":"researched","model":"Claude Opus (subagent)","machine":"ben-3070"}
  ]},
@@ -552,7 +552,7 @@ window.VOX_BOARD = {
  ]},
 
 {"id": "F24", "title": "Voxels raining behind the main menu", "round": "Round 1", "column": "todo", "machine": "james-3080", "kind": "feature", "origin": "Ben, 24 September: random-material voxels rain behind the menu buttons, some bounce off them, the mouse parts them like a hand under a waterfall.", "raisedBy": "Ben", "summary": "Random-material voxels rain behind the menu buttons, bounce off them, and part around the mouse; a corner slider sets the intensity, and Options can turn it all off.", "status": "Approved: waits for the cube particle system (F29a).", "repairRounds": 0, "blockedBy": ["F29a"], "involved": []},
-{"id": "F25", "title": "Pick out parts of an object", "round": "Round 1", "column": "doing", "statusAuto": "repaired:OpenRouter stealth/space-bunny-alpha@ben-3070", "machine": "james-3080", "dispatched": "2026-09-25 06:20", "kind": "feature", "grade": "L", "origin": "Ben, 24 September: a generated dinner table comes as one object; he wants to pick out a wine glass, keep it on its own, or make it a separate part of the table that can be glass while the table stays wood.", "raisedBy": "Ben", "summary": "A Parts tool: hover to light up the parts of an object, click to pick one, or select voxels with a colour wand (drag up and down to grow or shrink it) or a ball or cube brush, Shift to add and Ctrl to remove. Then keep the selection as its own library object, make it a separate part in place (nothing visibly changes), or give a part its own material so it breaks like glass, wood or metal.", "status": "Built and repaired; handed to James's machine for the final review and merge.", "repairRounds": 0, "blocking": ["F26"], "involved": [
+{"id": "F25", "title": "Pick out parts of an object", "round": "Round 1", "column": "doing", "statusAuto": "repaired:OpenRouter stealth/space-bunny-alpha@ben-3070", "machine": "ben-3070", "dispatched": "2026-09-25 06:20", "kind": "feature", "grade": "L", "origin": "Ben, 24 September: a generated dinner table comes as one object; he wants to pick out a wine glass, keep it on its own, or make it a separate part of the table that can be glass while the table stays wood.", "raisedBy": "Ben", "summary": "A Parts tool: hover to light up the parts of an object, click to pick one, or select voxels with a colour wand (drag up and down to grow or shrink it) or a ball or cube brush, Shift to add and Ctrl to remove. Then keep the selection as its own library object, make it a separate part in place (nothing visibly changes), or give a part its own material so it breaks like glass, wood or metal.", "status": "Built and repaired; handed to James's machine for the final review and merge.", "repairRounds": 0, "blocking": ["F26"], "involved": [
    {"role":"implemented","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"},
    {"role":"reviewed","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"},
    {"role":"repaired","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"}
@@ -564,7 +564,7 @@ window.VOX_BOARD = {
    {"role":"implemented","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"},
    {"role":"reviewed","model":"Claude Opus (orchestrator)","machine":"ben-3070"}
  ]},
-{"id": "F10b", "title": "Growing and restoring in the game and on friends' screens", "round": "Round 1", "column": "doing", "statusAuto": "repaired:OpenRouter stealth/space-bunny-alpha@ben-3070", "machine": "james-3080", "dispatched": "2026-09-25 05:46", "kind": "feature", "grade": "L", "origin": "Part of F10.", "raisedBy": "Ben", "summary": "The host grows or restores an object in place without it jumping or dropping quick strokes, and everyone else's copy follows exactly, including objects made of several parts.", "status": "In its repair round.", "parent": "F10", "repairRounds": 0, "blockedBy": [], "blocking": ["F10c"], "involved": [
+{"id": "F10b", "title": "Growing and restoring in the game and on friends' screens", "round": "Round 1", "column": "doing", "statusAuto": "repaired:OpenRouter stealth/space-bunny-alpha@ben-3070", "machine": "ben-3070", "dispatched": "2026-09-25 05:46", "kind": "feature", "grade": "L", "origin": "Part of F10.", "raisedBy": "Ben", "summary": "The host grows or restores an object in place without it jumping or dropping quick strokes, and everyone else's copy follows exactly, including objects made of several parts.", "status": "In its repair round.", "parent": "F10", "repairRounds": 0, "blockedBy": [], "blocking": ["F10c"], "involved": [
    {"role":"implemented","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"},
    {"role":"reviewed","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"},
    {"role":"repaired","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"}
@@ -648,7 +648,7 @@ window.VOX_BOARD = {
 
 {"id": "D13", "title": "The board writes itself: new cards, merge fields, blocking links both ways", "round": "Round 1", "column": "todo", "kind": "feature", "grade": "M", "origin": "Cards for new tasks, merge details and blocked-by links were kept by hand and drifted: fourteen stale blocking links were found on 25 September.", "raisedBy": "Ben", "summary": "Every task gets its card automatically, merge details come from the ledger, and a blocking link always exists on both sides and is removed by itself when the blocking task finishes.", "status": "Approved; starts after D12.", "parent": "D1", "prio": 2, "involved": []},
 
-{"id": "D12", "title": "Needs Input: one list of everything waiting on a person", "round": "Round 1", "column": "doing", "statusAuto": "building:OpenRouter stealth/space-bunny-alpha@ben-3070", "machine": "james-3080", "dispatched": "2026-09-25 18:09", "kind": "feature", "grade": "M", "origin": "Only formal questions got a badge; rulings, playtests and checks to write with Ben sat in card statuses and went stale.", "raisedBy": "Ben", "summary": "Every wait becomes a question with a kind (decide, play, write, try) and who may answer; a Needs Input tab lists them oldest first with what each blocks, marked stale after 2 days.", "status": "Being built by OpenRouter stealth/space-bunny-alpha on Ben's Win (RTX 3070 8GB).", "parent": "D1", "prio": 2, "involved": [
+{"id": "D12", "title": "Needs Input: one list of everything waiting on a person", "round": "Round 1", "column": "doing", "statusAuto": "building:OpenRouter stealth/space-bunny-alpha@ben-3070", "machine": "ben-3070", "dispatched": "2026-09-25 18:09", "kind": "feature", "grade": "M", "origin": "Only formal questions got a badge; rulings, playtests and checks to write with Ben sat in card statuses and went stale.", "raisedBy": "Ben", "summary": "Every wait becomes a question with a kind (decide, play, write, try) and who may answer; a Needs Input tab lists them oldest first with what each blocks, marked stale after 2 days.", "status": "Being built by OpenRouter stealth/space-bunny-alpha on Ben's Win (RTX 3070 8GB).", "parent": "D1", "prio": 2, "involved": [
    {"role":"implemented","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"}
  ]},
 
