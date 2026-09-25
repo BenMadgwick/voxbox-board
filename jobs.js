@@ -1,5 +1,5 @@
 window.VOX_BOARD = {
-"updated": "2026-09-25 08:31 UTC",
+"updated": "2026-09-25 08:52 UTC",
 "machines": {
   "ben-3070": "Ben's Win (RTX 3070 8GB)",
   "james-3080": "James Win (RTX 3080 10GB)",
@@ -625,7 +625,7 @@ window.VOX_BOARD = {
    {"role":"repaired","model":"Claude Opus (orchestrator)","machine":"ben-3070"}
  ]},
 
-{"id": "F23c", "title": "Menu touch-ups after the first review", "round": "Round 1", "column": "doing", "statusAuto": "building:OpenRouter stealth/space-bunny-alpha@james-3080", "dispatched": "2026-09-25 07:23", "kind": "qol", "grade": "S", "origin": "Ben's answers to the questions from F23's review.", "raisedBy": "Ben", "summary": "Templates keep their name, the host's leave is a clear dialog, and a few words fixed.", "status": "Being built by OpenRouter stealth/space-bunny-alpha on James Win (RTX 3080 10GB).", "parent": "F23", "repairRounds": 0, "involved": [
+{"id": "F23c", "title": "Menu touch-ups after the first review", "round": "Round 1", "column": "done", "statusAuto": "merged:2026-09-25", "merged": "2026-09-25", "kind": "qol", "grade": "S", "origin": "Ben's answers to the questions from F23's review.", "raisedBy": "Ben", "summary": "Templates keep their name, the host's leave is a clear dialog, and a few words fixed.", "status": "Merged 2026-09-25.", "parent": "F23", "repairRounds": 0, "involved": [
    {"role":"implemented","model":"OpenRouter stealth/space-bunny-alpha","machine":"james-3080"}
  ], "machine": "james-3080"}
 ]
