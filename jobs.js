@@ -1,5 +1,5 @@
 window.VOX_BOARD = {
-"updated": "2026-09-25 20:41 UTC",
+"updated": "2026-09-25 20:50 UTC",
 "machines": {
   "ben-3070": "Ben's Win (RTX 3070 8GB)",
   "james-3080": "James Win (RTX 3080 10GB)",
@@ -295,7 +295,7 @@ window.VOX_BOARD = {
    {"role":"reviewed","model":"deepseek-flash","machine":"ben-3070"}
  ]},
 
-{"id": "F7k", "title": "Keep a glued build as a library object", "round": "Round 1", "column": "todo", "kind": "feature", "grade": "L", "origin": "Part of F7.", "raisedBy": "Ben", "summary": "Press K on something you glued together to save it to your library as one object.", "status": "After F7c.", "parent": "F7", "blocking": ["F26"], "repairRounds": 0,
+{"id": "F7k", "title": "Keep a glued build as a library object", "round": "Round 1", "column": "todo", "machine": "james-3080", "kind": "feature", "grade": "L", "origin": "Part of F7.", "raisedBy": "Ben", "summary": "Press K on something you glued together to save it to your library as one object.", "status": "After F7c.", "parent": "F7", "blocking": ["F26"], "repairRounds": 0,
  "involved": [
    {"role":"researched","model":"Claude Opus (subagent)","machine":"ben-3070"}
  ]},
@@ -508,7 +508,7 @@ window.VOX_BOARD = {
    {"role":"reviewed","model":"Claude Opus (orchestrator)","machine":"ben-3070"}
  ]},
 
-{"id": "F22s", "title": "A true server build", "round": "Round 1", "column": "doing", "question": "The Linux server package ran the 32 GB PC out of memory twice (source-engine cross-compile). Retry Linux, or merge the Windows server now and split Linux off as F22s2?", "statusAuto": "reviewed:1", "machine": "ben-3070", "dispatched": "2026-09-23 23:32", "kind": "feature", "grade": "L", "origin": "Part of F22.", "raisedBy": "Ben", "summary": "Builds the engine from source so the Dedicated app is a real server program with no graphics in it, for Windows and Linux.", "status": "Windows server built (Development and Shipping). Linux ran the PC out of memory twice: waiting for Ben to choose.", "parent": "F22", "repairRounds": 0, "blocking": ["F22o", "F22Ld"],
+{"id": "F22s", "title": "A true server build", "round": "Round 1", "column": "doing", "statusAuto": "reviewed:1", "machine": "ben-3070", "dispatched": "2026-09-23 23:32", "kind": "feature", "grade": "L", "origin": "Part of F22.", "raisedBy": "Ben", "summary": "Builds the engine from source so the Dedicated app is a real server program with no graphics in it, for Windows and Linux.", "status": "Windows server built (Development and Shipping). Linux ran the PC out of memory twice: waiting for Ben to choose.", "parent": "F22", "repairRounds": 0, "blocking": ["F22o", "F22Ld"],
  "involved": [
    {"role":"researched","model":"Claude Opus (subagent)","machine":"ben-3070"},
    {"role":"implemented","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"},
