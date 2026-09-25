@@ -13,7 +13,7 @@
 :root{
   --ground:#edf0f3; --surface:#ffffff; --sunk:#e3e8ed; --ink:#17202b; --muted:#566476; --line:#d3dae2;
   --accent:#0e7c86; --accent-ink:#ffffff;
-  --done:#2c8a57; --doing:#b87211; --todo:#3461c4; --backlog:#6f5fa3; --closed:#7d8794;
+  --done:#2c8a57; --doing:#b87211; --todo:#3461c4; --backlog:#6f5fa3; --closed:#7d8794; --concept:#a3468a;
   --tile-top:#ffffff; --tile-side:#c6d0da;
   --shadow:0 1px 2px rgba(23,32,43,.06),0 6px 18px rgba(23,32,43,.06);
   --display:"Bricolage Grotesque","Segoe UI",system-ui,sans-serif;
@@ -24,7 +24,7 @@
   :root:not([data-theme="light"]){
     --ground:#0f141a; --surface:#172029; --sunk:#1e2833; --ink:#e5eaf0; --muted:#98a6b5; --line:#2a3642;
     --accent:#4cc0c8; --accent-ink:#06282b;
-    --done:#5cc58a; --doing:#e6a547; --todo:#7ea2f0; --backlog:#a898dc; --closed:#95a0ad;
+    --done:#5cc58a; --doing:#e6a547; --todo:#7ea2f0; --backlog:#a898dc; --closed:#95a0ad; --concept:#dd8ecb;
     --tile-top:#243140; --tile-side:#0a0f14;
     --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 22px rgba(0,0,0,.25);
   }
@@ -32,7 +32,7 @@
 :root[data-theme="dark"]{
   --ground:#0f141a; --surface:#172029; --sunk:#1e2833; --ink:#e5eaf0; --muted:#98a6b5; --line:#2a3642;
   --accent:#4cc0c8; --accent-ink:#06282b;
-  --done:#5cc58a; --doing:#e6a547; --todo:#7ea2f0; --backlog:#a898dc; --closed:#95a0ad;
+  --done:#5cc58a; --doing:#e6a547; --todo:#7ea2f0; --backlog:#a898dc; --closed:#95a0ad; --concept:#dd8ecb;
   --tile-top:#243140; --tile-side:#0a0f14;
   --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 22px rgba(0,0,0,.25);
 }
@@ -177,14 +177,15 @@ footer{margin-top:36px;color:var(--muted);font-size:13px;max-width:70ch}
 <script>
 (function(){
   var COLS = [
-    {k:"all",    name:"All",         c:"var(--accent)",  blurb:"Every job in every column: in progress first, then to do, done (newest first), backlog and closed."},
+    {k:"all",    name:"All",         c:"var(--accent)",  blurb:"Every job in every column: in progress first, then to do, done (newest first), backlog, closed and concepts."},
     {k:"done",   name:"Done",        c:"var(--done)",    blurb:"Merged into the game. The newest first."},
     {k:"doing",  name:"In progress", c:"var(--doing)",   blurb:"Being built or researched right now."},
     {k:"todo",   name:"To do",       c:"var(--todo)",    blurb:"Approved for this round, roughly in the order they'll be picked up."},
     {k:"backlog",name:"Backlog",     c:"var(--backlog)", blurb:"Approved for later rounds, or waiting for a discussion."},
-    {k:"closed", name:"Closed",      c:"var(--closed)",  blurb:"Folded into another job, or dropped."}
+    {k:"closed", name:"Closed",      c:"var(--closed)",  blurb:"Folded into another job, or dropped."},
+    {k:"concepts",name:"Concepts",   c:"var(--concept)", blurb:"Ben's own half-formed ideas, kept exactly as he said them until he's ready to flesh one out. Never offered as work."}
   ];
-  var KIND = {bug:"Bug", qol:"Quality of life", feature:"Feature"};
+  var KIND = {bug:"Bug", qol:"Quality of life", feature:"Feature", concept:"Concept"};
   var GRADE = {S:"Small", M:"Medium", L:"Large", R:"Research first"};
   // Each model family keeps one colour, so a reader can follow a model across cards.
   function modelColour(m){
@@ -233,8 +234,9 @@ footer{margin-top:36px;color:var(--muted);font-size:13px;max-width:70ch}
     return n >= 1e6 ? (n/1e6).toFixed(1).replace(/\.0$/,"") + " million" : Math.round(n/1e3) + " thousand";
   }
   function colOf(k){ for (var i=1;i<COLS.length;i++) if (COLS[i].k===k) return COLS[i]; return COLS[1]; }
-  // "All" lists the columns in the order a reader cares about: what is moving, what is next, then the rest.
-  var ALL_ORDER = ["doing","todo","done","backlog","closed"];
+  // "All" lists the columns in the order a reader cares about: what is moving, what is next, then the
+  // rest. Concepts are never work in progress, so they sit apart at the end, not mixed into that run.
+  var ALL_ORDER = ["doing","todo","done","backlog","closed","concepts"];
   function inRound(j){ return state.round==="all" || j.round===state.round; }
   // A job is shown when it has any involvement at all on the chosen machine, and any
   // involvement at all by the chosen model -- machine and model are separate questions,
@@ -407,6 +409,8 @@ footer{margin-top:36px;color:var(--muted);font-size:13px;max-width:70ch}
     h += '<h2 id="dlgTitle">'+esc(j.title)+'</h2></div>';
     if (j.origin) h += '<div class="sec origin"><h4>What prompted it</h4><p>'+esc(j.origin)+'</p>'+(j.raisedBy?'<span class="by">Raised by '+esc(j.raisedBy)+'</span>':'')+'</div>';
     if (j.closedAs) h += '<div class="sec"><h4>Closed</h4><p>'+esc(j.closedAs)+'</p></div>';
+    // A concept Ben has since fleshed out (tools/concept.ps1 -FleshedOut): the brief it became.
+    if (j.fleshedInto && byId[j.fleshedInto]) h += '<div class="sec"><h4>Fleshed out into</h4><div class="kids">'+jobLink(byId[j.fleshedInto])+'</div></div>';
     if (j.summary) h += '<div class="sec"><h4>'+(j.column==="done"?"What changed":"What it will change")+'</h4><p>'+esc(j.summary)+'</p></div>';
     if (j.status) h += '<div class="sec"><h4>Where it stands</h4><p>'+esc(j.status)+'</p></div>';
     if (j.question) h += '<div class="sec origin"><h4>Needs Ben</h4><p>'+esc(j.question)+'</p><span class="by">The machine building this job cannot go on until Ben answers.</span></div>';
