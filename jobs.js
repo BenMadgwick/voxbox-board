@@ -1,5 +1,5 @@
 window.VOX_BOARD = {
-"updated": "2026-09-25 21:17 UTC",
+"updated": "2026-09-25 21:24 UTC",
 "machines": {
   "ben-3070": "Ben's Win (RTX 3070 8GB)",
   "james-3080": "James Win (RTX 3080 10GB)",
@@ -466,7 +466,7 @@ window.VOX_BOARD = {
    {"role":"reviewed","model":"Claude Opus (orchestrator)","machine":"ben-3070"}
  ]},
 
-{"id": "F22", "title": "VoxBox Dedicated: making objects moves to its own free app", "round": "Round 1", "column": "doing", "statusAuto": "tasks:7/11", "kind": "feature", "grade": "L", "origin": "Ben wanted his 3070, which cannot draw the game and make objects at once, to sit in another room making objects for him and his friends, and a way to host lasting worlds later.", "raisedBy": "Ben", "summary": "The game becomes a small download with no generator in it. A free second app, VoxBox Dedicated, makes objects (Model Generation), will host worlds (Dedicated Server), or both. Your card serves you wherever you play, the worlds you list, and everyone in your current world while you tick Lend GPU.", "status": "7 of 11 tasks done.", "repairRounds": 0,
+{"id": "F22", "title": "VoxBox Dedicated: making objects moves to its own free app", "round": "Round 1", "column": "doing", "machine": "sam-linux", "statusAuto": "tasks:8/11", "kind": "feature", "grade": "L", "origin": "Ben wanted his 3070, which cannot draw the game and make objects at once, to sit in another room making objects for him and his friends, and a way to host lasting worlds later.", "raisedBy": "Ben", "summary": "The game becomes a small download with no generator in it. A free second app, VoxBox Dedicated, makes objects (Model Generation), will host worlds (Dedicated Server), or both. Your card serves you wherever you play, the worlds you list, and everyone in your current world while you tick Lend GPU.", "status": "8 of 11 tasks done.", "repairRounds": 0,
  "involved": [
    {"role":"researched","model":"Claude Opus (subagent)","machine":"ben-3070"}
  ]},
@@ -508,7 +508,7 @@ window.VOX_BOARD = {
    {"role":"reviewed","model":"Claude Opus (orchestrator)","machine":"ben-3070"}
  ]},
 
-{"id": "F22s", "title": "A true server build", "round": "Round 1", "column": "doing", "statusAuto": "reviewed:1", "machine": "ben-3070", "dispatched": "2026-09-23 23:32", "kind": "feature", "grade": "L", "origin": "Part of F22.", "raisedBy": "Ben", "summary": "Builds the engine from source so the Dedicated app is a real server program with no graphics in it, for Windows and Linux.", "status": "Windows server built (Development and Shipping). Linux ran the PC out of memory twice; the retry-or-split decision is on the board's Needs Input list.", "parent": "F22", "repairRounds": 0, "blocking": ["F22o", "F22Ld"],
+{"id": "F22s", "title": "A true server build", "round": "Round 1", "column": "done", "merged": "2026-09-25", "statusAuto": "merged:2026-09-25", "machine": "ben-3070", "dispatched": "2026-09-23 23:32", "kind": "feature", "grade": "L", "origin": "Part of F22.", "raisedBy": "Ben", "summary": "Builds the engine from source so the Dedicated app is a real server program with no graphics in it, for Windows and Linux.", "status": "Windows server built (Development and Shipping). Linux ran the PC out of memory twice; the retry-or-split decision is on the board's Needs Input list.", "parent": "F22", "repairRounds": 0, "blocking": ["F22o", "F22Ld"],
  "involved": [
    {"role":"researched","model":"Claude Opus (subagent)","machine":"ben-3070"},
    {"role":"implemented","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"},
