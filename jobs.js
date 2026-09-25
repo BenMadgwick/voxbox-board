@@ -1,5 +1,5 @@
 window.VOX_BOARD = {
-"updated": "2026-09-25 13:47 UTC",
+"updated": "2026-09-25 14:00 UTC",
 "machines": {
   "ben-3070": "Ben's Win (RTX 3070 8GB)",
   "james-3080": "James Win (RTX 3080 10GB)",
@@ -636,6 +636,11 @@ window.VOX_BOARD = {
    {"role":"implemented","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"},
    {"role":"reviewed","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"},
    {"role":"repaired","model":"Claude Opus (orchestrator)","machine":"ben-3070"}
+ ]},
+
+{"id": "D10", "title": "Concepts -- Ben's half-formed ideas kept on the board", "round": "Round 1", "column": "done", "merged": "2026-09-25", "statusAuto": "merged:2026-09-25", "machine": "ben-3070", "dispatched": "2026-09-25 13:05", "kind": "feature", "grade": "M", "origin": "Ben often has an idea with no time to design it, and it got lost or sat as a task nobody could start.", "raisedBy": "Ben", "summary": "Say \"add a concept regarding X\" and it is kept in Ben's own words as C1, C2... in its own board column, never offered as work until he is ready to flesh it out.", "status": "Merged 2026-09-25.", "parent": "D1", "repairRounds": 0, "prio": 2, "involved": [
+   {"role":"implemented","model":"Claude Sonnet (subagent)","machine":"ben-3070"},
+   {"role":"reviewed","model":"Claude Opus (orchestrator)","machine":"ben-3070"}
  ]},
 
 {"id": "F23c", "title": "Menu touch-ups after the first review", "round": "Round 1", "column": "done", "statusAuto": "merged:2026-09-25", "merged": "2026-09-25", "kind": "qol", "grade": "S", "origin": "Ben's answers to the questions from F23's review.", "raisedBy": "Ben", "summary": "Templates keep their name, the host's leave is a clear dialog, and a few words fixed.", "status": "Merged 2026-09-25.", "parent": "F23", "repairRounds": 0, "involved": [
