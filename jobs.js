@@ -1,5 +1,5 @@
 window.VOX_BOARD = {
-"updated": "2026-09-25 13:22 UTC",
+"updated": "2026-09-25 13:24 UTC",
 "machines": {
   "ben-3070": "Ben's Win (RTX 3070 8GB)",
   "james-3080": "James Win (RTX 3080 10GB)",
@@ -586,7 +586,7 @@ window.VOX_BOARD = {
    {"role":"implemented","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"},
    {"role":"reviewed","model":"Claude Opus (orchestrator)","machine":"ben-3070"}
  ]},
-{"id": "F28c", "title": "Aim through glass and at depth", "round": "Round 1", "column": "todo", "kind": "feature", "raisedBy": "Ben", "repairRounds": 0, "grade": "M", "origin": "Part of F28.", "summary": "Hold Alt and paint, erase or carve aim through see-through voxels to the first solid one; Alt and the wheel move the brush a voxel deeper or nearer, shown as an x-ray ball with the depth beside the crosshair.", "status": "Approved: waits for painting with opacity (F28a).", "parent": "F28", "blockedBy": ["F28a"], "involved": []},
+{"id": "F28c", "title": "Aim through glass and at depth", "round": "Round 1", "column": "doing", "statusAuto": "claimed:james-3080", "machine": "james-3080", "dispatched": "2026-09-25 13:23", "kind": "feature", "raisedBy": "Ben", "repairRounds": 0, "grade": "M", "origin": "Part of F28.", "summary": "Hold Alt and paint, erase or carve aim through see-through voxels to the first solid one; Alt and the wheel move the brush a voxel deeper or nearer, shown as an x-ray ball with the depth beside the crosshair.", "status": "Claimed by James Win (RTX 3080 10GB); starting.", "parent": "F28", "blockedBy": ["F28a"], "involved": []},
 
 {"id": "D5", "title": "Only one two-program test at a time", "round": "Round 1", "column": "done", "statusAuto": "merged:2026-09-24", "machine": "ben-3070", "dispatched": "2026-09-24 15:54", "kind": "feature", "grade": "S", "origin": "Ben's rule: tests that run two game or server programs at once must run alone.", "raisedBy": "Ben", "summary": "Tests that start two copies of the game (net_test, steam_test, null_lend_test) now take turns on a PC: a second one waits, says which run it is waiting for, and if the first is killed it tidies up the programs that run left behind before starting.", "status": "Merged. Checked for real with two net tests, including killing the first mid-run.", "parent": "D1", "repairRounds": 1, "merged": "2026-09-24 22:28", "forPlaytesters": "Nothing to play: this keeps the machines that build the game from tripping over each other.", "workMinutes": 32, "tokens": 5926091, "tokensWritten": 153995, "involved": [
    {"role":"implemented","model":"deepseek-flash","machine":"ben-3070"},
