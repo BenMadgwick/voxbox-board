@@ -1,5 +1,5 @@
 window.VOX_BOARD = {
-"updated": "2026-09-25 07:05 UTC",
+"updated": "2026-09-25 07:23 UTC",
 "machines": {
   "ben-3070": "Ben's Win (RTX 3070 8GB)",
   "james-3080": "James Win (RTX 3080 10GB)",
@@ -622,6 +622,6 @@ window.VOX_BOARD = {
    {"role":"repaired","model":"Claude Opus (orchestrator)","machine":"ben-3070"}
  ]},
 
-{"id": "F23c", "title": "Menu touch-ups after the first review", "round": "Round 1", "column": "todo", "kind": "qol", "grade": "S", "origin": "Ben's answers to the questions from F23's review.", "raisedBy": "Ben", "summary": "Templates keep their name, the host's leave is a clear dialog, and a few words fixed.", "status": "Approved; for James's machine.", "parent": "F23", "repairRounds": 0, "involved": [], "machine": "james-3080"}
+{"id": "F23c", "title": "Menu touch-ups after the first review", "round": "Round 1", "column": "doing", "statusAuto": "claimed:james-3080", "dispatched": "2026-09-25 07:23", "kind": "qol", "grade": "S", "origin": "Ben's answers to the questions from F23's review.", "raisedBy": "Ben", "summary": "Templates keep their name, the host's leave is a clear dialog, and a few words fixed.", "status": "Claimed by James Win (RTX 3080 10GB); starting.", "parent": "F23", "repairRounds": 0, "involved": [], "machine": "james-3080"}
 ]
 };
