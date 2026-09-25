@@ -1,5 +1,5 @@
 window.VOX_BOARD = {
-"updated": "2026-09-25 15:49 UTC",
+"updated": "2026-09-25 16:33 UTC",
 "machines": {
   "ben-3070": "Ben's Win (RTX 3070 8GB)",
   "james-3080": "James Win (RTX 3080 10GB)",
