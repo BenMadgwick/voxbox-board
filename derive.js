@@ -5,7 +5,7 @@
 // top-level job is a card, and it is placed by the real work beneath it: a **task** is a job
 // with no children, however deep (in F1 > F1a, F1b > F1a1, F1a2 the tasks are F1a1, F1a2 and
 // F1b -- three of them; F1a is a grouping and is not one). A grouping's column, its state bar
-// and its Needs Ben badge all come from the tasks under it, so a parent is never a hand-kept
+// and its Needs Input badge all come from the tasks under it, so a parent is never a hand-kept
 // column that has to be remembered after every dispatch and merge.
 //
 // These functions are the whole of it, and they are here rather than in the page so that
@@ -127,26 +127,101 @@
     return got;
   }
 
-  // Needs Ben bubbles up: a top-level card shows the badge when the job itself, or anything
+  // Needs Input bubbles up: a top-level card shows the badge when the job itself, or anything
   // beneath it at any depth, is waiting on an answer (docs/round/questions/, copied into
-  // "question" by board_sync). The shallowest waiting job is the one to name, because it is
-  // the one the orchestrator has to answer first.
-  function questionUnder(jobs, id) {
-    var byId = byIdOf(jobs), seen = {};
-    function walk(here) {
-      if (seen[here]) return null;
+  // "question" by board_sync). Every waiting job is returned, in board order and depth-first
+  // from the card, because since D12 a card can carry more than one (F22 waits on F22f's
+  // ruling and F22s's question at the same time) and naming only one of them would hide the
+  // other. The first is the one the orchestrator has to answer first, so it is the one a card
+  // quotes in full.
+  function questionsUnder(jobs, id) {
+    var byId = byIdOf(jobs), seen = {}, out = [];
+    (function walk(here) {
+      if (seen[here]) return;
       seen[here] = true;
       var j = byId[here];
-      if (j && j.question) return j;
-      for (var i = 0; i < jobs.length; i++) {
-        if (jobs[i].parent === here) {
-          var got = walk(jobs[i].id);
-          if (got) return got;
-        }
-      }
-      return null;
+      if (j && j.question) out.push(j);
+      jobs.forEach(function (k) { if (k.parent === here) walk(k.id); });
+    })(id);
+    return out;
+  }
+  function questionUnder(jobs, id) {
+    return questionsUnder(jobs, id)[0] || null;
+  }
+
+  // --- The Needs Input tab (docs/design/D12-needs-input.md) -------------------------------
+  //
+  // Everything waiting on a person is one list: a ruling, a playtest, a check to write
+  // together, something that needs a second machine. Each question file carries a kind and
+  // the people who may answer it, copied into the record by board_sync; a file written before
+  // that has neither, and is a decide for Ben -- which is what every question of the day was.
+  var KINDS = ["decide", "play", "write", "try"];
+  var KIND_WORDS = { decide: "for a decision", play: "to play it", write: "to write it together", try: "to try it" };
+  // The group headings and the line under each, for the Needs Input tab. A ruling first,
+  // because a ruling is what stops the most work.
+  var KIND_TITLES = { decide: "Rulings and choices", play: "To play", write: "To write together", try: "To try" };
+  var KIND_BLURB = {
+    decide: "A decision only a person can make: a ruling, a value, a choice of plan.",
+    play: "Something a person has to play, and say whether it is right.",
+    write: "Something to be written with a person; a machine cannot do it on its own.",
+    try: "Something that needs a person's own hands: a second machine, a second Steam account."
+  };
+  function kindOf(j) { return j && KINDS.indexOf(j.questionKind) >= 0 ? j.questionKind : "decide"; }
+  function forOf(j) { return j && j.questionFor ? j.questionFor : "Ben"; }
+
+  // The two rules that make an item "waiting", and for how long. Two days is the mark D12
+  // sets: an item open that long is raised at Ben's next discussion, and nowhere else -- no
+  // nagging. tools/machine.ps1 has the same number (Get-StaleAfter) for orch_status.ps1, so
+  // the board and the list cannot disagree about which item is stale.
+  var STALE_HOURS = 48;
+  function waitedMs(askedUtc, now) {
+    if (!askedUtc) return null;
+    // "2026-09-25 05:46" is UTC, as every time on the board is; a date with no time is the
+    // start of that day.
+    var m = /^(\d{4})-(\d\d)-(\d\d)(?:[ T](\d\d):(\d\d))?/.exec(String(askedUtc));
+    if (!m) return null;
+    var t = Date.UTC(+m[1], +m[2] - 1, +m[3], m[4] ? +m[4] : 0, m[5] ? +m[5] : 0);
+    if (isNaN(t)) return null;
+    return (now === undefined ? Date.now() : now) - t;
+  }
+  function isStale(askedUtc, now) {
+    var w = waitedMs(askedUtc, now);
+    return w !== null && w >= STALE_HOURS * 3600 * 1000;
+  }
+  // How long it has waited, in words a person reads at a glance: "3 days", "5 hours".
+  function waitedFor(askedUtc, now) {
+    var w = waitedMs(askedUtc, now);
+    if (w === null) return "an unknown time";
+    if (w < 0) return "not yet";
+    var h = w / 3600000;
+    if (h < 1) return "under an hour";
+    // Hours up to three days: a wait of 42 hours reads as 42 hours, not "1 day" beside a
+    // mark that calls two days stale.
+    var d = h / 24;
+    if (h < 72) { var hh = Math.floor(h); return hh + (hh === 1 ? " hour" : " hours"); }
+    var dd = Math.floor(d);
+    return dd + (dd === 1 ? " day" : " days");
+  }
+  // What a waiting job holds up: its own **Blocking:** line, and every job whose
+  // **Blocked by:** names it -- the two ends are kept in step by hand (docs/round/BOARD.md),
+  // so a reader can see either way round. Distinct, in board order.
+  function blocksOf(jobs, id) {
+    var byId = byIdOf(jobs), out = [];
+    (byId[id] && byId[id].blocking || []).forEach(function (b) { if (out.indexOf(b) < 0) out.push(b); });
+    jobs.forEach(function (j) {
+      if (j.blockedBy && j.blockedBy.indexOf(id) >= 0 && out.indexOf(j.id) < 0) out.push(j.id);
+    });
+    return out;
+  }
+  // The card a job is shown on: the top-level job above it, at any depth, which is the only
+  // thing the board draws (D11). A job with no parent is its own card.
+  function cardOf(jobs, id) {
+    var byId = byIdOf(jobs), here = byId[id], seen = {};
+    while (here && here.parent && byId[here.parent] && !seen[here.id]) {
+      seen[here.id] = true;
+      here = byId[here.parent];
     }
-    return walk(id);
+    return here ? here.id : id;
   }
   // Every machine named by a job's open descendants, the open ones only: a finished task
   // keeps its own machine, but the Machine filter on a parent should follow the work that is
@@ -171,6 +246,19 @@
     columnForTasks: columnForTasks,
     columnFor: columnFor,
     questionUnder: questionUnder,
+    questionsUnder: questionsUnder,
+    KINDS: KINDS,
+    KIND_WORDS: KIND_WORDS,
+    KIND_TITLES: KIND_TITLES,
+    KIND_BLURB: KIND_BLURB,
+    kindOf: kindOf,
+    forOf: forOf,
+    STALE_HOURS: STALE_HOURS,
+    waitedMs: waitedMs,
+    isStale: isStale,
+    waitedFor: waitedFor,
+    blocksOf: blocksOf,
+    cardOf: cardOf,
     machinesUnder: machinesUnder
   };
 });

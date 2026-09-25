@@ -89,10 +89,28 @@ select{max-width:100%;font:500 14px var(--body);color:var(--ink);background:var(
 .parentline{font-size:12.5px;color:var(--muted)}
 .wait{color:var(--doing);font-weight:600}
 .pr{font:600 11px/1 var(--body);letter-spacing:.04em;color:var(--c);border:1px solid currentColor;border-radius:4px;padding:4px 6px;white-space:nowrap}
-/* A job whose machine is waiting on Ben's answer (docs/round/questions/): the badge says so
-   on the card, and the question itself is shown in place of the usual summary line. */
-.needben{font:700 11px/1 var(--body);text-transform:uppercase;letter-spacing:.08em;color:var(--doing);border:1px solid currentColor;border-radius:4px;padding:4px 6px;white-space:nowrap}
+/* A job waiting on a person (docs/round/questions/): the badge says so on the card, names
+   who may answer in its tooltip, and the question itself is shown in place of the usual
+   summary line. "Stale" is the two-day mark (D12): raised at Ben's next discussion, nowhere
+   else. */
+.needsinput{font:700 11px/1 var(--body);text-transform:uppercase;letter-spacing:.08em;color:var(--doing);border:1px solid currentColor;border-radius:4px;padding:4px 6px;white-space:nowrap}
+.stale{font:700 11px/1 var(--body);text-transform:uppercase;letter-spacing:.08em;color:#b3261e;border:1px solid currentColor;border-radius:4px;padding:4px 6px;white-space:nowrap}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .stale{color:#f2837c}}
+:root[data-theme="dark"] .stale{color:#f2837c}
 .ask{border-left:3px solid var(--doing);padding-left:10px;color:var(--ink);font-size:13.5px}
+/* The Needs Input tab: every open item, grouped by kind, oldest first within a kind -- the
+   one list of everything waiting on a person, so the ones that unblock most are obvious. */
+.nigroup{margin:0 0 22px}
+.nigroup>h3{font:700 16px/1.2 var(--display);margin:0 0 4px;display:flex;gap:9px;align-items:center;flex-wrap:wrap}
+.nigroup>h3 .n{font:500 12px/1 var(--mono);color:var(--muted)}
+.nigroup>p{margin:0 0 10px}
+.ni{display:grid;gap:7px;margin-top:9px}
+.nirow{all:unset;box-sizing:border-box;display:grid;gap:7px;background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--doing);border-radius:12px;padding:13px 16px;cursor:pointer;box-shadow:var(--shadow);transition:transform .15s ease,border-color .15s ease}
+.nirow:hover{transform:translateY(-2px);border-color:var(--doing);border-left-color:var(--doing)}
+.nirow .top{display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center}
+.nirow .forwho{font:500 12.5px/1 var(--body);color:var(--muted);margin-left:auto}
+.nirow .waited{font:500 12.5px/1 var(--mono);color:var(--muted)}
+.nirow .blocks{font-size:12.5px;color:var(--muted)}
 .empty{padding:28px;border:1px dashed var(--line);border-radius:12px;color:var(--muted);text-align:center}
 .pill{display:inline-flex;align-items:center;gap:6px;font:600 12px/1 var(--body);padding:5px 9px;border-radius:999px;color:var(--c);background:color-mix(in srgb,var(--c) 14%,transparent)}
 .pill::before{content:"";width:7px;height:7px;border-radius:2px;background:var(--c)}
@@ -201,6 +219,12 @@ footer{margin-top:36px;color:var(--muted);font-size:13px;max-width:70ch}
   ];
   var KIND = {bug:"Bug", qol:"Quality of life", feature:"Feature", concept:"Concept"};
   var GRADE = {S:"Small", M:"Medium", L:"Large", R:"Research first"};
+  // The Needs Input tab is not a column: it is every open question, whatever the job's own
+  // column is (docs/design/D12-needs-input.md), grouped by kind and oldest first within a
+  // kind. It sits by In progress, because an item there is usually a job that is doing.
+  var INPUT_TAB = {k:"needs", name:"Needs Input", c:"var(--doing)",
+    blurb:"Everything waiting on a person: a decision, a playtest, something to write together, something that needs a second machine. Oldest first in each group; anything two days old is marked stale and is raised at Ben's next discussion."};
+  function tabList(){ var l = COLS.slice(0, 4); l.push(INPUT_TAB); return l.concat(COLS.slice(4)); }
   // Each model family keeps one colour, so a reader can follow a model across cards.
   function modelColour(m){
     m = (m||"").toLowerCase();
@@ -231,7 +255,8 @@ footer{margin-top:36px;color:var(--muted);font-size:13px;max-width:70ch}
   if (query("machine")) state.machine = query("machine");
   if (query("model")) state.model = query("model");
   if (query("tab")) state.tab = query("tab");
-  if (!COLS.some(function(c){ return c.k === state.tab; })) state.tab = "done";
+  // "needs" is not a column but a tab of its own, so it is checked against both lists.
+  if (!tabList().some(function(c){ return c.k === state.tab; })) state.tab = "done";
   function save(){ try { localStorage.setItem("voxboard", JSON.stringify({tab:state.tab, round:state.round})); } catch(e){} }
 
   function esc(s){ return String(s==null?"":s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];}); }
@@ -291,22 +316,38 @@ footer{margin-top:36px;color:var(--muted);font-size:13px;max-width:70ch}
     if (!j.prio || j.prio <= 1) return '';
     return '<span class="pr" title="Priority '+esc(j.prio)+' of 1 upwards: the higher, the sooner">Prio '+esc(j.prio)+'</span>';
   }
-  // A job whose machine is waiting on an answer (board_sync copies the question from
-  // docs/round/questions/): the card says who has to answer, and asks the question itself.
-  // The badge bubbles: a top-level card carries it when anything beneath it, at any depth, is
-  // waiting, and names which one (docs/design/D11-board-parents.md) -- F22 is not the job
-  // being asked about, F22s is, and a reader who only ever sees cards has to be told so.
-  function needBenMark(j){
-    var w = D.questionUnder(jobs, j.id);
-    if (!w) return '';
-    var where = w.id===j.id ? '' : ' ('+esc(w.id)+' is waiting)';
-    return '<span class="needben" title="Ben has been asked'+where+'; nothing under this job can go on until he answers">Needs Ben</span>';
+  // A job waiting on a person (board_sync copies the question from docs/round/questions/): the
+  // card names who has to answer, and asks the question itself. The badge bubbles: a top-level
+  // card carries it when anything beneath it, at any depth, is waiting, and names them
+  // (docs/design/D11-board-parents.md) -- F22 is not the job being asked about, F22s is, and a
+  // reader who only ever sees cards has to be told so. More than one can be waiting under a
+  // card (F22 waits on F22f's ruling and F22s's question at once), so the badge counts them and
+  // the tooltip names each. The badge is not named after one person: the question's own for:
+  // line says who may answer, and James or Sam may be allowed to answer some of these (D12).
+  function needInputMark(j){
+    var ws = D.questionsUnder(jobs, j.id);
+    if (!ws.length) return '';
+    var who = [], staleN = 0;
+    ws.forEach(function(w){
+      if (who.indexOf(D.forOf(w)) < 0) who.push(D.forOf(w));
+      if (D.isStale(w.questionAsked)) staleN++;
+    });
+    var title = ws.map(function(w){
+      return (w.id===j.id ? 'This job' : w.id) + ': waiting on ' + D.forOf(w) + ' ' +
+        (D.KIND_WORDS[D.kindOf(w)] || 'a decision') + ', ' + D.waitedFor(w.questionAsked) + ' now';
+    }).join('. ');
+    var n = ws.length > 1 ? ' ('+ws.length+')' : '';
+    var stale = staleN ? '<span class="stale" title="'+(staleN>1 ? staleN+' of these are past the two-day mark' : 'Past the two-day mark')+': raise it at the next discussion">stale</span>' : '';
+    return '<span class="needsinput" title="'+esc(title)+'">Needs Input'+n+'</span>'+stale;
   }
-  function needBenLine(j){
-    var w = D.questionUnder(jobs, j.id);
-    if (!w) return '';
-    var pre = w.id===j.id ? 'Waiting for Ben\'s answer: ' : esc(w.id)+' is waiting for Ben\'s answer: ';
-    return '<span class="ask">'+pre+esc(w.question)+'</span>';
+  function needInputLine(j){
+    var ws = D.questionsUnder(jobs, j.id);
+    if (!ws.length) return '';
+    var w = ws[0];
+    var pre = w.id===j.id ? 'Waiting on '+esc(D.forOf(w))+': ' : esc(w.id)+' is waiting on '+esc(D.forOf(w))+': ';
+    // The rest are named rather than quoted: the Needs Input tab has all of them in full.
+    var more = ws.length > 1 ? '<span class="ask">Also waiting: '+esc(ws.slice(1).map(function(x){ return x.id; }).join(', '))+'</span>' : '';
+    return '<span class="ask">'+pre+esc(w.question)+'</span>'+more;
   }
   // The state bar for a job with tasks under it, and nothing at all for one without: a
   // single task's state is already the card's column, and a bar one segment wide says less.
@@ -353,7 +394,27 @@ footer{margin-top:36px;color:var(--muted);font-size:13px;max-width:70ch}
     return bits.join(", ");
   }
 
+  // The open questions, one row each: the jobs that carry a "question" field, which is every
+  // item waiting on a person whatever its column (a ruling on a merged spike sits in Done, and
+  // is still waiting). The filters do not apply to this list: a person reading "what is waiting"
+  // is asking about all of it, and a card half-matched by the Machine filter would be a worse
+  // answer than the whole row. Oldest first within a kind, an undated file last, because the
+  // oldest is the one that unblocks the most.
+  function waiting(){
+    var l = jobs.filter(function(j){ return j.question; });
+    l.sort(function(a,b){
+      var wa = D.waitedMs(a.questionAsked), wb = D.waitedMs(b.questionAsked);
+      if (wa===null && wb!==null) return 1;
+      if (wb===null && wa!==null) return -1;
+      if (wa===null && wb===null) return a.id.localeCompare(b.id);
+      return wb - wa;
+    });
+    return l;
+  }
+  function staleCount(){ return waiting().filter(function(j){ return D.isStale(j.questionAsked); }).length; }
+
   function list(k){
+    if (k==="needs") return waiting();
     if (k==="all"){
       var out = [];
       ALL_ORDER.forEach(function(c){ out = out.concat(list(c)); });
@@ -367,19 +428,45 @@ footer{margin-top:36px;color:var(--muted);font-size:13px;max-width:70ch}
     return l;
   }
 
+  // One row of the Needs Input tab: the task, its kind, who may answer, how long it has
+  // waited, the question itself, and what it holds up -- so the ones that unblock the most are
+  // the ones you can see. A click opens the card the task sits on, at any depth (D11).
+  function inputRow(j){
+    var card = D.cardOf(jobs, j.id);
+    var blocks = D.blocksOf(jobs, j.id);
+    // What this holds up: the job's own **Blocking:** line and every job whose **Blocked by:**
+    // names it (both kept in step by hand), or -- when neither exists yet, which is the case
+    // for a ruling that gates a task nobody has briefed -- the question's own **Blocked:** line.
+    var what = blocks.length ? blocks.join(', ') : (j.questionBlocks || 'nothing else on the board yet');
+    var c = colOf(j.column);
+    return '<button class="nirow" data-id="'+esc(card)+'" style="--c:'+c.c+'">' +
+      '<div class="top"><span class="id" style="--c:'+c.c+'">'+esc(j.id)+'</span>' +
+      '<span class="kind">'+esc(D.kindOf(j))+'</span>' +
+      (D.isStale(j.questionAsked) ? '<span class="stale" title="Open '+esc(D.waitedFor(j.questionAsked))+', past the two-day mark: raise it at the next discussion">stale</span>' : '') +
+      '<span class="waited" title="Asked '+esc(j.questionAsked||'(no date)')+'">'+esc(D.waitedFor(j.questionAsked))+'</span>' +
+      '<span class="forwho">for '+esc(D.forOf(j))+'</span></div>' +
+      '<p class="ask">'+esc(j.question)+'</p>' +
+      '<span class="blocks">Blocks: '+esc(what)+'</span>'+
+      (card!==j.id ? '<span class="blocks">On the '+esc(card)+' card</span>' : '')+'</button>';
+  }
+
   function renderStats(){
     var n = {}; COLS.forEach(function(c){ if (c.k!=="all") n[c.k] = list(c.k).length; });
-    var r = rounds.length;
+    var r = rounds.length, w = waiting(), s = staleCount();
     document.getElementById("stats").innerHTML =
       '<span><b>'+r+'</b> round'+(r===1?'':'s')+' so far</span>' +
       COLS.filter(function(c){ return c.k!=="all"; }).map(function(c){ return '<span><b>'+n[c.k]+'</b> '+c.name.toLowerCase()+'</span>'; }).join("") +
+      '<span><b>'+w.length+'</b> waiting on a person'+(s ? ' ('+s+' stale)' : '')+'</span>' +
       (filterNote() ? '<span>filtered to '+esc(filterNote())+' (every job it had a hand in, so machines can share a job)</span>' : '') +
       (data.updated ? '<span>updated '+esc(data.updated)+'</span>' : '');
   }
 
   function renderTabs(){
-    document.getElementById("tabs").innerHTML = COLS.map(function(c){
-      return '<button class="tab" role="tab" id="tab-'+c.k+'" aria-selected="'+(state.tab===c.k)+'" data-k="'+c.k+'" style="--c:'+c.c+'"><span class="dot"></span>'+c.name+' <span class="n">'+list(c.k).length+'</span></button>';
+    var tabs = tabList(), w = waiting(), s = staleCount();
+    document.getElementById("tabs").innerHTML = tabs.map(function(c){
+      var n = c.k==="needs" ? w.length : list(c.k).length;
+      var mark = (c.k==="needs" && s) ? '<span class="stale" title="'+s+' open for two days or more: raised at the next discussion">'+s+' stale</span>' : '';
+      return '<button class="tab" role="tab" id="tab-'+c.k+'" aria-selected="'+(state.tab===c.k)+'" data-k="'+c.k+'" style="--c:'+c.c+'"><span class="dot"></span>'+c.name+' <span class="n">'+n+'</span>'+mark+'</button>';
     }).join("");
   }
 
@@ -397,14 +484,36 @@ footer{margin-top:36px;color:var(--muted);font-size:13px;max-width:70ch}
     if (j.column==="done" && j.merged) meta.push(when(j.merged).split(",")[0]);
     else if (j.status && j.column!=="closed") meta.push(esc(j.status.split(/(?<=\.)\s/)[0]));
     return '<button class="card" data-id="'+esc(j.id)+'" style="--c:'+c.c+'">' +
-      '<div class="head">'+barHTML(j)+'<div class="top"><span class="id">'+esc(j.id)+'</span><span class="kind">'+esc(KIND[j.kind]||"")+'</span>'+(state.tab==="all"?'<span class="pill colpill" style="--c:'+c.c+'">'+(j.column==="closed"?"Closed":c.name)+'</span>':'')+(j.grade?'<span class="grade" title="'+esc(GRADE[j.grade]||"")+'">'+esc(j.grade)+'</span>':'')+prioMark(j)+needBenMark(j)+'</div></div>' +
+      '<div class="head">'+barHTML(j)+'<div class="top"><span class="id">'+esc(j.id)+'</span><span class="kind">'+esc(KIND[j.kind]||"")+'</span>'+(state.tab==="all"?'<span class="pill colpill" style="--c:'+c.c+'">'+(j.column==="closed"?"Closed":c.name)+'</span>':'')+(j.grade?'<span class="grade" title="'+esc(GRADE[j.grade]||"")+'">'+esc(j.grade)+'</span>':'')+prioMark(j)+needInputMark(j)+'</div></div>' +
       '<h3>'+esc(j.title)+'</h3>' +
-      '<div style="display:grid;gap:6px;align-content:start"><p>'+esc(text)+'</p>'+needBenLine(j)+blockLines(j)+'</div>' +
+      '<div style="display:grid;gap:6px;align-content:start"><p>'+esc(text)+'</p>'+needInputLine(j)+blockLines(j)+'</div>' +
       (meta.length ? '<div class="meta">'+meta.join(' <span aria-hidden="true">·</span> ')+'</div>' : '<span></span>') +
       '</button>';
   }
 
+  // The Needs Input tab: one group per kind, in the order derive.js gives (decide, play,
+  // write, try -- a ruling first, because a ruling is what stops the most work), each group
+  // oldest first. A kind with nothing open in it is not shown, so the tab reads as a list of
+  // what is actually waiting rather than a form.
+  function renderInput(){
+    var l = waiting();
+    colEl.setAttribute("aria-labelledby","tab-needs");
+    if (!l.length) {
+      colEl.innerHTML = '<div class="colhead"><h2>Needs Input</h2><p>'+INPUT_TAB.blurb+'</p></div>' +
+        '<div class="empty">Nothing is waiting on a person. Every question has an answer in its **Answer:** line.</div>';
+      return;
+    }
+    var body = D.KINDS.map(function(k){
+      var g = l.filter(function(j){ return D.kindOf(j) === k; });
+      if (!g.length) return '';
+      return '<section class="nigroup"><h3>'+esc(D.KIND_TITLES[k])+' <span class="n">'+g.length+'</span></h3>' +
+        '<p>'+esc(D.KIND_BLURB[k])+'</p><div class="ni">'+g.map(inputRow).join("")+'</div></section>';
+    }).join("");
+    colEl.innerHTML = '<div class="colhead"><h2>Needs Input</h2><p>'+INPUT_TAB.blurb+'</p></div>' + body;
+  }
+
   function renderCol(){
+    if (state.tab==="needs") { renderInput(); return; }
     // The column's own heading; colOf() maps a job's column, and "All" is not one.
     var c = COLS.filter(function(x){ return x.k===state.tab; })[0] || colOf(state.tab), l = list(state.tab);
     colEl.setAttribute("aria-labelledby","tab-"+c.k);
@@ -431,7 +540,8 @@ footer{margin-top:36px;color:var(--muted);font-size:13px;max-width:70ch}
     state.tab = b.getAttribute("data-k"); save(); render();
   });
   colEl.addEventListener("click", function(e){
-    var b = e.target.closest(".card"); if (b) open(b.getAttribute("data-id"));
+    // A card, or a row of the Needs Input tab, whose data-id is already the card it sits on.
+    var b = e.target.closest(".card, .nirow"); if (b) open(b.getAttribute("data-id"));
   });
 
   // Detail
@@ -461,13 +571,13 @@ footer{margin-top:36px;color:var(--muted);font-size:13px;max-width:70ch}
     if (!under.length) return '';
     return '<div class="tree" style="margin-left:'+(depth ? 10 : 0)+'px">' + under.map(function(k){
       return '<div class="tr">'+jobLink(k)+barHTML(k)+
-        (D.questionUnder(jobs, k.id) ? ' '+needBenMark(k) : '')+jobTree(k.id, depth+1)+'</div>';
+        (D.questionUnder(jobs, k.id) ? ' '+needInputMark(k) : '')+jobTree(k.id, depth+1)+'</div>';
     }).join("") + '</div>';
   }
 
   function open(id){
     var j = byId[id]; if (!j) return;
-    var c = colOf(j.column), k = kids(j.id), p = j.parent && byId[j.parent], w = D.questionUnder(jobs, j.id);
+    var c = colOf(j.column), k = kids(j.id), p = j.parent && byId[j.parent], ws = D.questionsUnder(jobs, j.id);
     var row = '<div class="row"><span class="id" style="--c:'+c.c+'">'+esc(j.id)+'</span><span class="pill" style="--c:'+c.c+'">'+(j.column==="closed"?"Closed":c.name)+'</span><span class="kind">'+esc(KIND[j.kind]||"")+' · '+esc(j.round)+'</span><button class="close" id="dlgClose" aria-label="Close">×</button></div>';
     var h = '';
     // The header is the card's own: its state bar over the id row, when it has tasks.
@@ -479,7 +589,16 @@ footer{margin-top:36px;color:var(--muted);font-size:13px;max-width:70ch}
     if (j.fleshedInto && byId[j.fleshedInto]) h += '<div class="sec"><h4>Fleshed out into</h4><div class="kids">'+jobLink(byId[j.fleshedInto])+'</div></div>';
     if (j.summary) h += '<div class="sec"><h4>'+(j.column==="done"?"What changed":"What it will change")+'</h4><p>'+esc(j.summary)+'</p></div>';
     if (j.status) h += '<div class="sec"><h4>Where it stands</h4><p>'+esc(j.status)+'</p></div>';
-    if (w) h += '<div class="sec origin"><h4>Needs Ben'+(w.id===j.id ? '' : ' &mdash; '+esc(w.id)+' is waiting')+'</h4><p>'+esc(w.question)+'</p><span class="by">The machine building this job cannot go on until Ben answers.</span></div>';
+    // Every item waiting on this job or anything under it, each with who may answer, what
+    // sort of input it is and how long it has waited (docs/round/questions/, D12).
+    ws.forEach(function (w, n) {
+      h += '<div class="sec origin"><h4>Needs Input'+(ws.length>1 ? ' '+(n+1)+' of '+ws.length : '')+
+        (w.id===j.id ? '' : ' &mdash; '+esc(w.id)+' is waiting')+
+        (D.isStale(w.questionAsked) ? ' &nbsp;<span class="stale">stale</span>' : '')+'</h4>'+
+        '<p>'+esc(w.question)+'</p><span class="by">Waiting on '+esc(D.forOf(w))+' '+
+        esc(D.KIND_WORDS[D.kindOf(w)]||'')+', '+esc(D.waitedFor(w.questionAsked))+
+        '. Nothing on this job goes on until it is answered.</span></div>';
+    });
     if (j.blockedBy && j.blockedBy.length) h += '<div class="sec"><h4>Blocked by</h4><p>'+esc(j.blockedBy.join(', '))+' -- it cannot start until '+esc(j.blockedBy.length>1?"those jobs are":"that job is")+' merged.</p></div>';
     if (j.blocking && j.blocking.length) h += '<div class="sec"><h4>Blocking</h4><p>'+esc(j.blocking.join(', '))+' -- '+esc(j.blocking.length>1?"those jobs cannot":"that job cannot")+' start until this one is merged.</p></div>';
     if (j.forPlaytesters) h += '<div class="sec try"><h4>Try this next playtest</h4><p>'+esc(j.forPlaytesters)+'</p></div>';
