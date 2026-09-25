@@ -1,5 +1,5 @@
 window.VOX_BOARD = {
-"updated": "2026-09-25 08:52 UTC",
+"updated": "2026-09-25 11:30 UTC",
 "machines": {
   "ben-3070": "Ben's Win (RTX 3070 8GB)",
   "james-3080": "James Win (RTX 3080 10GB)",
@@ -560,8 +560,9 @@ window.VOX_BOARD = {
    {"role":"implemented","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"},
    {"role":"reviewed","model":"Claude Opus (orchestrator)","machine":"ben-3070"}
  ]},
-{"id": "F10b", "title": "Growing and restoring in the game and on friends' screens", "round": "Round 1", "column": "doing", "statusAuto": "building:OpenRouter stealth/space-bunny-alpha@ben-3070", "machine": "ben-3070", "dispatched": "2026-09-25 05:46", "kind": "feature", "grade": "L", "origin": "Part of F10.", "raisedBy": "Ben", "summary": "The host grows or restores an object in place without it jumping or dropping quick strokes, and everyone else's copy follows exactly, including objects made of several parts.", "status": "Being built by OpenRouter stealth/space-bunny-alpha on Ben's Win (RTX 3070 8GB).", "parent": "F10", "repairRounds": 0, "blockedBy": ["F10a", "B1e"], "blocking": ["F10c"], "involved": [
-   {"role":"implemented","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"}
+{"id": "F10b", "title": "Growing and restoring in the game and on friends' screens", "round": "Round 1", "column": "doing", "statusAuto": "reviewed:1", "machine": "ben-3070", "dispatched": "2026-09-25 05:46", "kind": "feature", "grade": "L", "origin": "Part of F10.", "raisedBy": "Ben", "summary": "The host grows or restores an object in place without it jumping or dropping quick strokes, and everyone else's copy follows exactly, including objects made of several parts.", "status": "Built; reviewed by 1 model; waiting for the orchestrator's check.", "parent": "F10", "repairRounds": 0, "blockedBy": ["F10a", "B1e"], "blocking": ["F10c"], "involved": [
+   {"role":"implemented","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"},
+   {"role":"reviewed","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"}
  ]},
 {"id": "F10c", "title": "The Sculpt tool", "round": "Round 1", "column": "todo", "kind": "feature", "grade": "S", "origin": "Part of F10.", "raisedBy": "Ben", "summary": "The carve tool is renamed Sculpt with its buttons: left carves, right grows, Ctrl and right restores; a key chooses how grown voxels are coloured; the cursor and the hints show which action you have.", "status": "Approved: waits for the game side (F10b).", "parent": "F10", "repairRounds": 0, "blockedBy": ["F10b"], "involved": []},
 {"id": "F27", "title": "Custom colours", "round": "Round 1", "column": "todo", "kind": "feature", "raisedBy": "Ben", "repairRounds": 0, "grade": "M", "origin": "Ben, 24 September: he wants colours of his own to paint with, an opacity slider, and a way to copy a colour off anything in the scene.", "summary": "A second row of 16 custom colour swatches under the fixed ones. With the cursor free, Tab and Shift+Tab move through every swatch and Return opens an editor on a custom one: a colour wheel, brightness, opacity, and R G B A numbers you can type. A pipette button in the editor copies a colour from anything you click.", "status": "Approved: ready to start. Two jobs, the first can begin now.", "blocking": ["F28a"], "involved": []},
