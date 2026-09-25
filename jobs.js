@@ -1,5 +1,5 @@
 window.VOX_BOARD = {
-"updated": "2026-09-25 23:36 UTC",
+"updated": "2026-09-25 23:42 UTC",
 "machines": {
   "ben-3070": "Ben's Win (RTX 3070 8GB)",
   "james-3080": "James Win (RTX 3080 10GB)",
@@ -508,7 +508,7 @@ window.VOX_BOARD = {
    {"role":"reviewed","model":"Claude Opus (orchestrator)","machine":"ben-3070"}
  ]},
 
-{"id": "F22s", "title": "A true server build", "round": "Round 1", "column": "done", "merged": "2026-09-25", "statusAuto": "merged:2026-09-25", "machine": "ben-3070", "dispatched": "2026-09-23 23:32", "kind": "feature", "grade": "L", "origin": "Part of F22.", "raisedBy": "Ben", "summary": "Builds the engine from source so the Dedicated app is a real server program with no graphics in it, for Windows and Linux.", "status": "Windows server built (Development and Shipping). Linux ran the PC out of memory twice; the retry-or-split decision is on the board's Needs Input list.", "parent": "F22", "repairRounds": 0, "blocking": ["F22o", "F22Ld"],
+{"id": "F22s", "title": "A true server build", "round": "Round 1", "column": "done", "merged": "2026-09-25", "statusAuto": "merged:2026-09-25", "machine": "ben-3070", "dispatched": "2026-09-23 23:32", "kind": "feature", "grade": "L", "origin": "Part of F22.", "raisedBy": "Ben", "summary": "Builds the engine from source so the Dedicated app is a real server program with no graphics in it, for Windows and Linux.", "status": "Windows server built (Development and Shipping). Linux ran the PC out of memory twice; the retry-or-split decision is on the board's Needs Input list.", "parent": "F22", "repairRounds": 0,
  "involved": [
    {"role":"researched","model":"Claude Opus (subagent)","machine":"ben-3070"},
    {"role":"implemented","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"},
