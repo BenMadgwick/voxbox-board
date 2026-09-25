@@ -1,5 +1,5 @@
 window.VOX_BOARD = {
-"updated": "2026-09-25 16:41 UTC",
+"updated": "2026-09-25 17:09 UTC",
 "machines": {
   "ben-3070": "Ben's Win (RTX 3070 8GB)",
   "james-3080": "James Win (RTX 3080 10GB)",
@@ -646,7 +646,7 @@ window.VOX_BOARD = {
    {"role":"repaired","model":"Claude Opus (orchestrator)","machine":"ben-3070"}
  ]},
 
-{"id": "D11", "title": "The board shows only top-level jobs, each placed by its tasks", "round": "Round 1", "column": "todo", "kind": "feature", "grade": "M", "origin": "A parent and its children each had a card, so the same work looked like several jobs and In progress showed 9 when 4 things were really going on.", "raisedBy": "Ben", "summary": "Only top-level jobs get cards; a parent moves by the state of every task beneath it, and a coloured bar shows how many are done, in progress, to do and parked.", "status": "Approved; being built.", "parent": "D1", "prio": 2, "machine": "ben-3070", "involved": []},
+{"id": "D11", "title": "The board shows only top-level jobs, each placed by its tasks", "round": "Round 1", "column": "doing", "statusAuto": "claimed:ben-3070", "dispatched": "2026-09-25 17:09", "kind": "feature", "grade": "M", "origin": "A parent and its children each had a card, so the same work looked like several jobs and In progress showed 9 when 4 things were really going on.", "raisedBy": "Ben", "summary": "Only top-level jobs get cards; a parent moves by the state of every task beneath it, and a coloured bar shows how many are done, in progress, to do and parked.", "status": "Claimed by Ben's Win (RTX 3070 8GB); starting.", "parent": "D1", "prio": 2, "machine": "ben-3070", "involved": []},
 
 {"id": "D10", "title": "Concepts -- Ben's half-formed ideas kept on the board", "round": "Round 1", "column": "done", "merged": "2026-09-25", "statusAuto": "merged:2026-09-25", "machine": "ben-3070", "dispatched": "2026-09-25 13:05", "kind": "feature", "grade": "M", "origin": "Ben often has an idea with no time to design it, and it got lost or sat as a task nobody could start.", "raisedBy": "Ben", "summary": "Say \"add a concept regarding X\" and it is kept in Ben's own words as C1, C2... in its own board column, never offered as work until he is ready to flesh it out.", "status": "Merged 2026-09-25.", "parent": "D1", "repairRounds": 0, "prio": 2, "involved": [
    {"role":"implemented","model":"Claude Sonnet (subagent)","machine":"ben-3070"},
