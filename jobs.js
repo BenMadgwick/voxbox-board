@@ -1,5 +1,5 @@
 window.VOX_BOARD = {
-"updated": "2026-09-25 14:17 UTC",
+"updated": "2026-09-25 14:32 UTC",
 "machines": {
   "ben-3070": "Ben's Win (RTX 3070 8GB)",
   "james-3080": "James Win (RTX 3080 10GB)",
@@ -129,7 +129,7 @@ window.VOX_BOARD = {
    {"role":"reviewed","model":"Claude Opus (orchestrator)","machine":"james-3080"}
  ]},
 
-{"id": "F3b4", "title": "The generator keeps the see-through data", "round": "Round 1", "column": "doing", "statusAuto": "building:OpenRouter stealth/space-bunny-alpha@james-3080", "question": "F3b4 is built on james-3080 (branch f3b4-generator-alpha, 38/38 tests, unity build, net_test -Pool, synthetic glass jar looked at), but checks 2-4 and the two-seed bottle run need F3a's pictures, Saved/AlphaReport and the q8 weights, which only ben-3070 has: finish those checks on ben-3070, or copy F3a's files here and run them on q4?", "machine": "james-3080", "dispatched": "2026-09-25 07:27", "kind": "feature", "grade": "M", "origin": "The last part of F3b: the generator add-on currently throws the see-through numbers away, so a generated bottle arrives solid.", "raisedBy": "Ben", "summary": "The generator keeps each voxel's see-through value and the host decides from it, so a glass bottle arrives see-through without the picture being made again.", "status": "Being built by OpenRouter stealth/space-bunny-alpha on James Win (RTX 3080 10GB).", "parent": "F3b", "blockedBy": ["F3b2"], "repairRounds": 0,
+{"id": "F3b4", "title": "The generator keeps the see-through data", "round": "Round 1", "column": "doing", "statusAuto": "building:OpenRouter stealth/space-bunny-alpha@james-3080", "machine": "james-3080", "dispatched": "2026-09-25 07:27", "kind": "feature", "grade": "M", "origin": "The last part of F3b: the generator add-on currently throws the see-through numbers away, so a generated bottle arrives solid.", "raisedBy": "Ben", "summary": "The generator keeps each voxel's see-through value and the host decides from it, so a glass bottle arrives see-through without the picture being made again.", "status": "Being built by OpenRouter stealth/space-bunny-alpha on James Win (RTX 3080 10GB).", "parent": "F3b", "blockedBy": ["F3b2"], "repairRounds": 0,
  "involved": [
    {"role":"researched","model":"Claude Opus (subagent)","machine":"ben-3070"},
    {"role":"implemented","model":"OpenRouter stealth/space-bunny-alpha","machine":"james-3080"}
