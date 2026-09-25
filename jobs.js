@@ -1,5 +1,5 @@
 window.VOX_BOARD = {
-"updated": "2026-09-25 17:59 UTC",
+"updated": "2026-09-25 18:09 UTC",
 "machines": {
   "ben-3070": "Ben's Win (RTX 3070 8GB)",
   "james-3080": "James Win (RTX 3080 10GB)",
@@ -648,7 +648,7 @@ window.VOX_BOARD = {
 
 {"id": "D13", "title": "The board writes itself: new cards, merge fields, blocking links both ways", "round": "Round 1", "column": "todo", "kind": "feature", "grade": "M", "origin": "Cards for new tasks, merge details and blocked-by links were kept by hand and drifted: fourteen stale blocking links were found on 25 September.", "raisedBy": "Ben", "summary": "Every task gets its card automatically, merge details come from the ledger, and a blocking link always exists on both sides and is removed by itself when the blocking task finishes.", "status": "Approved; starts after D12.", "parent": "D1", "prio": 2, "involved": []},
 
-{"id": "D12", "title": "Needs Input: one list of everything waiting on a person", "round": "Round 1", "column": "todo", "kind": "feature", "grade": "M", "origin": "Only formal questions got a badge; rulings, playtests and checks to write with Ben sat in card statuses and went stale.", "raisedBy": "Ben", "summary": "Every wait becomes a question with a kind (decide, play, write, try) and who may answer; a Needs Input tab lists them oldest first with what each blocks, marked stale after 2 days.", "status": "Approved; starts after D11.", "parent": "D1", "prio": 2, "involved": []},
+{"id": "D12", "title": "Needs Input: one list of everything waiting on a person", "round": "Round 1", "column": "doing", "statusAuto": "claimed:ben-3070", "machine": "ben-3070", "dispatched": "2026-09-25 18:09", "kind": "feature", "grade": "M", "origin": "Only formal questions got a badge; rulings, playtests and checks to write with Ben sat in card statuses and went stale.", "raisedBy": "Ben", "summary": "Every wait becomes a question with a kind (decide, play, write, try) and who may answer; a Needs Input tab lists them oldest first with what each blocks, marked stale after 2 days.", "status": "Claimed by Ben's Win (RTX 3070 8GB); starting.", "parent": "D1", "prio": 2, "involved": []},
 
 {"id": "D11", "title": "The board shows only top-level jobs, each placed by its tasks", "round": "Round 1", "column": "done", "merged": "2026-09-25", "statusAuto": "merged:2026-09-25", "dispatched": "2026-09-25 17:09", "kind": "feature", "grade": "M", "origin": "A parent and its children each had a card, so the same work looked like several jobs and In progress showed 9 when 4 things were really going on.", "raisedBy": "Ben", "summary": "Only top-level jobs get cards; a parent moves by the state of every task beneath it, and a coloured bar shows how many are done, in progress, to do and parked.", "status": "Merged 2026-09-25. Reviewed on James's PC; one rule added at merge: a parent that shipped work of its own stays done.", "parent": "D1", "repairRounds": 0, "prio": 2, "machine": "james-3080", "involved": [
    {"role":"implemented","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"},
