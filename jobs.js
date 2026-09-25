@@ -1,5 +1,5 @@
 window.VOX_BOARD = {
-"updated": "2026-09-25 22:31 UTC",
+"updated": "2026-09-25 22:38 UTC",
 "machines": {
   "ben-3070": "Ben's Win (RTX 3070 8GB)",
   "james-3080": "James Win (RTX 3080 10GB)",
@@ -109,7 +109,7 @@ window.VOX_BOARD = {
    {"role":"researched","model":"Claude Opus (subagent)","machine":"ben-3070"}
  ]},
 
-{"id": "F3c", "title": "Air behind glass, not clear filling", "round": "Round 1", "column": "backlog", "kind": "feature", "origin": "F3b fills the space behind glass with clear glass, because telling trapped air apart reliably proved fragile. Ben would rather it were air.", "raisedBy": "Ben", "summary": "Work out reliably which voxels behind glass are air, so a bottle is hollow instead of full of clear glass.", "status": "After F3b, and after Ben finds more see-through pictures (glass, water, plastic) to test on.", "parent": "F3", "repairRounds": 0,
+{"id": "F3c", "title": "Air behind glass, not clear filling", "round": "Round 1", "column": "backlog", "kind": "feature", "origin": "F3b fills the space behind glass with clear glass, because telling trapped air apart reliably proved fragile. Ben would rather it were air.", "raisedBy": "Ben", "summary": "Work out reliably which voxels behind glass are air, so a bottle is hollow instead of full of clear glass.", "status": "Ben's nine see-through pictures are in data/uploads/f3 (23 Sep, with index.tsv). Needs a brief; after F3b4.", "parent": "F3", "repairRounds": 0,
  "involved": []},
 
 {"id": "F3b2", "title": "Work out which voxels are see-through", "round": "Round 1", "column": "done", "statusAuto": "merged:2026-09-24", "machine": "ben-3070", "dispatched": "2026-09-24 15:52", "kind": "feature", "grade": "L", "origin": "The first half of F3b: something has to turn the generator's see-through numbers into a yes-or-no rule before anything can be drawn with them.", "raisedBy": "Ben", "summary": "The game can now tell which outer voxels of a generated object are glass and which are empty space the generator filled in, and rebuild the inside to match. Nothing uses it yet: hooking it into generation is the next part (F3b4).", "status": "Merged. Checked against the 22 real pictures from F3a; nothing to see in the game yet.", "parent": "F3b", "blocking": [], "repairRounds": 0,
@@ -319,13 +319,13 @@ window.VOX_BOARD = {
    {"role":"reviewed","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"}
  ]},
 
-{"id": "F16", "title": "Bake a glued build into one object", "round": "Round 1", "column": "backlog", "kind": "feature", "origin": "Glue keeps each part's own grid, material and detail. Ben liked the idea of also offering a deliberate way to fuse a build into a single grid.", "raisedBy": "Ben", "summary": "A Bake action that fuses a glued build into one voxel grid at a resolution you choose, for when you want it to behave as a single lump, for example to carve evenly across the seams.", "status": "Backlog, after F7.", "parent": "F7", "repairRounds": 0,
+{"id": "F16", "title": "Bake a glued build into one object", "round": "Round 1", "column": "backlog", "kind": "feature", "origin": "Glue keeps each part's own grid, material and detail. Ben liked the idea of also offering a deliberate way to fuse a build into a single grid.", "raisedBy": "Ben", "summary": "A Bake action that fuses a glued build into one voxel grid at a resolution you choose, for when you want it to behave as a single lump, for example to carve evenly across the seams.", "status": "Left for now (Ben, 25 Sep): .vxc files do the job today; a bake will be wanted eventually.", "parent": "F7", "repairRounds": 0,
  "involved": []},
 
 {"id": "F5", "title": "Sound", "round": "Round 1", "column": "backlog", "kind": "feature", "origin": "Nobody mentioned sound, because there isn't any.", "raisedBy": "the triage", "status": "Roadmap, not this round.", "repairRounds": 0,
  "involved": []},
 
-{"id": "F6", "title": "Save a template from a selection", "round": "Round 1", "column": "backlog", "kind": "feature", "origin": "Saving the whole table as a template is unusable while others are playing on it.", "raisedBy": "Ben", "summary": "Hold a key and click objects to select them, then save just those as a template.", "status": "Roadmap; small enough to pull forward if there's time (Ben decides).", "repairRounds": 0,
+{"id": "F6", "title": "Save a template from a selection", "round": "Round 1", "column": "todo", "prio": 2, "grade": "M", "kind": "feature", "origin": "Saving the whole table as a template is unusable while others are playing on it.", "raisedBy": "Ben", "summary": "Hold a key and click objects to select them, then save just those as a template.", "status": "Approved; ready to start (Ben, 25 Sep: with every F25 select tool, the wand included).", "repairRounds": 0,
  "involved": []},
 
 {"id": "F8", "title": "Round things bounce like balls", "round": "Round 1", "column": "todo", "prio": 3, "grade": "M", "kind": "feature", "origin": "A voxel sphere's flat facets knock a rubber ball sideways on its second bounce. Ben asked for a neat solution.", "raisedBy": "Ben", "summary": "The game measures how round each object is when it is made; very round things get a true sphere collider, and nearly round ones bounce more smoothly.", "status": "Approved; ready to start (Ben moved it from the backlog, 25 Sep).", "repairRounds": 0,
