@@ -188,6 +188,11 @@ footer{margin-top:36px;color:var(--muted);font-size:13px;max-width:70ch}
 }
 @media (prefers-reduced-motion:reduce){.card{transition:none}.card:hover{transform:none}}
 </style>
+<script>
+// Dark whatever the device says (Ben, 26 Sep): a phone in light mode had been getting the light
+// board. ?theme=light still asks for it, which is how board_check.js shoots the light palette.
+document.documentElement.setAttribute("data-theme", /[?&]theme=light(&|$)/.test(location.search) ? "light" : "dark");
+</script>
 
 <div class="wrap">
   <header>
