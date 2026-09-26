@@ -1,5 +1,5 @@
 window.VOX_BOARD = {
-"updated": "2026-09-26 20:54 UTC",
+"updated": "2026-09-26 20:59 UTC",
 "machines": {
   "ben-3070": "Ben's Win (RTX 3070 8GB)",
   "james-3080": "James Win (RTX 3080 10GB)",
@@ -682,8 +682,9 @@ window.VOX_BOARD = {
    {"role":"reviewed","model":"Grok (grok-4.5)","machine":"james-3080"},
    {"role":"repaired","model":"OpenRouter stealth/space-bunny-alpha","machine":"james-3080"}
  ]},
-{"id": "F31f", "title": "/local: chat to players within 30 metres", "round": "Round 1", "column": "doing", "dispatched": "2026-09-26 20:22", "kind": "feature", "grade": "S", "origin": "Part of F31.", "raisedBy": "Ben", "summary": "A chat line that only reaches players standing within 30 metres of you, with its own prefix and colour. The range is adjustable.", "status": "Being built by OpenRouter stealth/space-bunny-alpha on James Win (RTX 3080 10GB).", "parent": "F31", "machine": "james-3080", "statusAuto": "building:OpenRouter stealth/space-bunny-alpha@james-3080", "repairRounds": 0, "involved": [
-   {"role":"implemented","model":"OpenRouter stealth/space-bunny-alpha","machine":"james-3080"}
+{"id": "F31f", "title": "/local: chat to players within 30 metres", "round": "Round 1", "column": "doing", "dispatched": "2026-09-26 20:22", "kind": "feature", "grade": "S", "origin": "Part of F31.", "raisedBy": "Ben", "summary": "A chat line that only reaches players standing within 30 metres of you, with its own prefix and colour. The range is adjustable.", "status": "Built; reviewed by 1 model; waiting for the orchestrator's check.", "parent": "F31", "machine": "james-3080", "statusAuto": "reviewed:1", "repairRounds": 0, "involved": [
+   {"role":"implemented","model":"OpenRouter stealth/space-bunny-alpha","machine":"james-3080"},
+   {"role":"reviewed","model":"Grok (grok-4.5)","machine":"james-3080"}
  ]},
 {"id": "F31g", "title": "Chat groups, with admins", "round": "Round 1", "column": "todo", "kind": "feature", "grade": "M", "origin": "Part of F31.", "raisedBy": "Ben", "summary": "Make a group of players for the session (/groupadd), talk to it (/group), remove people (/groupkick) or leave (/groupleave). /groupadmin says who may add and kick: everyone to start with, or named players. If the only admin leaves, it goes back to everyone.", "status": "Approved: waits for F31a and F31e.", "parent": "F31", "machine": "james-3080", "repairRounds": 0, "involved": []},
 {"id": "F32", "title": "Send QA reports, /bug and /idea to the developers over the internet", "round": "Round 1", "column": "backlog", "kind": "feature", "grade": "R", "origin": "Ben, 25 September: reports should ideally phone home, but that needs research first and must not hold up F31.", "raisedBy": "Ben", "summary": "Research into how reports could reach us without a secret in the game, what players are told, and what is sent, ending in a recommendation and a brief. Nothing changes in the game.", "status": "Parked: Ben will research it with another agent before it is briefed.", "repairRounds": 0, "involved": []},
@@ -795,6 +796,9 @@ window.VOX_BOARD = {
  "involved": []},
 
 {"id": "F3c2", "title": "air behind the glass (a switch, measured on the kept pictures)", "round": "Round 1", "column": "doing", "dispatched": "2026-09-26 20:04", "kind": "feature", "grade": "M", "origin": "F3b fills the space behind a pane of glass with clear fill: see-through voxels that copy the pane's colour. Ben prefers air there -- a bottle becomes a thin shell with its scene inside, which falls out when smashed.", "raisedBy": "Ben", "parent": "F3c", "machine": "james-3080", "status": "Claimed by James Win (RTX 3080 10GB); starting.", "statusAuto": "claimed:james-3080", "handedFrom": "ben-3070", "repairRounds": 0,
+ "involved": []},
+
+{"id": "B18", "title": "a fresh PC asks for the Visual C++ Redistributable before the game will start", "round": "Round 1", "column": "backlog", "kind": "feature", "grade": "S", "origin": "James ran a packaged build on another PC and Windows refused to start it until he installed the \"Microsoft Visual C++ 2015-2022 Redistributable (x64)\". Every Visual Studio build needs Microsoft's C++ runtime DLLs (vcruntime140.dll, msvcp140.dll, the Universal CRT); that means the game and the generator DLL (generato...", "raisedBy": "Ben", "question": "Approve B18 (docs/design/B18-bundled-runtime.md): package the zips with the C++ runtime DLLs beside the exe (about 2 MB zipped), so a fresh PC no longer asks for the Visual C++ Redistributable? James chose this; for the Steam build, tick VC++ 2015-2022 Redist in Steamworks.", "questionKind": "decide", "questionFor": "Ben", "questionAsked": "2026-09-26 20:57", "questionBlocks": "B18 only; nothing else waits on it", "prio": 2, "repairRounds": 0,
  "involved": []}
 ]
 };
