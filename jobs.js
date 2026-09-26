@@ -1,5 +1,5 @@
 window.VOX_BOARD = {
-"updated": "2026-09-26 07:15 UTC",
+"updated": "2026-09-26 07:18 UTC",
 "machines": {
   "ben-3070": "Ben's Win (RTX 3070 8GB)",
   "james-3080": "James Win (RTX 3080 10GB)",
@@ -659,7 +659,7 @@ window.VOX_BOARD = {
 
 {"id": "F23b", "title": "More ways to find a game", "round": "Round 1", "column": "backlog", "kind": "feature", "origin": "Ben: a public lobby browser, join codes, passwords and joining by address, later.", "raisedBy": "Ben", "summary": "Finish the Multiplayer menu beyond friends' games.", "status": "Later; needs a design.", "repairRounds": 0, "blockedBy": [], "involved": []},
 
-{"id": "F24b", "title": "Settle the menu rain's intensity", "round": "Round 1", "column": "backlog", "kind": "qol", "origin": "Ben will say which slider setting felt right.", "raisedBy": "Ben", "summary": "Bake in Ben's chosen intensity and remove the slider.", "status": "Waits for F24: the intensity question was withdrawn until there is a slider to try (Ben, 25 Sep).", "repairRounds": 0, "involved": []},
+{"id": "F24b", "title": "Settle the menu rain's intensity", "round": "Round 1", "column": "backlog", "kind": "qol", "origin": "Ben will say which slider setting felt right.", "raisedBy": "Ben", "summary": "Bake in Ben's chosen intensity and remove the slider.", "status": "Waits for F24: the intensity question was withdrawn until there is a slider to try (Ben, 25 Sep).", "questionKind": "play", "questionFor": "Ben", "questionAsked": "2026-09-26 07:17", "questionBlocks": "F24b (bake the value in, remove the slider); nothing else", "question": "F24 is merged: play the main menu, move the Rain slider (bottom right, 0-10), and say which number felt right so F24b can bake it in. Also: falling cubes leave smeared trails (F29a's break dust too; a per-instance velocity fix did not cure it) -- do they bother you enough to chase?", "repairRounds": 0, "involved": []},
 
 {"id": "B1e", "title": "Fast carving never drops a cut", "round": "Round 1", "column": "done", "questionBlocks": "B1e is merged, so nothing is blocked; the answer is the only thing that says whether the fix landed as intended.", "questionAsked": "2026-09-24", "questionFor": "Ben", "questionKind": "play", "tokens": 19559587, "tokensWritten": 122436, "workMinutes": 73, "question": "Play the carve: while you drag, does the body you are cutting still collide as its box, or is that gone?", "statusAuto": "merged:2026-09-24", "machine": "james-3080", "merged": "2026-09-24", "kind": "bug", "grade": "M", "origin": "B1c's test found the host silently drops a carve scoop while the previous piece's collision is still being built (20-620 ms), so quick carving loses cuts.", "raisedBy": "Ben", "summary": "Build a carved piece's collision after the piece is in place, so every scoop is carved.", "status": "Merged; every scoop is carved (20 of 20). The playtest to ask for is on the board's Needs Input list.", "parent": "B1", "blocking": [], "repairRounds": 0, "involved": [{"role": "researched", "model": "Claude Sonnet (subagent)", "machine": "james-3080"},
    {"role":"implemented","model":"Grok (grok-4.7-build)","machine":"james-3080"},
