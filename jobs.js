@@ -1,5 +1,5 @@
 window.VOX_BOARD = {
-"updated": "2026-09-26 11:22 UTC",
+"updated": "2026-09-26 11:33 UTC",
 "machines": {
   "ben-3070": "Ben's Win (RTX 3070 8GB)",
   "james-3080": "James Win (RTX 3080 10GB)",
@@ -330,10 +330,11 @@ window.VOX_BOARD = {
 {"id": "F5", "title": "Sound", "round": "Round 1", "column": "backlog", "kind": "feature", "origin": "Nobody mentioned sound, because there isn't any.", "raisedBy": "the triage", "status": "Roadmap, not this round.", "repairRounds": 0,
  "involved": []},
 
-{"id": "F6", "title": "Save a template from a selection", "round": "Round 1", "column": "doing", "dispatched": "2026-09-26 00:23", "machine": "james-3080", "statusAuto": "reviewed:1", "prio": 2, "grade": "M", "kind": "feature", "origin": "Saving the whole table as a template is unusable while others are playing on it.", "raisedBy": "Ben", "summary": "Hold a key and click objects to select them, then save just those as a template.", "status": "Built; reviewed by 1 model; waiting for the orchestrator's check.", "repairRounds": 0,
+{"id": "F6", "title": "Save a template from a selection", "round": "Round 1", "column": "done", "forPlaytesters": "You can save just what you have selected as a template, not only the whole table: select bodies, parts or a brushed patch of voxels (any of the select tools), save, and place it back. It should come back as exactly what you selected, standing the way it was. Try a selection across two parts of a glued object.", "merged": "2026-09-26", "dispatched": "2026-09-26 00:23", "machine": "james-3080", "statusAuto": "merged:2026-09-26", "tokens": 39050551, "tokensWritten": 238841, "workMinutes": 102, "prio": 2, "grade": "M", "kind": "feature", "origin": "Saving the whole table as a template is unusable while others are playing on it.", "raisedBy": "Ben", "summary": "Hold a key and click objects to select them, then save just those as a template.", "summary": "Templates can be saved from a selection: whole bodies, parts of a glued object, or a brushed patch of voxels, and they place back in the arrangement they were cut from.", "status": "Merged 2026-09-26: built by Space Bunny; Grok review found masks sent to the wrong part and a placement offset (real), repaired by Space Bunny; shots looked at by the orchestrator.", "repairRounds": 1,
  "involved": [
    {"role":"implemented","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"},
-   {"role":"reviewed","model":"Grok (grok-4.5)","machine":"james-3080"}
+   {"role":"reviewed","model":"Grok (grok-4.5)","machine":"james-3080"},
+   {"role":"repaired","model":"OpenRouter stealth/space-bunny-alpha","machine":"james-3080"}
  ]},
 
 {"id": "F8", "title": "Round things bounce like balls", "round": "Round 1", "column": "done", "merged": "2026-09-26", "dispatched": "2026-09-26 02:24", "machine": "james-3080", "statusAuto": "merged:2026-09-26", "tokens": 14242758, "tokensWritten": 80046, "workMinutes": 55, "prio": 3, "grade": "M", "kind": "feature", "origin": "A voxel sphere's flat facets knock a rubber ball sideways on its second bounce. Ben asked for a neat solution.", "raisedBy": "Ben", "summary": "The game measures how round each object is when it is made; very round things get a true sphere collider, and nearly round ones bounce more smoothly.", "status": "Merged 2026-09-26.", "repairRounds": 0,
@@ -722,6 +723,9 @@ window.VOX_BOARD = {
  ]},
 
 {"id": "F3c1", "title": "the see-through rule on Ben's nine pictures (measure only)", "round": "Round 1", "column": "doing", "dispatched": "2026-09-26 09:36", "kind": "feature", "grade": "M", "origin": "F3b's rule (see_through(), DESIGN 6.53-6.55) was tuned on one glass picture, the bottle. Ben's answer 2 (docs/design/F3b-see-through.md, \"Ben's answers\") prefers air behind the glass over clear fill, \"with more glass pictures to test it on\"; F3b chose clear fill because air was fragile on the bottle (a threshold of...", "raisedBy": "Ben", "parent": "F3c", "machine": "ben-3070", "status": "Claimed by Ben's Win (RTX 3070 8GB); starting.", "statusAuto": "claimed:ben-3070", "repairRounds": 0,
+ "involved": []},
+
+{"id": "C3", "title": "Screenshots on tasks", "round": "Round 1", "column": "concepts", "kind": "concept", "origin": "Ben's own idea, kept as he said it, parked until he is ready to flesh it out.", "raisedBy": "Ben", "summary": "Screenshots get attached to tasks (the jobs board card/dialog) so Ben can check them out later, instead of them living only in a worktree's Saved/Shots on one PC.", "status": "Open: not designed yet.", "repairRounds": 0,
  "involved": []}
 ]
 };
