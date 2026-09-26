@@ -1,5 +1,5 @@
 window.VOX_BOARD = {
-"updated": "2026-09-26 21:07 UTC",
+"updated": "2026-09-26 21:13 UTC",
 "machines": {
   "ben-3070": "Ben's Win (RTX 3070 8GB)",
   "james-3080": "James Win (RTX 3080 10GB)",
@@ -795,9 +795,10 @@ window.VOX_BOARD = {
 {"id": "C9", "title": "Colour variants in a .vxb", "round": "Round 1", "column": "concepts", "kind": "concept", "origin": "Ben's own idea, kept as he said it, parked until he is ready to flesh it out.", "raisedBy": "Ben", "summary": "One .vxb shape with several saved colour sets (a red ball and a blue ball share one file), stored as differences from the base; with many sets, order the diffs by fewest changes. Colours could then be swapped by script or animation. Further: a streamed-colour object (Ben suggested .vbv; perhaps .vxv to match .vxb/.vxc) whose defined area takes colours streamed in, e.g. a 1920x1080 plane of voxels showing video, one voxel per pixel. Needs discussion and performance tests.", "status": "Open: not designed yet.", "repairRounds": 0,
  "involved": []},
 
-{"id": "F3c2", "title": "air behind the glass (a switch, measured on the kept pictures)", "round": "Round 1", "column": "doing", "dispatched": "2026-09-26 20:04", "kind": "feature", "grade": "M", "origin": "F3b fills the space behind a pane of glass with clear fill: see-through voxels that copy the pane's colour. Ben prefers air there -- a bottle becomes a thin shell with its scene inside, which falls out when smashed.", "raisedBy": "Ben", "parent": "F3c", "machine": "james-3080", "status": "Being built by OpenRouter stealth/space-bunny-alpha on Ben's Win (RTX 3070 8GB).", "statusAuto": "building:OpenRouter stealth/space-bunny-alpha@ben-3070", "handedFrom": "ben-3070", "repairRounds": 0,
+{"id": "F3c2", "title": "air behind the glass (a switch, measured on the kept pictures)", "round": "Round 1", "column": "doing", "dispatched": "2026-09-26 20:04", "kind": "feature", "grade": "M", "origin": "F3b fills the space behind a pane of glass with clear fill: see-through voxels that copy the pane's colour. Ben prefers air there -- a bottle becomes a thin shell with its scene inside, which falls out when smashed.", "raisedBy": "Ben", "parent": "F3c", "machine": "james-3080", "status": "Built; reviewed by 1 model; waiting for the orchestrator's check.", "statusAuto": "reviewed:1", "handedFrom": "ben-3070", "repairRounds": 0,
  "involved": [
-   {"role":"implemented","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"}
+   {"role":"implemented","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"},
+   {"role":"reviewed","model":"Grok (grok-4.5)","machine":"james-3080"}
  ]},
 
 {"id": "B18", "title": "a fresh PC asks for the Visual C++ Redistributable before the game will start", "round": "Round 1", "column": "doing", "dispatched": "2026-09-26 21:06", "kind": "feature", "grade": "S", "origin": "James ran a packaged build on another PC and Windows refused to start it until he installed the \"Microsoft Visual C++ 2015-2022 Redistributable (x64)\". Every Visual Studio build needs Microsoft's C++ runtime DLLs (vcruntime140.dll, msvcp140.dll, the Universal CRT); that means the game and the generator DLL (generato...", "raisedBy": "Ben", "machine": "james-3080", "status": "Claimed by James Win (RTX 3080 10GB); starting.", "statusAuto": "claimed:james-3080", "prio": 2, "repairRounds": 0,
