@@ -1,5 +1,5 @@
 window.VOX_BOARD = {
-"updated": "2026-09-26 02:24 UTC",
+"updated": "2026-09-26 02:29 UTC",
 "machines": {
   "ben-3070": "Ben's Win (RTX 3070 8GB)",
   "james-3080": "James Win (RTX 3080 10GB)",
@@ -295,10 +295,11 @@ window.VOX_BOARD = {
    {"role":"reviewed","model":"deepseek-flash","machine":"ben-3070"}
  ]},
 
-{"id": "F7k", "title": "Keep a glued build as a library object", "round": "Round 1", "column": "doing", "statusAuto": "building:Grok (grok-4.7)@james-3080", "dispatched": "2026-09-25 23:30", "machine": "james-3080", "kind": "feature", "grade": "L", "origin": "Part of F7.", "raisedBy": "Ben", "summary": "Press K on something you glued together to save it to your library as one object.", "status": "Being built by Grok (grok-4.7) on James Win (RTX 3080 10GB).", "parent": "F7", "blocking": ["F26"], "repairRounds": 0,
+{"id": "F7k", "title": "Keep a glued build as a library object", "round": "Round 1", "column": "doing", "statusAuto": "reviewed:1", "dispatched": "2026-09-25 23:30", "machine": "james-3080", "kind": "feature", "grade": "L", "origin": "Part of F7.", "raisedBy": "Ben", "summary": "Press K on something you glued together to save it to your library as one object.", "status": "Built; reviewed by 1 model; waiting for the orchestrator's check.", "parent": "F7", "blocking": ["F26"], "repairRounds": 0,
  "involved": [
    {"role":"researched","model":"Claude Opus (subagent)","machine":"ben-3070"},
-   {"role":"implemented","model":"Grok (grok-4.7)","machine":"james-3080"}
+   {"role":"implemented","model":"Grok (grok-4.7)","machine":"james-3080"},
+   {"role":"reviewed","model":"Grok (grok-4.7)","machine":"james-3080"}
  ]},
 
 {"id": "F7f", "title": "Glued builds stay light", "round": "Round 1", "column": "done", "statusAuto": "merged:2026-09-24", "merged": "2026-09-24 21:36", "machine": "ben-3070", "dispatched": "2026-09-24 07:53", "kind": "feature", "grade": "M", "origin": "Part of F7.", "raisedBy": "Ben", "summary": "Parts that line up exactly on the voxel grid -- the same size and material, whole quarter turns apart, whole voxels apart, and unpainted (or cut from the same object and put back where they were) -- are folded into one part when glued, so a wall of 64 crates is one part, not 64. Erase still restores exactly what was there.", "status": "Merged. Built and tested by script (64-crate wall -> 1 part, erase round-trip, all 24 turns in the unit test); the picture was looked at. Not yet played, and not yet tried between two players.", "parent": "F7", "repairRounds": 2,
