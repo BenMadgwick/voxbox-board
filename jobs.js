@@ -1,5 +1,5 @@
 window.VOX_BOARD = {
-"updated": "2026-09-26 08:38 UTC",
+"updated": "2026-09-26 09:10 UTC",
 "machines": {
   "ben-3070": "Ben's Win (RTX 3070 8GB)",
   "james-3080": "James Win (RTX 3080 10GB)",
@@ -708,6 +708,9 @@ window.VOX_BOARD = {
  "involved": []},
 
 {"id": "C2", "title": "Small pieces burst into cube particles", "round": "Round 1", "column": "closed", "closedAs": "Became F29: fleshed out into a task.", "fleshedInto": "F29", "kind": "concept", "origin": "Ben's own idea, kept as he said it, parked until he is ready to flesh it out.", "raisedBy": "Ben", "summary": "Small pieces burst into cube particles (Ben, 2026-09-22). When a small piece is shot or smashed, or a break leaves dust (today: pieces under 40 voxels, and all beyond the largest 20, simply vanish -- fracture.h min_voxels/max_pieces), spawn cube particles instead of new bodies or nothing: one per voxel (or a sample), in the voxels' own colours (the dust's voxels are known at the break, so the colour array is exact, not approximated), scattered from the impact with the piece's velocity, fading out and despawning after a few seconds. Cheap, and looks exactly right for voxels. Questions for the design: an AVoxFx Niagara or instanced-cube system (must render in Shipping, not DrawDebug*); a size threshold for \"burst instead of fracture\" on already-small bodies; a particle cap; clients spawn their own from the break replay (no network cost).", "status": "Fleshed out into F29.", "repairRounds": 0,
+ "involved": []},
+
+{"id": "D14", "title": "parents show their size and their models, bars carry counts, and closing goes up a level", "round": "Round 1", "column": "doing", "dispatched": "2026-09-26 09:09", "kind": "feature", "grade": "M", "origin": "Ben navigates the board by parents. Four things get in his way:", "raisedBy": "Ben", "machine": "ben-3070", "status": "Claimed by Ben's Win (RTX 3070 8GB); starting.", "statusAuto": "claimed:ben-3070", "repairRounds": 0,
  "involved": []}
 ]
 };
