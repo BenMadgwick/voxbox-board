@@ -1,5 +1,5 @@
 window.VOX_BOARD = {
-"updated": "2026-09-26 06:04 UTC",
+"updated": "2026-09-26 06:05 UTC",
 "machines": {
   "ben-3070": "Ben's Win (RTX 3070 8GB)",
   "james-3080": "James Win (RTX 3080 10GB)",
@@ -559,7 +559,7 @@ window.VOX_BOARD = {
    {"role":"reviewed","model":"Claude Opus (orchestrator)","machine":"james-3080"}
  ]},
 
-{"id": "F24", "title": "Voxels raining behind the main menu", "round": "Round 1", "column": "todo", "machine": "james-3080", "kind": "feature", "origin": "Ben, 24 September: random-material voxels rain behind the menu buttons, some bounce off them, the mouse parts them like a hand under a waterfall.", "raisedBy": "Ben", "summary": "Random-material voxels rain behind the menu buttons, bounce off them, and part around the mouse; a corner slider sets the intensity, and Options can turn it all off.", "status": "Approved: waits for the cube particle system (F29a).", "blocking": ["F24b"], "repairRounds": 0, "involved": []},
+{"id": "F24", "title": "Voxels raining behind the main menu", "round": "Round 1", "column": "doing", "dispatched": "2026-09-26 06:05", "machine": "james-3080", "kind": "feature", "origin": "Ben, 24 September: random-material voxels rain behind the menu buttons, some bounce off them, the mouse parts them like a hand under a waterfall.", "raisedBy": "Ben", "summary": "Random-material voxels rain behind the menu buttons, bounce off them, and part around the mouse; a corner slider sets the intensity, and Options can turn it all off.", "status": "Claimed by James Win (RTX 3080 10GB); starting.", "blocking": ["F24b"], "statusAuto": "claimed:james-3080", "repairRounds": 0, "involved": []},
 {"id": "F25", "title": "Pick out parts of an object", "round": "Round 1", "column": "done", "merged": "2026-09-25", "statusAuto": "merged:2026-09-25", "machine": "ben-3070", "dispatched": "2026-09-25 06:20", "kind": "feature", "grade": "L", "origin": "Ben, 24 September: a generated dinner table comes as one object; he wants to pick out a wine glass, keep it on its own, or make it a separate part of the table that can be glass while the table stays wood.", "raisedBy": "Ben", "summary": "A Parts tool: hover to light up the parts of an object, click to pick one, or select voxels with a colour wand (drag up and down to grow or shrink it) or a ball or cube brush, Shift to add and Ctrl to remove. Then keep the selection as its own library object, make it a separate part in place (nothing visibly changes), or give a part its own material so it breaks like glass, wood or metal.", "status": "Being built by OpenRouter stealth/space-bunny-alpha on Ben's Win (RTX 3070 8GB).", "tokens": 52928903, "tokensWritten": 368200, "workMinutes": 172, "repairRounds": 1, "involved": [
    {"role":"implemented","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"},
    {"role":"reviewed","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"},
