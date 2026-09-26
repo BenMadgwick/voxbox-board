@@ -1,5 +1,5 @@
 window.VOX_BOARD = {
-"updated": "2026-09-26 02:20 UTC",
+"updated": "2026-09-26 02:24 UTC",
 "machines": {
   "ben-3070": "Ben's Win (RTX 3070 8GB)",
   "james-3080": "James Win (RTX 3080 10GB)",
@@ -329,7 +329,7 @@ window.VOX_BOARD = {
 {"id": "F6", "title": "Save a template from a selection", "round": "Round 1", "column": "doing", "dispatched": "2026-09-26 00:23", "machine": "ben-3070", "statusAuto": "claimed:ben-3070", "prio": 2, "grade": "M", "kind": "feature", "origin": "Saving the whole table as a template is unusable while others are playing on it.", "raisedBy": "Ben", "summary": "Hold a key and click objects to select them, then save just those as a template.", "status": "Claimed by Ben's Win (RTX 3070 8GB); starting.", "repairRounds": 0,
  "involved": []},
 
-{"id": "F8", "title": "Round things bounce like balls", "round": "Round 1", "column": "todo", "prio": 3, "grade": "M", "kind": "feature", "origin": "A voxel sphere's flat facets knock a rubber ball sideways on its second bounce. Ben asked for a neat solution.", "raisedBy": "Ben", "summary": "The game measures how round each object is when it is made; very round things get a true sphere collider, and nearly round ones bounce more smoothly.", "status": "Approved; ready to start (Ben moved it from the backlog, 25 Sep).", "repairRounds": 0,
+{"id": "F8", "title": "Round things bounce like balls", "round": "Round 1", "column": "doing", "dispatched": "2026-09-26 02:24", "machine": "james-3080", "statusAuto": "claimed:james-3080", "prio": 3, "grade": "M", "kind": "feature", "origin": "A voxel sphere's flat facets knock a rubber ball sideways on its second bounce. Ben asked for a neat solution.", "raisedBy": "Ben", "summary": "The game measures how round each object is when it is made; very round things get a true sphere collider, and nearly round ones bounce more smoothly.", "status": "Claimed by James Win (RTX 3080 10GB); starting.", "repairRounds": 0,
  "involved": []},
 
 {"id": "F9", "title": "Primitives: place, then scale; colour before spawning", "round": "Round 1", "column": "backlog", "kind": "feature", "origin": "Place a primitive and then scale it (growing it with more voxels, not stretching), and choose its colour before spawning.", "raisedBy": "Ben", "status": "Roadmap; Ben has more ideas.", "repairRounds": 0,
