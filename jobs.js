@@ -1,5 +1,5 @@
 window.VOX_BOARD = {
-"updated": "2026-09-25 23:48 UTC",
+"updated": "2026-09-26 00:24 UTC",
 "machines": {
   "ben-3070": "Ben's Win (RTX 3070 8GB)",
   "james-3080": "James Win (RTX 3080 10GB)",
@@ -325,7 +325,7 @@ window.VOX_BOARD = {
 {"id": "F5", "title": "Sound", "round": "Round 1", "column": "backlog", "kind": "feature", "origin": "Nobody mentioned sound, because there isn't any.", "raisedBy": "the triage", "status": "Roadmap, not this round.", "repairRounds": 0,
  "involved": []},
 
-{"id": "F6", "title": "Save a template from a selection", "round": "Round 1", "column": "todo", "prio": 2, "grade": "M", "kind": "feature", "origin": "Saving the whole table as a template is unusable while others are playing on it.", "raisedBy": "Ben", "summary": "Hold a key and click objects to select them, then save just those as a template.", "status": "Approved; ready to start (Ben, 25 Sep: with every F25 select tool, the wand included).", "repairRounds": 0,
+{"id": "F6", "title": "Save a template from a selection", "round": "Round 1", "column": "doing", "statusAuto": "claimed:ben-3070", "machine": "ben-3070", "dispatched": "2026-09-26 00:23", "prio": 2, "grade": "M", "kind": "feature", "origin": "Saving the whole table as a template is unusable while others are playing on it.", "raisedBy": "Ben", "summary": "Hold a key and click objects to select them, then save just those as a template.", "status": "Claimed by Ben's Win (RTX 3070 8GB); starting.", "repairRounds": 0,
  "involved": []},
 
 {"id": "F8", "title": "Round things bounce like balls", "round": "Round 1", "column": "todo", "prio": 3, "grade": "M", "kind": "feature", "origin": "A voxel sphere's flat facets knock a rubber ball sideways on its second bounce. Ben asked for a neat solution.", "raisedBy": "Ben", "summary": "The game measures how round each object is when it is made; very round things get a true sphere collider, and nearly round ones bounce more smoothly.", "status": "Approved; ready to start (Ben moved it from the backlog, 25 Sep).", "repairRounds": 0,
@@ -564,7 +564,7 @@ window.VOX_BOARD = {
    {"role":"implemented","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"},
    {"role":"reviewed","model":"Claude Opus (orchestrator)","machine":"ben-3070"}
  ]},
-{"id": "F10b", "title": "Growing and restoring in the game and on friends' screens", "round": "Round 1", "column": "doing", "statusAuto": "repaired:OpenRouter stealth/space-bunny-alpha@ben-3070", "machine": "ben-3070", "dispatched": "2026-09-25 05:46", "kind": "feature", "grade": "L", "origin": "Part of F10.", "raisedBy": "Ben", "summary": "The host grows or restores an object in place without it jumping or dropping quick strokes, and everyone else's copy follows exactly, including objects made of several parts.", "status": "In its repair round.", "parent": "F10", "repairRounds": 0, "blockedBy": [], "blocking": ["F10c"], "involved": [
+{"id": "F10b", "title": "Growing and restoring in the game and on friends' screens", "round": "Round 1", "column": "doing", "statusAuto": "building:OpenRouter stealth/space-bunny-alpha@ben-3070", "machine": "ben-3070", "dispatched": "2026-09-25 05:46", "kind": "feature", "grade": "L", "origin": "Part of F10.", "raisedBy": "Ben", "summary": "The host grows or restores an object in place without it jumping or dropping quick strokes, and everyone else's copy follows exactly, including objects made of several parts.", "status": "Being built by OpenRouter stealth/space-bunny-alpha on Ben's Win (RTX 3070 8GB).", "parent": "F10", "repairRounds": 0, "blockedBy": [], "blocking": ["F10c"], "involved": [
    {"role":"implemented","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"},
    {"role":"reviewed","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"},
    {"role":"repaired","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"}
