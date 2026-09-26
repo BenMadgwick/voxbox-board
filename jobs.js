@@ -1,5 +1,5 @@
 window.VOX_BOARD = {
-"updated": "2026-09-26 03:34 UTC",
+"updated": "2026-09-26 03:42 UTC",
 "machines": {
   "ben-3070": "Ben's Win (RTX 3070 8GB)",
   "james-3080": "James Win (RTX 3080 10GB)",
@@ -327,7 +327,7 @@ window.VOX_BOARD = {
 {"id": "F5", "title": "Sound", "round": "Round 1", "column": "backlog", "kind": "feature", "origin": "Nobody mentioned sound, because there isn't any.", "raisedBy": "the triage", "status": "Roadmap, not this round.", "repairRounds": 0,
  "involved": []},
 
-{"id": "F6", "title": "Save a template from a selection", "round": "Round 1", "column": "doing", "dispatched": "2026-09-26 00:23", "machine": "ben-3070", "statusAuto": "building:OpenRouter stealth/space-bunny-alpha@ben-3070", "prio": 2, "grade": "M", "kind": "feature", "origin": "Saving the whole table as a template is unusable while others are playing on it.", "raisedBy": "Ben", "summary": "Hold a key and click objects to select them, then save just those as a template.", "status": "Being built by OpenRouter stealth/space-bunny-alpha on Ben's Win (RTX 3070 8GB).", "repairRounds": 0,
+{"id": "F6", "title": "Save a template from a selection", "round": "Round 1", "column": "doing", "dispatched": "2026-09-26 00:23", "machine": "james-3080", "statusAuto": "building:OpenRouter stealth/space-bunny-alpha@ben-3070", "prio": 2, "grade": "M", "kind": "feature", "origin": "Saving the whole table as a template is unusable while others are playing on it.", "raisedBy": "Ben", "summary": "Hold a key and click objects to select them, then save just those as a template.", "status": "Being built by OpenRouter stealth/space-bunny-alpha on Ben's Win (RTX 3070 8GB).", "repairRounds": 0,
  "involved": [
    {"role":"implemented","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"}
  ]},
