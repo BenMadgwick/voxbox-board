@@ -90,7 +90,7 @@ window.VOX_BOARD = {
    {"role":"reviewed","model":"Claude Opus","machine":"ben-3070"}
  ]},
 
-{"id": "F3", "title": "See-through objects", "round": "Round 1", "column": "doing", "statusAuto": "tasks:4/5", "machine": "james-3080", "kind": "feature", "origin": "The generator (TRELLIS) works out how see-through each voxel is, but the game throws that away. Ben: \"Trellis should do see-through ok\".", "raisedBy": "Ben", "summary": "Split in two: first measure whether the see-through data is good enough to be worth keeping (F3a), then build the real feature from those numbers (F3b).", "status": "4 of 5 tasks done.", "repairRounds": 0,
+{"id": "F3", "title": "See-through objects", "round": "Round 1", "column": "doing", "statusAuto": "tasks:4/6", "machine": "james-3080", "kind": "feature", "origin": "The generator (TRELLIS) works out how see-through each voxel is, but the game throws that away. Ben: \"Trellis should do see-through ok\".", "raisedBy": "Ben", "summary": "Split in two: first measure whether the see-through data is good enough to be worth keeping (F3a), then build the real feature from those numbers (F3b).", "status": "4 of 6 tasks done.", "repairRounds": 0,
  "involved": [
    {"role":"researched","model":"Claude Opus (orchestrator)","machine":"ben-3070"}
  ]},
@@ -109,7 +109,7 @@ window.VOX_BOARD = {
    {"role":"researched","model":"Claude Opus (subagent)","machine":"ben-3070"}
  ]},
 
-{"id": "F3c", "title": "Air behind glass, not clear filling", "round": "Round 1", "column": "doing", "kind": "feature", "origin": "F3b fills the space behind glass with clear glass, because telling trapped air apart reliably proved fragile. Ben would rather it were air.", "raisedBy": "Ben", "summary": "Work out reliably which voxels behind glass are air, so a bottle is hollow instead of full of clear glass.", "status": "0 of 1 tasks done.", "parent": "F3", "machine": "ben-3070", "statusAuto": "tasks:0/1", "repairRounds": 0,
+{"id": "F3c", "title": "Air behind glass, not clear filling", "round": "Round 1", "column": "doing", "kind": "feature", "origin": "F3b fills the space behind glass with clear glass, because telling trapped air apart reliably proved fragile. Ben would rather it were air.", "raisedBy": "Ben", "summary": "Work out reliably which voxels behind glass are air, so a bottle is hollow instead of full of clear glass.", "status": "0 of 2 tasks done.", "parent": "F3", "machine": "ben-3070", "statusAuto": "tasks:0/2", "repairRounds": 0,
  "involved": []},
 
 {"id": "F3b2", "title": "Work out which voxels are see-through", "round": "Round 1", "column": "done", "statusAuto": "merged:2026-09-24", "machine": "ben-3070", "dispatched": "2026-09-24 15:52", "kind": "feature", "grade": "L", "origin": "The first half of F3b: something has to turn the generator's see-through numbers into a yes-or-no rule before anything can be drawn with them.", "raisedBy": "Ben", "summary": "The game can now tell which outer voxels of a generated object are glass and which are empty space the generator filled in, and rebuild the inside to match. Nothing uses it yet: hooking it into generation is the next part (F3b4).", "status": "Merged. Checked against the 22 real pictures from F3a; nothing to see in the game yet.", "parent": "F3b", "blocking": [], "repairRounds": 0,
@@ -787,6 +787,9 @@ window.VOX_BOARD = {
  "involved": []},
 
 {"id": "C9", "title": "Colour variants in a .vxb", "round": "Round 1", "column": "concepts", "kind": "concept", "origin": "Ben's own idea, kept as he said it, parked until he is ready to flesh it out.", "raisedBy": "Ben", "summary": "One .vxb shape with several saved colour sets (a red ball and a blue ball share one file), stored as differences from the base; with many sets, order the diffs by fewest changes. Colours could then be swapped by script or animation. Further: a streamed-colour object (Ben suggested .vbv; perhaps .vxv to match .vxb/.vxc) whose defined area takes colours streamed in, e.g. a 1920x1080 plane of voxels showing video, one voxel per pixel. Needs discussion and performance tests.", "status": "Open: not designed yet.", "repairRounds": 0,
+ "involved": []},
+
+{"id": "F3c2", "title": "air behind the glass (a switch, measured on the kept pictures)", "round": "Round 1", "column": "doing", "dispatched": "2026-09-26 20:04", "kind": "feature", "grade": "M", "origin": "F3b fills the space behind a pane of glass with clear fill: see-through voxels that copy the pane's colour. Ben prefers air there -- a bottle becomes a thin shell with its scene inside, which falls out when smashed.", "raisedBy": "Ben", "parent": "F3c", "machine": "ben-3070", "status": "Claimed by Ben's Win (RTX 3070 8GB); starting.", "statusAuto": "claimed:ben-3070", "repairRounds": 0,
  "involved": []}
 ]
 };
