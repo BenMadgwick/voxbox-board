@@ -1,5 +1,5 @@
 window.VOX_BOARD = {
-"updated": "2026-09-26 04:32 UTC",
+"updated": "2026-09-26 06:04 UTC",
 "machines": {
   "ben-3070": "Ben's Win (RTX 3070 8GB)",
   "james-3080": "James Win (RTX 3080 10GB)",
@@ -333,7 +333,7 @@ window.VOX_BOARD = {
    {"role":"implemented","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"}
  ]},
 
-{"id": "F8", "title": "Round things bounce like balls", "round": "Round 1", "column": "doing", "dispatched": "2026-09-26 02:24", "machine": "james-3080", "statusAuto": "reviewed:1", "prio": 3, "grade": "M", "kind": "feature", "origin": "A voxel sphere's flat facets knock a rubber ball sideways on its second bounce. Ben asked for a neat solution.", "raisedBy": "Ben", "summary": "The game measures how round each object is when it is made; very round things get a true sphere collider, and nearly round ones bounce more smoothly.", "status": "Built; reviewed by 1 model; waiting for the orchestrator's check.", "repairRounds": 0,
+{"id": "F8", "title": "Round things bounce like balls", "round": "Round 1", "column": "done", "merged": "2026-09-26", "dispatched": "2026-09-26 02:24", "machine": "james-3080", "statusAuto": "merged:2026-09-26", "tokens": 14242758, "tokensWritten": 80046, "workMinutes": 55, "prio": 3, "grade": "M", "kind": "feature", "origin": "A voxel sphere's flat facets knock a rubber ball sideways on its second bounce. Ben asked for a neat solution.", "raisedBy": "Ben", "summary": "The game measures how round each object is when it is made; very round things get a true sphere collider, and nearly round ones bounce more smoothly.", "status": "Claimed by James Win (RTX 3080 10GB); starting.", "repairRounds": 0,
  "involved": [
    {"role":"implemented","model":"OpenRouter stealth/space-bunny-alpha","machine":"james-3080"},
    {"role":"reviewed","model":"Grok (grok-4.5)","machine":"james-3080"}
