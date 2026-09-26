@@ -6,7 +6,8 @@
 // with no children, however deep (in F1 > F1a, F1b > F1a1, F1a2 the tasks are F1a1, F1a2 and
 // F1b -- three of them; F1a is a grouping and is not one). A grouping's column, its state bar
 // and its Needs Input badge all come from the tasks under it, so a parent is never a hand-kept
-// column that has to be remembered after every dispatch and merge.
+// column that has to be remembered after every dispatch and merge. Since D14 the same
+// everything-under-it idea gives a parent its size (tokensOf) and its models (modelsUnder).
 //
 // These functions are the whole of it, and they are here rather than in the page so that
 // tools/board_check.js can check the page and tools/board_sync.ps1 against the same rules.
@@ -82,9 +83,12 @@
   }
   // The words in the bar's tooltip, so the numbers are readable without seeing the colours.
   var STATE_WORDS = { done: "done", doing: "in progress", todo: "to do", backlog: "in the backlog", closed: "closed" };
+  // One segment's own tooltip, used when a segment is too narrow to hold its number: "3 in
+  // progress" says the same thing without the digit being there to read.
+  function segTitle(s) { return s.n + " " + STATE_WORDS[s.state]; }
   function barTitle(bar) {
     if (!bar) return "";
-    return bar.segments.map(function (s) { return s.n + " " + STATE_WORDS[s.state]; }).join(", ") +
+    return bar.segments.map(segTitle).join(", ") +
       " (" + bar.total + (bar.total === 1 ? " task)" : " tasks)");
   }
 
@@ -234,6 +238,60 @@
     return out;
   }
 
+  // --- A parent's size, and its models (docs/design/D14-board-parent-rollups.md) ---------
+  //
+  // Two things Ben cannot see from a card: how big the work under it was, and which models
+  // touched it at all. Both are the same kind of thing -- everything beneath a job, at every
+  // depth, added up or collected -- and both are here rather than in the page so that
+  // tools/board_check.js can check the page against them.
+
+  // How big the work under a job was: its own tokens plus every descendant's, at every depth,
+  // groupings included (a grouping usually has none of its own, but if a run was recorded
+  // against it, it counts). soFar says the figure is only what has been spent so far, because
+  // something under it has not merged. Note what it can and cannot count: board_sync.ps1 writes
+  // a job's tokens only once that job has merged (D13's rule, that a card in flight is not
+  // spent yet), so a parent still in progress counts the tasks that have finished and not the
+  // run happening now.
+  function tokensOf(jobs, id) {
+    var byId = byIdOf(jobs), seen = {}, total = 0, soFar = false, counted = 0;
+    (function walk(here) {
+      if (seen[here]) return;
+      seen[here] = true;
+      var j = byId[here];
+      if (!j) return;
+      if (j.tokens) { total += j.tokens; counted += 1; }
+      if (j.column !== "done" && j.column !== "closed") soFar = true;
+      childrenOf(jobs, here).forEach(function (k) { walk(k.id); });
+    })(id);
+    return { total: total, soFar: soFar, jobs: counted };
+  }
+
+  // Which models have touched a job: every model named in the "involved" list of the job
+  // itself or of anything beneath it, at every depth. Distinct, in the order the tree is
+  // walked -- the job's own entries first, then its children, each in the order the ledger
+  // put them down. No counts and no shares: only which, because the question Ben is asking
+  // is who was ever on this job, and one model on its own is worth following up.
+  function modelsUnder(jobs, id) {
+    var byId = byIdOf(jobs), out = [], seen = {};
+    (function walk(here) {
+      if (seen[here]) return;
+      seen[here] = true;
+      var j = byId[here];
+      if (!j) return;
+      (j.involved || []).forEach(function (e) {
+        if (e.model && out.indexOf(e.model) < 0) out.push(e.model);
+      });
+      childrenOf(jobs, here).forEach(function (k) { walk(k.id); });
+    })(id);
+    return out;
+  }
+  // The one model, when there is exactly one: a job only one model ever touched is the case
+  // the page marks, so that a single-model job stands out in a column of mixed ones.
+  function onlyModelUnder(jobs, id) {
+    var m = modelsUnder(jobs, id);
+    return m.length === 1 ? m[0] : null;
+  }
+
   return {
     STATES: STATES,
     byIdOf: byIdOf,
@@ -245,6 +303,7 @@
     barTitle: barTitle,
     columnForTasks: columnForTasks,
     columnFor: columnFor,
+    segTitle: segTitle,
     questionUnder: questionUnder,
     questionsUnder: questionsUnder,
     KINDS: KINDS,
@@ -259,6 +318,9 @@
     waitedFor: waitedFor,
     blocksOf: blocksOf,
     cardOf: cardOf,
-    machinesUnder: machinesUnder
+    machinesUnder: machinesUnder,
+    tokensOf: tokensOf,
+    modelsUnder: modelsUnder,
+    onlyModelUnder: onlyModelUnder
   };
 });

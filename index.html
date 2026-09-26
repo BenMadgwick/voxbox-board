@@ -14,6 +14,10 @@
   --ground:#edf0f3; --surface:#ffffff; --sunk:#e3e8ed; --ink:#17202b; --muted:#566476; --line:#d3dae2;
   --accent:#0e7c86; --accent-ink:#ffffff;
   --done:#2c8a57; --doing:#b87211; --todo:#3461c4; --backlog:#6f5fa3; --closed:#7d8794; --concept:#a3468a;
+  /* The ink of a number drawn on a state colour in the bar (D14). Dark ink on the two light
+     segments, white on the three dark ones: board_check.js measures every pair and fails below
+     4:1, which is the floor for a digit this size. */
+  --done-ink:#ffffff; --doing-ink:#101820; --todo-ink:#ffffff; --backlog-ink:#ffffff; --closed-ink:#101820;
   --tile-top:#ffffff; --tile-side:#c6d0da;
   --shadow:0 1px 2px rgba(23,32,43,.06),0 6px 18px rgba(23,32,43,.06);
   --display:"Bricolage Grotesque","Segoe UI",system-ui,sans-serif;
@@ -25,6 +29,7 @@
     --ground:#0f141a; --surface:#172029; --sunk:#1e2833; --ink:#e5eaf0; --muted:#98a6b5; --line:#2a3642;
     --accent:#4cc0c8; --accent-ink:#06282b;
     --done:#5cc58a; --doing:#e6a547; --todo:#7ea2f0; --backlog:#a898dc; --closed:#95a0ad; --concept:#dd8ecb;
+    --done-ink:#101820; --doing-ink:#101820; --todo-ink:#101820; --backlog-ink:#101820; --closed-ink:#101820;
     --tile-top:#243140; --tile-side:#0a0f14;
     --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 22px rgba(0,0,0,.25);
   }
@@ -33,6 +38,7 @@
   --ground:#0f141a; --surface:#172029; --sunk:#1e2833; --ink:#e5eaf0; --muted:#98a6b5; --line:#2a3642;
   --accent:#4cc0c8; --accent-ink:#06282b;
   --done:#5cc58a; --doing:#e6a547; --todo:#7ea2f0; --backlog:#a898dc; --closed:#95a0ad; --concept:#dd8ecb;
+  --done-ink:#101820; --doing-ink:#101820; --todo-ink:#101820; --backlog-ink:#101820; --closed-ink:#101820;
   --tile-top:#243140; --tile-side:#0a0f14;
   --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 22px rgba(0,0,0,.25);
 }
@@ -69,9 +75,15 @@ select{max-width:100%;font:500 14px var(--body);color:var(--ink);background:var(
 .head{display:grid;gap:6px}
 /* The state bar (docs/design/D11-board-parents.md): one segment per state, in proportion to
    how many of this job's tasks are in it -- a card for F10 is a third done, a third in
-   progress, a third to do. Closed tasks are left out unless they are all there is. */
-.bar{display:flex;gap:2px;height:7px;border-radius:4px;overflow:hidden;background:var(--sunk)}
-.bar i{display:block;height:100%;background:var(--bc)}
+   progress, a third to do. Closed tasks are left out unless they are all there is. Since D14
+   each segment also carries its own count, so the bar can be read without the colours: it is
+   tall enough for a digit, and the ink is the one that reads on that state colour (see the
+   --*-ink values above). A segment too narrow to hold its number keeps its tooltip instead,
+   which fitBarNumbers() decides by measuring, after the bar is on the page. */
+.bar{display:flex;gap:2px;height:16px;border-radius:5px;overflow:hidden;background:var(--sunk)}
+.bar i{display:flex;align-items:center;justify-content:center;min-width:0;overflow:hidden;background:var(--bc);color:var(--bi)}
+.bar i b{font:700 11px/1 var(--mono);color:inherit}
+.bar i.narrow b{display:none}
 .id{font:700 13px/1 var(--mono);color:var(--ink);background:var(--tile-top);border:1px solid var(--line);border-radius:5px;padding:5px 7px;box-shadow:2px 2px 0 var(--tile-side),inset 0 -2px 0 var(--c)}
 .kind{font:600 11px/1 var(--body);text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
 .grade{margin-left:auto;font:500 11px/1 var(--mono);color:var(--muted);border:1px solid var(--line);border-radius:4px;padding:3px 5px}
@@ -82,6 +94,10 @@ select{max-width:100%;font:500 14px var(--body);color:var(--ink);background:var(
 .meta .on{color:var(--muted)}
 .chip{display:inline-flex;align-items:center;gap:5px;font:500 12px/1 var(--body);padding:5px 8px;border-radius:999px;background:var(--sunk);color:var(--ink);white-space:nowrap}
 .chip.m::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--mc)}
+/* Which models have touched a job (D14): the chips as they are on a dialog, on a parent's
+   card too. One model on its own is marked "only", so a job that was worked by one model
+   throughout stands out in a column of mixed ones. */
+.models{display:inline-flex;align-items:center;gap:5px;flex-wrap:wrap}
 .mpill{font:500 12px/1 var(--body);padding:5px 8px;border-radius:999px;border:1px solid var(--line);color:var(--muted);white-space:nowrap}
 .invs{display:grid;gap:7px}
 .inv{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
@@ -284,7 +300,10 @@ footer{margin-top:36px;color:var(--muted);font-size:13px;max-width:70ch}
   // tools/board_sync.ps1: a job claimed or queued for a machine counts there even before
   // anyone on that machine has touched it.
   function onMachine(j){ return state.machine==="all" || j.machine===state.machine || (j.involved||[]).some(function(e){ return e.machine===state.machine; }); }
-  function onModel(j){ return state.model==="all" || (j.involved||[]).some(function(e){ return e.model===state.model; }); }
+  // A parent matches a model when anything under it, at any depth, was worked on by that
+  // model (D14): the same rule as the machines, and the reason modelsUnder exists. A model
+  // filter that hid the parent whose children it was is not a filter anybody would use.
+  function onModel(j){ return state.model==="all" || D.modelsUnder(jobs, j.id).indexOf(state.model) >= 0; }
   // Only a top-level job is a card (docs/design/D11-board-parents.md), so a card stands for
   // everything under it: a filter that matches any job in the tree brings the whole card back,
   // at any depth. Otherwise picking a machine would hide the parents whose work is that
@@ -351,14 +370,59 @@ footer{margin-top:36px;color:var(--muted);font-size:13px;max-width:70ch}
   }
   // The state bar for a job with tasks under it, and nothing at all for one without: a
   // single task's state is already the card's column, and a bar one segment wide says less.
-  // The tooltip is the numbers, so the colours are not the only way to read it.
+  // The tooltip is the numbers, so the colours are not the only way to read it. Since D14
+  // each segment carries its own count as well -- the bar says how many tasks each colour
+  // stands for, not just in what proportion -- and keeps its own tooltip for the case where
+  // the segment is too narrow to hold the digit.
   function barHTML(j){
     var bar = D.barOf(jobs, j.id);
     if (!bar) return '';
     var title = D.barTitle(bar);
     return '<div class="bar" role="img" aria-label="'+esc(title)+'" title="'+esc(title)+'">' +
-      bar.segments.map(function(s){ return '<i style="flex:'+s.n+';--bc:var(--'+s.state+')"></i>'; }).join('') +
+      bar.segments.map(function(s){
+        return '<i style="flex:'+s.n+';--bc:var(--'+s.state+');--bi:var(--'+s.state+'-ink)" title="'+esc(D.segTitle(s))+'"><b>'+s.n+'</b></i>';
+      }).join('') +
       '</div>';
+  }
+  // A number is only drawn where it fits: a segment narrower than its own digits would clip
+  // them into a sliver, so it drops the number and keeps the tooltip instead. Measured after
+  // the bar is on the page, because how wide a segment is depends on the card it is in and on
+  // the window. Nine pixels a digit, and four of air either side.
+  var NUMW = 9, NUMPAD = 4;
+  function fitBarNumbers(root){
+    var segs = (root||document).querySelectorAll(".bar i");
+    for (var i=0;i<segs.length;i++){
+      var b = segs[i].querySelector("b"); if (!b) continue;
+      var need = b.textContent.length * NUMW + NUMPAD * 2;
+      segs[i].classList.toggle("narrow", segs[i].clientWidth < need);
+    }
+  }
+
+  // How big the work under a job was (docs/design/D14-board-parent-rollups.md). A task keeps
+  // its own figure as it always was; a parent gets its own plus every descendant's, and says
+  // "so far" while anything under it has not merged, because then it is only what has been
+  // spent. Nothing on the board to add up, nothing shown.
+  function tokensShort(n){ return tok(n).replace(" million","M").replace(" thousand","k"); }
+  function tokensLine(j){
+    var roll = D.tokensOf(jobs, j.id);
+    if (!D.barOf(jobs, j.id)) return j.column==="done" && j.tokens ? tokensShort(j.tokens)+' tokens' : "";
+    if (!roll.total) return "";
+    return tokensShort(roll.total)+' tokens'+(roll.soFar ? ' so far' : '');
+  }
+  // Which models have touched a job (D14): every model in the involved list of the job or of
+  // anything under it, at every depth -- no counts and no shares, only which, because the
+  // question is who was ever on this job. One model on its own is marked "only", which is the
+  // case worth following up. Parents only: a task's own dialog already lists every entry.
+  function modelLine(j){
+    var ms = D.modelsUnder(jobs, j.id);
+    if (!ms.length || !D.barOf(jobs, j.id)) return "";
+    return '<span class="models">'+(ms.length===1 ? 'only ' : 'models ') + ms.map(chip).join(" ") + '</span>';
+  }
+  function modelSection(j){
+    var ms = D.modelsUnder(jobs, j.id);
+    if (!ms.length || !D.barOf(jobs, j.id)) return "";
+    return '<div class="sec"><h4>Models used'+(ms.length===1 ? ' &mdash; only this one' : '')+'</h4>' +
+      '<div class="models">'+ms.map(chip).join(" ")+'</div></div>';
   }
 
   // Rounds
@@ -480,7 +544,10 @@ footer{margin-top:36px;color:var(--muted);font-size:13px;max-width:70ch}
     if (!impl && j.machine && (j.column==="doing"||j.column==="todo")) meta.push((j.column==="doing"?'Being built on ':'For ')+'<span class="who">'+esc(machineLabel(j.machine))+'</span>');
     var nrev = roleOf(j,"reviewed").length;
     if (nrev) meta.push(nrev+' review'+(nrev===1?'':'s'));
-    if (j.column==="done" && j.tokens) meta.push(tok(j.tokens).replace(" million","M").replace(" thousand","k")+' tokens');
+    var tl = tokensLine(j);
+    if (tl) meta.push(esc(tl));
+    var ml = modelLine(j);
+    if (ml) meta.push(ml);
     if (j.column==="done" && j.merged) meta.push(when(j.merged).split(",")[0]);
     else if (j.status && j.column!=="closed") meta.push(esc(j.status.split(/(?<=\.)\s/)[0]));
     return '<button class="card" data-id="'+esc(j.id)+'" style="--c:'+c.c+'">' +
@@ -522,7 +589,7 @@ footer{margin-top:36px;color:var(--muted);font-size:13px;max-width:70ch}
                 : '<div class="empty">Nothing here'+(state.round!=="all"?' in '+esc(state.round):'')+(filterNote()?' for '+esc(filterNote()):'')+' yet. Clear the filters to see the rest.</div>');
   }
 
-  function render(){ renderStats(); renderTabs(); renderCol(); renderToggle(); }
+  function render(){ renderStats(); renderTabs(); renderCol(); renderToggle(); fitBarNumbers(colEl); }
   // On a phone the three filters fold behind one button; it says how many are set.
   var ftoggle = document.getElementById("ftoggle"), filtersEl = document.getElementById("filters");
   function renderToggle(){
@@ -575,10 +642,17 @@ footer{margin-top:36px;color:var(--muted);font-size:13px;max-width:70ch}
     }).join("") + '</div>';
   }
 
+  // Which job's record the dialog is showing, so X and Escape know where "up" is. Set by
+  // open() and cleared when the dialog closes (D14).
+  var shownId = null;
   function open(id){
     var j = byId[id]; if (!j) return;
     var c = colOf(j.column), k = kids(j.id), p = j.parent && byId[j.parent], ws = D.questionsUnder(jobs, j.id);
-    var row = '<div class="row"><span class="id" style="--c:'+c.c+'">'+esc(j.id)+'</span><span class="pill" style="--c:'+c.c+'">'+(j.column==="closed"?"Closed":c.name)+'</span><span class="kind">'+esc(KIND[j.kind]||"")+' · '+esc(j.round)+'</span><button class="close" id="dlgClose" aria-label="Close">×</button></div>';
+    // X and Escape go up one level (D14), so on a child the button says where to; on a
+    // top-level job there is nowhere up to and it closes, as it always did.
+    var up = p ? '<button class="close" id="dlgClose" aria-label="Close" title="Up to '+esc(p.id)+'">×</button>'
+               : '<button class="close" id="dlgClose" aria-label="Close" title="Close">×</button>';
+    var row = '<div class="row"><span class="id" style="--c:'+c.c+'">'+esc(j.id)+'</span><span class="pill" style="--c:'+c.c+'">'+(j.column==="closed"?"Closed":c.name)+'</span><span class="kind">'+esc(KIND[j.kind]||"")+' · '+esc(j.round)+'</span>'+up+'</div>';
     var h = '';
     // The header is the card's own: its state bar over the id row, when it has tasks.
     h += '<div class="hd">'+(barHTML(j) ? '<div class="head">'+barHTML(j)+row+'</div>' : row);
@@ -602,28 +676,54 @@ footer{margin-top:36px;color:var(--muted);font-size:13px;max-width:70ch}
     if (j.blockedBy && j.blockedBy.length) h += '<div class="sec"><h4>Blocked by</h4><p>'+esc(j.blockedBy.join(', '))+' -- it cannot start until '+esc(j.blockedBy.length>1?"those jobs are":"that job is")+' merged.</p></div>';
     if (j.blocking && j.blocking.length) h += '<div class="sec"><h4>Blocking</h4><p>'+esc(j.blocking.join(', '))+' -- '+esc(j.blocking.length>1?"those jobs cannot":"that job cannot")+' start until this one is merged.</p></div>';
     if (j.forPlaytesters) h += '<div class="sec try"><h4>Try this next playtest</h4><p>'+esc(j.forPlaytesters)+'</p></div>';
+    h += modelSection(j);
     h += involvement(j.involved);
+    // A parent's figure is the whole tree under it, not its own; a task's is its own, as it
+    // always was (D14). A parent's says "so far" while anything under it has not merged.
+    var roll = D.tokensOf(jobs, j.id);
+    var tokFact = D.barOf(jobs, j.id)
+      ? (roll.total ? fact("Worker tokens, all of it", tok(roll.total)+' read and written'+
+          (roll.soFar ? '<br>so far &mdash; something under this job has not merged yet' : ''), true) : "")
+      : fact("Worker tokens", j.tokens ? tok(j.tokens)+' read and written<br>'+tok(j.tokensWritten)+' written' : "", true);
     var facts = fact("Size", j.grade ? esc(j.grade)+' · '+esc(GRADE[j.grade]||"") : "") +
       fact("Priority", (j.prio && j.prio>1) ? 'Prio '+esc(j.prio)+' (higher is more urgent)' : "", true) +
       fact("Repair rounds", j.column==="done" ? String(j.repairRounds||0) : "", true) +
       fact("Started", when(j.dispatched), true) +
       fact("Merged", when(j.merged), true) +
       fact("Worker time", j.workMinutes ? j.workMinutes+' min' : "", true) +
-      fact("Worker tokens", j.tokens ? tok(j.tokens)+' read and written<br>'+tok(j.tokensWritten)+' written' : "", true);
+      tokFact;
     if (facts) h += '<div class="facts">'+facts+'</div>';
     if (p) h += '<div class="sec"><h4>Part of</h4><div class="kids">'+jobLink(p)+'</div></div>';
     if (k.length) h += '<div class="sec"><h4>'+(j.column==="closed"?"Related":"Parts and folded-in reports")+'</h4><div class="kids">'+jobTree(j.id, 0)+'</div></div>';
     sheet.innerHTML = h;
     sheet.scrollTop = 0;
+    shownId = j.id;
     if (!dlg.open) dlg.showModal();
+    fitBarNumbers(sheet);
     try { history.replaceState(null, "", "#job=" + encodeURIComponent(j.id)); } catch(e){}
   }
+  // Up one level, in the tree rather than in the browser's history: from F1a1, X goes to F1a,
+  // then to F1, then off the board. Escape does the same, one level per press, so a way out
+  // from several levels down is several presses and never a dead end.
+  function upOne(){
+    var j = shownId && byId[shownId];
+    var p = j && j.parent && byId[j.parent] ? j.parent : null;
+    if (p) { open(p); return; }
+    dlg.close();
+  }
   sheet.addEventListener("click", function(e){
-    if (e.target.closest("#dlgClose")) { dlg.close(); return; }
+    if (e.target.closest("#dlgClose")) { upOne(); return; }
     var b = e.target.closest(".jl"); if (b) open(b.getAttribute("data-id"));
   });
+  // Escape is the browser's own "cancel" on a dialog, so it is handled here rather than
+  // allowed to close the whole thing: one press, one level up.
+  dlg.addEventListener("cancel", function(e){ e.preventDefault(); upOne(); });
+  // A click on the backdrop is the one-click way out, so it goes all the way to the board.
   dlg.addEventListener("click", function(e){ if (e.target===dlg) dlg.close(); });
-  dlg.addEventListener("close", function(){ try { history.replaceState(null, "", location.pathname + location.search); } catch(e){} });
+  dlg.addEventListener("close", function(){
+    shownId = null;
+    try { history.replaceState(null, "", location.pathname + location.search); } catch(e){}
+  });
 
   document.getElementById("foot").innerHTML =
     (data.rounds||[]).map(function(r){ return '<p><b>'+esc(r.name)+'</b> came from '+esc(r.from)+'.</p>'; }).join("") +
