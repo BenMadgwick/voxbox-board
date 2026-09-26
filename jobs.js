@@ -1,5 +1,5 @@
 window.VOX_BOARD = {
-"updated": "2026-09-26 06:08 UTC",
+"updated": "2026-09-26 06:28 UTC",
 "machines": {
   "ben-3070": "Ben's Win (RTX 3070 8GB)",
   "james-3080": "James Win (RTX 3080 10GB)",
@@ -129,10 +129,11 @@ window.VOX_BOARD = {
    {"role":"reviewed","model":"Claude Opus (orchestrator)","machine":"james-3080"}
  ]},
 
-{"id": "F3b4", "title": "The generator keeps the see-through data", "round": "Round 1", "column": "doing", "statusAuto": "building:OpenRouter stealth/space-bunny-alpha@james-3080", "machine": "ben-3070", "dispatched": "2026-09-25 07:27", "kind": "feature", "grade": "M", "origin": "The last part of F3b: the generator add-on currently throws the see-through numbers away, so a generated bottle arrives solid.", "raisedBy": "Ben", "summary": "The generator keeps each voxel's see-through value and the host decides from it, so a glass bottle arrives see-through without the picture being made again.", "status": "Being built by OpenRouter stealth/space-bunny-alpha on James Win (RTX 3080 10GB).", "parent": "F3b", "blockedBy": [], "repairRounds": 0,
+{"id": "F3b4", "title": "The generator keeps the see-through data", "round": "Round 1", "column": "doing", "statusAuto": "building:OpenRouter stealth/space-bunny-alpha@ben-3070", "machine": "ben-3070", "dispatched": "2026-09-25 07:27", "kind": "feature", "grade": "M", "origin": "The last part of F3b: the generator add-on currently throws the see-through numbers away, so a generated bottle arrives solid.", "raisedBy": "Ben", "summary": "The generator keeps each voxel's see-through value and the host decides from it, so a glass bottle arrives see-through without the picture being made again.", "status": "Being built by OpenRouter stealth/space-bunny-alpha on Ben's Win (RTX 3070 8GB).", "parent": "F3b", "blockedBy": [], "repairRounds": 0,
  "involved": [
    {"role":"researched","model":"Claude Opus (subagent)","machine":"ben-3070"},
-   {"role":"implemented","model":"OpenRouter stealth/space-bunny-alpha","machine":"james-3080"}
+   {"role":"implemented","model":"OpenRouter stealth/space-bunny-alpha","machine":"james-3080"},
+   {"role":"implemented","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"}
  ]},
 
 {"id": "F2", "title": "Faster generation on 8 GB cards, with a quality toggle", "round": "Round 1", "column": "done", "statusAuto": "merged:2026-09-23", "kind": "feature", "grade": "L", "origin": "Generating an object took nearly ten minutes on an 8 GB card (581 seconds on a 3070). Smaller weights bring that to about 54 seconds. Ben: ship both, with a toggle, so he and his friends can compare quality and speed by playing.", "raisedBy": "Ben", "summary": "Both parts are in. The generator can hold either set of weights, and the game offers a Fast/Best choice that the shared pool respects.", "status": "Done. It came with a hard finding: an 8 GB card cannot make objects while the game is running, so those players get their pictures made by somebody else in the session instead.", "repairRounds": 0, "merged": "2026-09-23 14:36",
