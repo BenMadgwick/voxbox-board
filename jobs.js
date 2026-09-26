@@ -1,5 +1,5 @@
 window.VOX_BOARD = {
-"updated": "2026-09-26 20:47 UTC",
+"updated": "2026-09-26 20:54 UTC",
 "machines": {
   "ben-3070": "Ben's Win (RTX 3070 8GB)",
   "james-3080": "James Win (RTX 3080 10GB)",
@@ -794,7 +794,7 @@ window.VOX_BOARD = {
 {"id": "C9", "title": "Colour variants in a .vxb", "round": "Round 1", "column": "concepts", "kind": "concept", "origin": "Ben's own idea, kept as he said it, parked until he is ready to flesh it out.", "raisedBy": "Ben", "summary": "One .vxb shape with several saved colour sets (a red ball and a blue ball share one file), stored as differences from the base; with many sets, order the diffs by fewest changes. Colours could then be swapped by script or animation. Further: a streamed-colour object (Ben suggested .vbv; perhaps .vxv to match .vxb/.vxc) whose defined area takes colours streamed in, e.g. a 1920x1080 plane of voxels showing video, one voxel per pixel. Needs discussion and performance tests.", "status": "Open: not designed yet.", "repairRounds": 0,
  "involved": []},
 
-{"id": "F3c2", "title": "air behind the glass (a switch, measured on the kept pictures)", "round": "Round 1", "column": "doing", "dispatched": "2026-09-26 20:04", "kind": "feature", "grade": "M", "origin": "F3b fills the space behind a pane of glass with clear fill: see-through voxels that copy the pane's colour. Ben prefers air there -- a bottle becomes a thin shell with its scene inside, which falls out when smashed.", "raisedBy": "Ben", "parent": "F3c", "machine": "ben-3070", "status": "Claimed by Ben's Win (RTX 3070 8GB); starting.", "statusAuto": "claimed:ben-3070", "repairRounds": 0,
+{"id": "F3c2", "title": "air behind the glass (a switch, measured on the kept pictures)", "round": "Round 1", "column": "doing", "dispatched": "2026-09-26 20:04", "kind": "feature", "grade": "M", "origin": "F3b fills the space behind a pane of glass with clear fill: see-through voxels that copy the pane's colour. Ben prefers air there -- a bottle becomes a thin shell with its scene inside, which falls out when smashed.", "raisedBy": "Ben", "parent": "F3c", "machine": "james-3080", "status": "Claimed by James Win (RTX 3080 10GB); starting.", "statusAuto": "claimed:james-3080", "handedFrom": "ben-3070", "repairRounds": 0,
  "involved": []}
 ]
 };
