@@ -1,5 +1,5 @@
 window.VOX_BOARD = {
-"updated": "2026-09-26 16:27 UTC",
+"updated": "2026-09-26 18:20 UTC",
 "machines": {
   "ben-3070": "Ben's Win (RTX 3070 8GB)",
   "james-3080": "James Win (RTX 3080 10GB)",
@@ -668,7 +668,9 @@ window.VOX_BOARD = {
    {"role":"reviewed","model":"Grok (grok-4.5)","machine":"james-3080"},
    {"role":"repaired","model":"OpenRouter stealth/space-bunny-alpha","machine":"james-3080"}
  ]},
-{"id": "F31d", "title": "The QA triage agent", "round": "Round 1", "column": "doing", "dispatched": "2026-09-26 15:32", "kind": "feature", "grade": "M", "origin": "Part of F31.", "raisedBy": "Ben", "summary": "A Sonnet agent reads the collected QA reports, /bug and /idea files, ticks off the tests people have completed, and writes up each failure or idea as a proposed task for an orchestrator and Ben to decide on.", "status": "Claimed by James Win (RTX 3080 10GB); starting.", "parent": "F31", "machine": "james-3080", "statusAuto": "claimed:james-3080", "repairRounds": 0, "involved": []},
+{"id": "F31d", "title": "The QA triage agent", "round": "Round 1", "column": "doing", "dispatched": "2026-09-26 15:32", "kind": "feature", "grade": "M", "origin": "Part of F31.", "raisedBy": "Ben", "summary": "A Sonnet agent reads the collected QA reports, /bug and /idea files, ticks off the tests people have completed, and writes up each failure or idea as a proposed task for an orchestrator and Ben to decide on.", "status": "Being built by OpenRouter stealth/space-bunny-alpha on James Win (RTX 3080 10GB).", "parent": "F31", "machine": "james-3080", "statusAuto": "building:OpenRouter stealth/space-bunny-alpha@james-3080", "repairRounds": 0, "involved": [
+   {"role":"implemented","model":"OpenRouter stealth/space-bunny-alpha","machine":"james-3080"}
+ ]},
 {"id": "F31e", "title": "Chat history, a default channel and /r", "round": "Round 1", "column": "todo", "kind": "feature", "grade": "M", "origin": "Part of F31.", "raisedBy": "Ben", "summary": "Up and Down in the chat box bring back what you sent. A plain line goes to your default channel (Global to start with), and typing just /dm james, or /global, switches it, with a label showing where you are talking. /r replies to the last person who messaged you.", "status": "Approved: waits for F31a.", "parent": "F31", "blocking": ["F31f", "F31g"], "machine": "james-3080", "repairRounds": 0, "involved": []},
 {"id": "F31f", "title": "/local: chat to players within 30 metres", "round": "Round 1", "column": "todo", "kind": "feature", "grade": "S", "origin": "Part of F31.", "raisedBy": "Ben", "summary": "A chat line that only reaches players standing within 30 metres of you, with its own prefix and colour. The range is adjustable.", "status": "Approved: waits for F31a and F31e.", "parent": "F31", "blockedBy": ["F31e"], "machine": "james-3080", "repairRounds": 0, "involved": []},
 {"id": "F31g", "title": "Chat groups, with admins", "round": "Round 1", "column": "todo", "kind": "feature", "grade": "M", "origin": "Part of F31.", "raisedBy": "Ben", "summary": "Make a group of players for the session (/groupadd), talk to it (/group), remove people (/groupkick) or leave (/groupleave). /groupadmin says who may add and kick: everyone to start with, or named players. If the only admin leaves, it goes back to everyone.", "status": "Approved: waits for F31a and F31e.", "parent": "F31", "blockedBy": ["F31e"], "machine": "james-3080", "repairRounds": 0, "involved": []},
