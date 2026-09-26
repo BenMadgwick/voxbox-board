@@ -1,5 +1,5 @@
 window.VOX_BOARD = {
-"updated": "2026-09-26 21:06 UTC",
+"updated": "2026-09-26 21:07 UTC",
 "machines": {
   "ben-3070": "Ben's Win (RTX 3070 8GB)",
   "james-3080": "James Win (RTX 3080 10GB)",
@@ -686,7 +686,7 @@ window.VOX_BOARD = {
    {"role":"implemented","model":"OpenRouter stealth/space-bunny-alpha","machine":"james-3080"},
    {"role":"reviewed","model":"Grok (grok-4.5)","machine":"james-3080"}
  ]},
-{"id": "F31g", "title": "Chat groups, with admins", "round": "Round 1", "column": "todo", "kind": "feature", "grade": "M", "origin": "Part of F31.", "raisedBy": "Ben", "summary": "Make a group of players for the session (/groupadd), talk to it (/group), remove people (/groupkick) or leave (/groupleave). /groupadmin says who may add and kick: everyone to start with, or named players. If the only admin leaves, it goes back to everyone.", "status": "Approved: waits for F31a and F31e.", "parent": "F31", "machine": "james-3080", "repairRounds": 0, "involved": []},
+{"id": "F31g", "title": "Chat groups, with admins", "round": "Round 1", "column": "doing", "dispatched": "2026-09-26 21:06", "kind": "feature", "grade": "M", "origin": "Part of F31.", "raisedBy": "Ben", "summary": "Make a group of players for the session (/groupadd), talk to it (/group), remove people (/groupkick) or leave (/groupleave). /groupadmin says who may add and kick: everyone to start with, or named players. If the only admin leaves, it goes back to everyone.", "status": "Claimed by James Win (RTX 3080 10GB); starting.", "parent": "F31", "machine": "james-3080", "statusAuto": "claimed:james-3080", "repairRounds": 0, "involved": []},
 {"id": "F32", "title": "Send QA reports, /bug and /idea to the developers over the internet", "round": "Round 1", "column": "backlog", "kind": "feature", "grade": "R", "origin": "Ben, 25 September: reports should ideally phone home, but that needs research first and must not hold up F31.", "raisedBy": "Ben", "summary": "Research into how reports could reach us without a secret in the game, what players are told, and what is sent, ending in a recommendation and a brief. Nothing changes in the game.", "status": "Parked: Ben will research it with another agent before it is briefed.", "repairRounds": 0, "involved": []},
 {"id": "F22g", "title": "The Dedicated app makes objects for others", "round": "Round 1", "column": "done", "statusAuto": "merged:2026-09-24", "merged": "2026-09-24", "dispatched": "2026-09-24 17:15", "machine": "james-3080", "kind": "feature", "grade": "M", "origin": "Part of F22.", "raisedBy": "Ben", "summary": "VoxBox Dedicated takes pictures over the network, queues them fairly, makes the objects and sends them back.", "status": "Merged; Grok built it, Opus review found and fixed one bug (idle peers dropped mid-job).", "parent": "F22", "tokens": 22882624, "tokensWritten": 172948, "workMinutes": 81, "repairRounds": 1, "involved": [{"role": "researched", "model": "Claude Opus (orchestrator)", "machine": "ben-3070"},
    {"role":"reviewed","model":"Claude Opus (orchestrator)","machine":"james-3080"},
