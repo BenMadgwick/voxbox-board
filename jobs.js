@@ -1,5 +1,5 @@
 window.VOX_BOARD = {
-"updated": "2026-09-26 13:03 UTC",
+"updated": "2026-09-26 13:15 UTC",
 "machines": {
   "ben-3070": "Ben's Win (RTX 3070 8GB)",
   "james-3080": "James Win (RTX 3080 10GB)",
@@ -730,7 +730,7 @@ window.VOX_BOARD = {
    {"role":"reviewed","model":"Claude Opus (orchestrator)","machine":"james-3080"}
  ]},
 
-{"id": "F3c1", "title": "the see-through rule on Ben's nine pictures (measure only)", "round": "Round 1", "column": "doing", "dispatched": "2026-09-26 09:36", "kind": "feature", "grade": "M", "origin": "F3b's rule (see_through(), DESIGN 6.53-6.55) was tuned on one glass picture, the bottle. Ben's answer 2 (docs/design/F3b-see-through.md, \"Ben's answers\") prefers air behind the glass over clear fill, \"with more glass pictures to test it on\"; F3b chose clear fill because air was fragile on the bottle (a threshold of...", "raisedBy": "Ben", "parent": "F3c", "machine": "ben-3070", "status": "Claimed by Ben's Win (RTX 3070 8GB); starting.", "statusAuto": "claimed:ben-3070", "repairRounds": 0,
+{"id": "F3c1", "title": "the see-through rule on Ben's nine pictures (measure only)", "round": "Round 1", "column": "doing", "dispatched": "2026-09-26 09:36", "kind": "feature", "grade": "M", "origin": "F3b's rule (see_through(), DESIGN 6.53-6.55) was tuned on one glass picture, the bottle. Ben's answer 2 (docs/design/F3b-see-through.md, \"Ben's answers\") prefers air behind the glass over clear fill, \"with more glass pictures to test it on\"; F3b chose clear fill because air was fragile on the bottle (a threshold of...", "raisedBy": "Ben", "parent": "F3c", "machine": "james-3080", "status": "Claimed by James Win (RTX 3080 10GB); starting.", "statusAuto": "claimed:james-3080", "repairRounds": 0,
  "involved": []},
 
 {"id": "C3", "title": "Screenshots on tasks", "round": "Round 1", "column": "concepts", "kind": "concept", "origin": "Ben's own idea, kept as he said it, parked until he is ready to flesh it out.", "raisedBy": "Ben", "summary": "Screenshots get attached to tasks (the jobs board card/dialog) so Ben can check them out later, instead of them living only in a worktree's Saved/Shots on one PC.", "status": "Open: not designed yet.", "repairRounds": 0,
