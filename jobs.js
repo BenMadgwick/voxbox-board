@@ -1,5 +1,5 @@
 window.VOX_BOARD = {
-"updated": "2026-09-26 12:56 UTC",
+"updated": "2026-09-26 13:00 UTC",
 "machines": {
   "ben-3070": "Ben's Win (RTX 3070 8GB)",
   "james-3080": "James Win (RTX 3080 10GB)",
@@ -587,7 +587,9 @@ window.VOX_BOARD = {
    {"role":"reviewed","model":"Grok (grok-4.5)","machine":"james-3080"},
    {"role":"repaired","model":"OpenRouter stealth/space-bunny-alpha","machine":"james-3080"}
  ]},
-{"id": "F10c", "title": "The Sculpt tool", "round": "Round 1", "column": "doing", "dispatched": "2026-09-26 12:19", "kind": "feature", "grade": "S", "origin": "Part of F10.", "raisedBy": "Ben", "summary": "The carve tool is renamed Sculpt with its buttons: left carves, right grows, Ctrl and right restores; a key chooses how grown voxels are coloured; the cursor and the hints show which action you have.", "status": "Claimed by James Win (RTX 3080 10GB); starting.", "parent": "F10", "machine": "james-3080", "statusAuto": "claimed:james-3080", "repairRounds": 0, "involved": []},
+{"id": "F10c", "title": "The Sculpt tool", "round": "Round 1", "column": "doing", "dispatched": "2026-09-26 12:19", "kind": "feature", "grade": "S", "origin": "Part of F10.", "raisedBy": "Ben", "summary": "The carve tool is renamed Sculpt with its buttons: left carves, right grows, Ctrl and right restores; a key chooses how grown voxels are coloured; the cursor and the hints show which action you have.", "status": "Being built by OpenRouter stealth/space-bunny-alpha on James Win (RTX 3080 10GB).", "parent": "F10", "machine": "james-3080", "statusAuto": "building:OpenRouter stealth/space-bunny-alpha@james-3080", "repairRounds": 0, "involved": [
+   {"role":"implemented","model":"OpenRouter stealth/space-bunny-alpha","machine":"james-3080"}
+ ]},
 {"id": "F27", "title": "Custom colours", "round": "Round 1", "column": "done", "statusAuto": "merged:2026-09-25", "merged": "2026-09-25", "kind": "feature", "raisedBy": "Ben", "repairRounds": 0, "grade": "M", "origin": "Ben, 24 September: he wants colours of his own to paint with, an opacity slider, and a way to copy a colour off anything in the scene.", "summary": "A second row of 16 custom colour swatches under the fixed ones. With the cursor free, Tab and Shift+Tab move through every swatch and Return opens an editor on a custom one: a colour wheel, brightness, opacity, and R G B A numbers you can type. A pipette button in the editor copies a colour from anything you click.", "status": "Merged 2026-09-25.", "blocking": [], "involved": []},
 {"id": "F27a", "title": "Custom colour row and editor", "round": "Round 1", "column": "done", "statusAuto": "merged:2026-09-25", "machine": "james-3080", "merged": "2026-09-25", "kind": "feature", "raisedBy": "Ben", "tokens": 19491288, "tokensWritten": 139270, "workMinutes": 44, "repairRounds": 0, "grade": "M", "origin": "Part of F27.", "summary": "Sixteen custom swatches of your own, stepped with Tab and Shift+Tab, and an editor with a colour wheel, brightness, opacity and typed R G B A values. Saved per player.", "status": "Merged 2026-09-25.", "parent": "F27", "blocking": [], "involved": [
    {"role":"reviewed","model":"OpenRouter stealth/space-bunny-alpha","machine":"james-3080"},
