@@ -1,5 +1,5 @@
 window.VOX_BOARD = {
-"updated": "2026-09-26 02:48 UTC",
+"updated": "2026-09-26 02:50 UTC",
 "machines": {
   "ben-3070": "Ben's Win (RTX 3070 8GB)",
   "james-3080": "James Win (RTX 3080 10GB)",
@@ -568,7 +568,7 @@ window.VOX_BOARD = {
    {"role":"implemented","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"},
    {"role":"reviewed","model":"Claude Opus (orchestrator)","machine":"ben-3070"}
  ]},
-{"id": "F10b", "title": "Growing and restoring in the game and on friends' screens", "round": "Round 1", "column": "doing", "statusAuto": "building:OpenRouter stealth/space-bunny-alpha@ben-3070", "machine": "ben-3070", "dispatched": "2026-09-25 05:46", "kind": "feature", "grade": "L", "origin": "Part of F10.", "raisedBy": "Ben", "summary": "The host grows or restores an object in place without it jumping or dropping quick strokes, and everyone else's copy follows exactly, including objects made of several parts.", "status": "Being built by OpenRouter stealth/space-bunny-alpha on Ben's Win (RTX 3070 8GB).", "parent": "F10", "repairRounds": 0, "blockedBy": [], "blocking": ["F10c"], "involved": [
+{"id": "F10b", "title": "Growing and restoring in the game and on friends' screens", "round": "Round 1", "column": "doing", "statusAuto": "building:OpenRouter stealth/space-bunny-alpha@ben-3070", "machine": "james-3080", "dispatched": "2026-09-25 05:46", "kind": "feature", "grade": "L", "origin": "Part of F10.", "raisedBy": "Ben", "summary": "The host grows or restores an object in place without it jumping or dropping quick strokes, and everyone else's copy follows exactly, including objects made of several parts.", "status": "Being built by OpenRouter stealth/space-bunny-alpha on Ben's Win (RTX 3070 8GB).", "parent": "F10", "repairRounds": 0, "blockedBy": [], "blocking": ["F10c"], "involved": [
    {"role":"implemented","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"},
    {"role":"reviewed","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"},
    {"role":"repaired","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"}
