@@ -8,6 +8,9 @@
 // and its Needs Input badge all come from the tasks under it, so a parent is never a hand-kept
 // column that has to be remembered after every dispatch and merge. Since D14 the same
 // everything-under-it idea gives a parent its size (tokensOf) and its models (modelsUnder).
+// Since D15 the page's numbers count tasks rather than cards, a job's machines are read the
+// same way, a card in Done never carries a needs badge, and the automatic in-flight status
+// lines are listed here so both sides of the board can recognise them.
 //
 // These functions are the whole of it, and they are here rather than in the page so that
 // tools/board_check.js can check the page and tools/board_sync.ps1 against the same rules.
@@ -227,6 +230,32 @@
     }
     return here ? here.id : id;
   }
+  // Every machine that has had a hand in a job: the machine on the job itself (its claim, or
+  // the machine its brief is for), every machine in its "involved" list, and the same again
+  // for everything beneath it, at every depth. Distinct, in the order the tree is walked.
+  //
+  // More than one is the normal case and the reason this exists: a task can be built on one
+  // machine and reviewed, repaired or merged on another, and before D15 a card could only
+  // ever name one of them (the last "implemented" entry) or, for a parent, the machines of
+  // its *open* tasks. Nothing here is written by hand -- it is read out of the record, which
+  // is what keeps the machine list from being a field somebody has to remember to fill in.
+  function machinesAllOf(jobs, id) {
+    var byId = byIdOf(jobs), out = [], seen = {};
+    (function walk(here) {
+      if (seen[here]) return;
+      seen[here] = true;
+      var j = byId[here];
+      if (!j) return;
+      if (j.machine && out.indexOf(j.machine) < 0) out.push(j.machine);
+      // The machine a claim was handed over from (board_sync's "handedFrom", from takes_over).
+      if (j.handedFrom && out.indexOf(j.handedFrom) < 0) out.push(j.handedFrom);
+      (j.involved || []).forEach(function (e) {
+        if (e.machine && out.indexOf(e.machine) < 0) out.push(e.machine);
+      });
+      childrenOf(jobs, here).forEach(function (k) { walk(k.id); });
+    })(id);
+    return out;
+  }
   // Every machine named by a job's open descendants, the open ones only: a finished task
   // keeps its own machine, but the Machine filter on a parent should follow the work that is
   // still going. Distinct, in board order.
@@ -292,6 +321,62 @@
     return m.length === 1 ? m[0] : null;
   }
 
+  // --- Done never says "needs" (docs/design/D15-board-task-parity.md) ---------------------
+  //
+  // A merged job is finished, so a card in Done must not read as though it were still going to
+  // be built, and must not carry a Needs Input badge. The open question itself is not touched:
+  // it stays in the record, in the Needs Input tab and in the job's own dialog, because a
+  // playtest of merged work is a real thing to be waiting for (B1e, F24b). What goes is the
+  // claim on the card, which is what a reader skims.
+  //
+  // The badge bubbles up from a job to the card above it, so the rule is about the card's own
+  // column: a card in Done carries no badge even when a task under it is waiting, and a card
+  // that is not in Done still carries one for a waiting task that has merged.
+  function badgeUnder(jobs, id) {
+    if ((byIdOf(jobs)[id] || {}).column === "done") return [];
+    return questionsUnder(jobs, id);
+  }
+  // The lines board_sync.ps1 writes while a job is still in flight, which are the only lines
+  // that are ever both automatic and true of a merged job by accident. F25 read "Being built
+  // by OpenRouter ... on Ben's Win" in Done, and D9 and D12 "Claimed by ...; starting.": a
+  // record whose statusAuto already said merged:<date> and whose text had not caught up.
+  // tools/board_sync.ps1 matches the same list, and rewrites a merged job's line to
+  // "Merged <date>." when it finds one.
+  var IN_FLIGHT = /^(Being built by |Claimed by .*; starting\.|In its repair round\.|Built; reviewed by |Researched by |Queued for |Brief ready)/;
+  function isInFlightStatus(s) { return !!s && IN_FLIGHT.test(String(s)); }
+
+  // --- The counts count tasks, not cards (D15) --------------------------------------------
+  //
+  // D11 made every number on the page a count of cards, which undersells the work: a parent
+  // in progress with two tasks in progress and six done showed "1 in progress, 0 done" for
+  // eight pieces of work. A count that means something has to count what was done, so a
+  // number is now a count of **tasks** -- leaves, at any depth -- each in its own state. A
+  // parent contributes to a column by its tasks and not by itself, so the last two finishing
+  // moves the parent into Done *and* puts all eight in Done, rather than replacing eight with
+  // one. The cards a tab shows do not change: that is still D11's placement, one card per
+  // top-level job.
+  //
+  // The list of cards is the page's business (it has the filters), so the cards are an
+  // argument; what is counted here is one task each, in the state that task is in.
+  // keep, when given, says which tasks count: the page's filters (a card shown because one
+  // task under it matched does not bring the rest of its tree into the numbers).
+  function countTasksByState(jobs, cardIds, keep) {
+    var byId = byIdOf(jobs), n = { all: 0 };
+    ["backlog", "todo", "doing", "done", "closed", "concepts"].forEach(function (k) { n[k] = 0; });
+    (cardIds || []).forEach(function (id) {
+      // A top-level job with no children is itself a task (D11), and tasksUnder() only walks
+      // children -- so it is counted here, or every single task on the board would be missing
+      // from every number on the page.
+      var ts = childrenOf(jobs, id).length ? tasksUnder(jobs, id) : (byId[id] ? [byId[id]] : []);
+      ts.forEach(function (t) {
+        if (keep && !keep(t, byId[id])) return;
+        n.all += 1;
+        if (n[t.column] !== undefined) n[t.column] += 1;
+      });
+    });
+    return n;
+  }
+
   return {
     STATES: STATES,
     byIdOf: byIdOf,
@@ -321,6 +406,10 @@
     machinesUnder: machinesUnder,
     tokensOf: tokensOf,
     modelsUnder: modelsUnder,
-    onlyModelUnder: onlyModelUnder
+    onlyModelUnder: onlyModelUnder,
+    machinesAllOf: machinesAllOf,
+    badgeUnder: badgeUnder,
+    isInFlightStatus: isInFlightStatus,
+    countTasksByState: countTasksByState
   };
 });

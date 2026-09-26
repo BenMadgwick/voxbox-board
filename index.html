@@ -94,11 +94,18 @@ select{max-width:100%;font:500 14px var(--body);color:var(--ink);background:var(
 .meta .on{color:var(--muted)}
 .chip{display:inline-flex;align-items:center;gap:5px;font:500 12px/1 var(--body);padding:5px 8px;border-radius:999px;background:var(--sunk);color:var(--ink);white-space:nowrap}
 .chip.m::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--mc)}
-/* Which models have touched a job (D14): the chips as they are on a dialog, on a parent's
-   card too. One model on its own is marked "only", so a job that was worked by one model
-   throughout stands out in a column of mixed ones. */
+/* Which models have touched a job (D14, and on every job since D15): the chips as they are
+   on a dialog, on a task's card as well as a parent's. One model on its own is marked "only",
+   so a job that was worked by one model throughout stands out in a column of mixed ones. */
 .models{display:inline-flex;align-items:center;gap:5px;flex-wrap:wrap}
 .mpill{font:500 12px/1 var(--body);padding:5px 8px;border-radius:999px;border:1px solid var(--line);color:var(--muted);white-space:nowrap}
+/* The machines, on a card and in a dialog, in the one place each (D15). The pills are the
+   dialog's own; the card's is one line of text, because a card's meta row is already busy. */
+.mpills{display:flex;flex-wrap:wrap;gap:5px}
+.machines{color:var(--muted)}
+/* The small print under the title: the numbers count tasks, not cards, which is not something
+   the numbers can say for themselves. */
+.hint{font-style:italic;opacity:.85}
 .invs{display:grid;gap:7px}
 .inv{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
 .inv .role{font:600 11.5px/1 var(--body);text-transform:uppercase;letter-spacing:.08em;color:var(--muted);min-width:10ch}
@@ -348,8 +355,12 @@ document.documentElement.setAttribute("data-theme", /[?&]theme=light(&|$)/.test(
   // card (F22 waits on F22f's ruling and F22s's question at once), so the badge counts them and
   // the tooltip names each. The badge is not named after one person: the question's own for:
   // line says who may answer, and James or Sam may be allowed to answer some of these (D12).
+  //
+  // Except on a card in Done (D15): a merged job is finished, and a Done card that said
+  // "Needs Input" read as though it were not. badgeUnder() is empty for one, and the question
+  // itself is untouched -- it is still in the Needs Input tab and still in the job's dialog.
   function needInputMark(j){
-    var ws = D.questionsUnder(jobs, j.id);
+    var ws = D.badgeUnder(jobs, j.id);
     if (!ws.length) return '';
     var who = [], staleN = 0;
     ws.forEach(function(w){
@@ -365,7 +376,7 @@ document.documentElement.setAttribute("data-theme", /[?&]theme=light(&|$)/.test(
     return '<span class="needsinput" title="'+esc(title)+'">Needs Input'+n+'</span>'+stale;
   }
   function needInputLine(j){
-    var ws = D.questionsUnder(jobs, j.id);
+    var ws = D.badgeUnder(jobs, j.id);
     if (!ws.length) return '';
     var w = ws[0];
     var pre = w.id===j.id ? 'Waiting on '+esc(D.forOf(w))+': ' : esc(w.id)+' is waiting on '+esc(D.forOf(w))+': ';
@@ -417,17 +428,41 @@ document.documentElement.setAttribute("data-theme", /[?&]theme=light(&|$)/.test(
   // Which models have touched a job (D14): every model in the involved list of the job or of
   // anything under it, at every depth -- no counts and no shares, only which, because the
   // question is who was ever on this job. One model on its own is marked "only", which is the
-  // case worth following up. Parents only: a task's own dialog already lists every entry.
+  // case worth following up. Since D15 this is the same on a task as on a parent: before, a
+  // parent said "models" with the chips and a single task said "Built by <model> on <machine>"
+  // in the dialog's own words, so the same question was answered two ways on the same page.
   function modelLine(j){
     var ms = D.modelsUnder(jobs, j.id);
-    if (!ms.length || !D.barOf(jobs, j.id)) return "";
+    if (!ms.length) return "";
     return '<span class="models">'+(ms.length===1 ? 'only ' : 'models ') + ms.map(chip).join(" ") + '</span>';
   }
   function modelSection(j){
     var ms = D.modelsUnder(jobs, j.id);
-    if (!ms.length || !D.barOf(jobs, j.id)) return "";
+    if (!ms.length) return "";
     return '<div class="sec"><h4>Models used'+(ms.length===1 ? ' &mdash; only this one' : '')+'</h4>' +
       '<div class="models">'+ms.map(chip).join(" ")+'</div></div>';
+  }
+  // Which machines have had a hand in a job (D15), in the one place on the card and the one
+  // place in the dialog, for a task and a parent alike. More than one is normal: a job can be
+  // built on one machine and reviewed, repaired or merged on another, and a parent is the union
+  // of everything under it. The list is read out of the record -- the job's own machine, every
+  // involved entry's machine, and the same again for every task beneath it -- so there is no
+  // field for anybody to fill in by hand and keep up to date.
+  function machinePills(j){
+    return D.machinesAllOf(jobs, j.id).map(function(m){
+      return '<span class="mpill" title="'+esc(m)+'">'+esc(machineLabel(m))+'</span>';
+    }).join(" ");
+  }
+  function machineLine(j){
+    var ms = D.machinesAllOf(jobs, j.id);
+    if (!ms.length) return "";
+    return '<span class="machines" title="Every machine that worked on this job, at any depth: '+
+      esc(ms.map(machineLabel).join(", "))+'">'+(ms.length===1 ? 'on ' : 'machines ') +
+      ms.map(function(m){ return esc(machineLabel(m)); }).join(", ") + '</span>';
+  }
+  function machineSection(j){
+    if (!D.machinesAllOf(jobs, j.id).length) return "";
+    return '<div class="sec"><h4>Machines</h4><div class="mpills">'+machinePills(j)+'</div></div>';
   }
 
   // Rounds
@@ -490,11 +525,29 @@ document.documentElement.setAttribute("data-theme", /[?&]theme=light(&|$)/.test(
       return out;
     }
     // Top-level jobs only, in every tab including All: a child is not a card of its own, it
-    // is part of the card above it. Every count on the page comes from here, so they are
-    // counts of cards.
+    // is part of the card above it. Which cards a tab shows is D11's rule and has not moved.
     var l = D.topLevel(jobs).filter(function(j){ return j.column===k && shown(j); });
     if (k==="done") l = l.slice().sort(function(a,b){ return (b.merged||"").localeCompare(a.merged||""); });
     return l;
+  }
+
+  // The numbers on the page count **tasks**, not cards (docs/design/D15-board-task-parity.md).
+  // A card stands for a tree, and a count of cards said "1 in progress" for a parent with two
+  // tasks being built and six already merged. A task is a leaf at any depth and counts in the
+  // state it is itself in, so the parent in Ben's example adds 2 to In progress and 6 to Done
+  // today, and all 8 to Done once the last two finish -- the parent moving into Done adds to
+  // the number rather than replacing eight with one.
+  //
+  // A task is counted when it passes the same filters a card does, including through a card
+  // that is shown because something under it matched: picking a machine counts that machine's
+  // work and not the rest of the tree it happens to sit in.
+  function counts(){
+    var cards = D.topLevel(jobs).filter(shown);
+    // A task counts when it matches itself; only the round may come from its card, where it is
+    // set (a card's machine and model are its tasks', so they must not stand in for them).
+    var all = state.round==="all" && state.machine==="all" && state.model==="all";
+    return D.countTasksByState(jobs, cards.map(function(j){ return j.id; }),
+      all ? null : function(t, card){ return (inRound(t) || inRound(card)) && onMachine(t) && onModel(t); });
   }
 
   // One row of the Needs Input tab: the task, its kind, who may answer, how long it has
@@ -520,22 +573,25 @@ document.documentElement.setAttribute("data-theme", /[?&]theme=light(&|$)/.test(
   }
 
   function renderStats(){
-    var n = {}; COLS.forEach(function(c){ if (c.k!=="all") n[c.k] = list(c.k).length; });
+    var n = counts();
     var r = rounds.length, w = waiting(), s = staleCount();
     document.getElementById("stats").innerHTML =
       '<span><b>'+r+'</b> round'+(r===1?'':'s')+' so far</span>' +
       COLS.filter(function(c){ return c.k!=="all"; }).map(function(c){ return '<span><b>'+n[c.k]+'</b> '+c.name.toLowerCase()+'</span>'; }).join("") +
       '<span><b>'+w.length+'</b> waiting on a person'+(s ? ' ('+s+' stale)' : '')+'</span>' +
+      '<span class="hint" title="A card stands for a whole tree of work, so the numbers count the tasks under the cards, each in its own state -- the cards each tab shows are counted by neither. The Needs Input number counts open questions.">the numbers count tasks, not cards</span>' +
       (filterNote() ? '<span>filtered to '+esc(filterNote())+' (every job it had a hand in, so machines can share a job)</span>' : '') +
       (data.updated ? '<span>updated '+esc(data.updated)+'</span>' : '');
   }
 
   function renderTabs(){
-    var tabs = tabList(), w = waiting(), s = staleCount();
+    var tabs = tabList(), w = waiting(), s = staleCount(), n = counts();
     document.getElementById("tabs").innerHTML = tabs.map(function(c){
-      var n = c.k==="needs" ? w.length : list(c.k).length;
+      var num = c.k==="needs" ? w.length : (c.k==="all" ? n.all : n[c.k]);
+      var what = c.k==="needs" ? num+' open question'+(num===1?'':'s')
+        : num+' task'+(num===1?'':'s')+' in '+c.name.toLowerCase()+' -- a card can stand for several';
       var mark = (c.k==="needs" && s) ? '<span class="stale" title="'+s+' open for two days or more: raised at the next discussion">'+s+' stale</span>' : '';
-      return '<button class="tab" role="tab" id="tab-'+c.k+'" aria-selected="'+(state.tab===c.k)+'" data-k="'+c.k+'" style="--c:'+c.c+'"><span class="dot"></span>'+c.name+' <span class="n">'+n+'</span>'+mark+'</button>';
+      return '<button class="tab" role="tab" id="tab-'+c.k+'" aria-selected="'+(state.tab===c.k)+'" data-k="'+c.k+'" style="--c:'+c.c+'"><span class="dot"></span>'+c.name+' <span class="n" title="'+esc(what)+'">'+num+'</span>'+mark+'</button>';
     }).join("");
   }
 
@@ -544,15 +600,19 @@ document.documentElement.setAttribute("data-theme", /[?&]theme=light(&|$)/.test(
     var text = j.column==="closed" ? (j.closedAs||"") : (j.summary || j.origin);
     var meta = [];
     var impl = lastOf(j,"implemented"), res = roleOf(j,"researched")[0];
-    if (impl) meta.push('Built by <span class="who">'+esc(impl.model)+'</span> <span class="on">on '+esc(machineLabel(impl.machine))+'</span>');
-    else if (res && (j.column==="doing"||j.column==="todo")) meta.push('Researched by <span class="who">'+esc(res.model)+'</span> <span class="on">on '+esc(machineLabel(res.machine))+'</span>');
-    if (!impl && j.machine && (j.column==="doing"||j.column==="todo")) meta.push((j.column==="doing"?'Being built on ':'For ')+'<span class="who">'+esc(machineLabel(j.machine))+'</span>');
+    // Who built it and where it was built are the model chips and the machine line below, the
+    // same on a task as on a parent (D15). The one thing they do not say is a job that was
+    // researched rather than built, which is a different fact about the same job, so it keeps
+    // its own words -- without repeating the machine, which is now listed once.
+    if (!impl && res && (j.column==="doing"||j.column==="todo")) meta.push('Researched by <span class="who">'+esc(res.model)+'</span>');
     var nrev = roleOf(j,"reviewed").length;
     if (nrev) meta.push(nrev+' review'+(nrev===1?'':'s'));
     var tl = tokensLine(j);
     if (tl) meta.push(esc(tl));
     var ml = modelLine(j);
     if (ml) meta.push(ml);
+    var mach = machineLine(j);
+    if (mach) meta.push(mach);
     if (j.column==="done" && j.merged) meta.push(when(j.merged).split(",")[0]);
     else if (j.status && j.column!=="closed") meta.push(esc(j.status.split(/(?<=\.)\s/)[0]));
     return '<button class="card" data-id="'+esc(j.id)+'" style="--c:'+c.c+'">' +
@@ -682,6 +742,7 @@ document.documentElement.setAttribute("data-theme", /[?&]theme=light(&|$)/.test(
     if (j.blocking && j.blocking.length) h += '<div class="sec"><h4>Blocking</h4><p>'+esc(j.blocking.join(', '))+' -- '+esc(j.blocking.length>1?"those jobs cannot":"that job cannot")+' start until this one is merged.</p></div>';
     if (j.forPlaytesters) h += '<div class="sec try"><h4>Try this next playtest</h4><p>'+esc(j.forPlaytesters)+'</p></div>';
     h += modelSection(j);
+    h += machineSection(j);
     h += involvement(j.involved);
     // A parent's figure is the whole tree under it, not its own; a task's is its own, as it
     // always was (D14). A parent's says "so far" while anything under it has not merged.
