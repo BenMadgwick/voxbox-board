@@ -1,5 +1,5 @@
 window.VOX_BOARD = {
-"updated": "2026-09-26 07:20 UTC",
+"updated": "2026-09-26 07:24 UTC",
 "machines": {
   "ben-3070": "Ben's Win (RTX 3070 8GB)",
   "james-3080": "James Win (RTX 3080 10GB)",
@@ -129,7 +129,7 @@ window.VOX_BOARD = {
    {"role":"reviewed","model":"Claude Opus (orchestrator)","machine":"james-3080"}
  ]},
 
-{"id": "F3b4", "title": "The generator keeps the see-through data", "round": "Round 1", "column": "doing", "statusAuto": "building:OpenRouter stealth/space-bunny-alpha@ben-3070", "machine": "ben-3070", "dispatched": "2026-09-25 07:27", "kind": "feature", "grade": "M", "origin": "The last part of F3b: the generator add-on currently throws the see-through numbers away, so a generated bottle arrives solid.", "raisedBy": "Ben", "summary": "The generator keeps each voxel's see-through value and the host decides from it, so a glass bottle arrives see-through without the picture being made again.", "status": "Being built by OpenRouter stealth/space-bunny-alpha on Ben's Win (RTX 3070 8GB).", "parent": "F3b", "blockedBy": [], "repairRounds": 0,
+{"id": "F3b4", "title": "The generator keeps the see-through data", "round": "Round 1", "column": "doing", "statusAuto": "building:OpenRouter stealth/space-bunny-alpha@ben-3070", "machine": "james-3080", "dispatched": "2026-09-25 07:27", "kind": "feature", "grade": "M", "origin": "The last part of F3b: the generator add-on currently throws the see-through numbers away, so a generated bottle arrives solid.", "raisedBy": "Ben", "summary": "The generator keeps each voxel's see-through value and the host decides from it, so a glass bottle arrives see-through without the picture being made again.", "status": "Being built by OpenRouter stealth/space-bunny-alpha on Ben's Win (RTX 3070 8GB).", "parent": "F3b", "blockedBy": [], "questionKind": "decide", "questionFor": "Ben", "questionAsked": "2026-09-26 07:23", "questionBlocks": "nothing: F3b4 is handed to james-3080 to merge; this would be a follow-up (F3b5)", "question": "Generated glass reads as solid blue because each clear-fill voxel copies a different pane teal and F3b3 draws a face at every seam (751,030 of 788,484 glass faces are internal): should the clear fill take one colour, or not be meshed at all?", "repairRounds": 0,
  "involved": [
    {"role":"researched","model":"Claude Opus (subagent)","machine":"ben-3070"},
    {"role":"implemented","model":"OpenRouter stealth/space-bunny-alpha","machine":"james-3080"},
