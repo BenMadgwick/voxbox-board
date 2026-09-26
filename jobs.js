@@ -1,5 +1,5 @@
 window.VOX_BOARD = {
-"updated": "2026-09-26 21:45 UTC",
+"updated": "2026-09-26 21:48 UTC",
 "machines": {
   "ben-3070": "Ben's Win (RTX 3070 8GB)",
   "james-3080": "James Win (RTX 3080 10GB)",
@@ -807,7 +807,9 @@ window.VOX_BOARD = {
    {"role":"reviewed","model":"Grok (grok-4.5)","machine":"james-3080"}
  ]},
 
-{"id": "F3c3", "title": "one colour per pane (a switch, measured on the kept pictures)", "round": "Round 1", "column": "doing", "dispatched": "2026-09-26 21:02", "kind": "feature", "grade": "S", "origin": "Generated glass reads as a solid blue block. F3c2 (docs/design/F3c2-air.md, Result) showed that taking the clear fill away behind the glass removes 72% of the bottle's seams, yet the bottle with air still reads solid: 72% of the glass faces left are still seams, now between the pane's own voxels.", "raisedBy": "Ben", "parent": "F3c", "machine": "ben-3070", "status": "Claimed by Ben's Win (RTX 3070 8GB); starting.", "statusAuto": "claimed:ben-3070", "repairRounds": 0,
- "involved": []}
+{"id": "F3c3", "title": "one colour per pane (a switch, measured on the kept pictures)", "round": "Round 1", "column": "doing", "dispatched": "2026-09-26 21:02", "kind": "feature", "grade": "S", "origin": "Generated glass reads as a solid blue block. F3c2 (docs/design/F3c2-air.md, Result) showed that taking the clear fill away behind the glass removes 72% of the bottle's seams, yet the bottle with air still reads solid: 72% of the glass faces left are still seams, now between the pane's own voxels.", "raisedBy": "Ben", "parent": "F3c", "machine": "james-3080", "status": "Being built by OpenRouter stealth/space-bunny-alpha on Ben's Win (RTX 3070 8GB).", "statusAuto": "building:OpenRouter stealth/space-bunny-alpha@ben-3070", "handedFrom": "ben-3070", "repairRounds": 0,
+ "involved": [
+   {"role":"implemented","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"}
+ ]}
 ]
 };
