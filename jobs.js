@@ -1,5 +1,5 @@
 window.VOX_BOARD = {
-"updated": "2026-09-26 21:05 UTC",
+"updated": "2026-09-26 21:06 UTC",
 "machines": {
   "ben-3070": "Ben's Win (RTX 3070 8GB)",
   "james-3080": "James Win (RTX 3080 10GB)",
@@ -682,7 +682,7 @@ window.VOX_BOARD = {
    {"role":"reviewed","model":"Grok (grok-4.5)","machine":"james-3080"},
    {"role":"repaired","model":"OpenRouter stealth/space-bunny-alpha","machine":"james-3080"}
  ]},
-{"id": "F31f", "title": "/local: chat to players within 30 metres", "round": "Round 1", "column": "done", "merged": "2026-09-26", "dispatched": "2026-09-26 20:22", "kind": "feature", "grade": "S", "origin": "Part of F31.", "raisedBy": "Ben", "summary": "A chat line that only reaches players standing within 30 metres of you, with its own prefix and colour. The range is adjustable.", "status": "Merged 2026-09-26.", "parent": "F31", "machine": "james-3080", "statusAuto": "merged:2026-09-26", "tokens": 18148749, "tokensWritten": 86405, "workMinutes": 30, "repairRounds": 0, "involved": [
+{"id": "F31f", "title": "/local: chat to players within 30 metres", "round": "Round 1", "forPlaytesters": "Type /local and a message: only players standing near you (about 30 m) see it, with a [Local] prefix. If nobody is near, you are told so.", "column": "done", "merged": "2026-09-26", "dispatched": "2026-09-26 20:22", "kind": "feature", "grade": "S", "origin": "Part of F31.", "raisedBy": "Ben", "summary": "A chat line that only reaches players standing within 30 metres of you, with its own prefix and colour. The range is adjustable.", "status": "Merged 2026-09-26.", "parent": "F31", "machine": "james-3080", "statusAuto": "merged:2026-09-26", "tokens": 18148749, "tokensWritten": 86405, "workMinutes": 30, "repairRounds": 0, "involved": [
    {"role":"implemented","model":"OpenRouter stealth/space-bunny-alpha","machine":"james-3080"},
    {"role":"reviewed","model":"Grok (grok-4.5)","machine":"james-3080"}
  ]},
@@ -800,7 +800,7 @@ window.VOX_BOARD = {
    {"role":"implemented","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"}
  ]},
 
-{"id": "B18", "title": "a fresh PC asks for the Visual C++ Redistributable before the game will start", "round": "Round 1", "column": "backlog", "kind": "feature", "grade": "S", "origin": "James ran a packaged build on another PC and Windows refused to start it until he installed the \"Microsoft Visual C++ 2015-2022 Redistributable (x64)\". Every Visual Studio build needs Microsoft's C++ runtime DLLs (vcruntime140.dll, msvcp140.dll, the Universal CRT); that means the game and the generator DLL (generato...", "raisedBy": "Ben", "question": "Approve B18 (docs/design/B18-bundled-runtime.md): package the zips with the C++ runtime DLLs beside the exe (about 2 MB zipped), so a fresh PC no longer asks for the Visual C++ Redistributable? James chose this; for the Steam build, tick VC++ 2015-2022 Redist in Steamworks.", "questionKind": "decide", "questionFor": "Ben", "questionAsked": "2026-09-26 20:57", "questionBlocks": "B18 only; nothing else waits on it", "machine": "james-3080", "prio": 2, "repairRounds": 0,
+{"id": "B18", "title": "a fresh PC asks for the Visual C++ Redistributable before the game will start", "round": "Round 1", "column": "doing", "dispatched": "2026-09-26 21:06", "kind": "feature", "grade": "S", "origin": "James ran a packaged build on another PC and Windows refused to start it until he installed the \"Microsoft Visual C++ 2015-2022 Redistributable (x64)\". Every Visual Studio build needs Microsoft's C++ runtime DLLs (vcruntime140.dll, msvcp140.dll, the Universal CRT); that means the game and the generator DLL (generato...", "raisedBy": "Ben", "machine": "james-3080", "status": "Claimed by James Win (RTX 3080 10GB); starting.", "statusAuto": "claimed:james-3080", "prio": 2, "repairRounds": 0,
  "involved": []},
 
 {"id": "F3c3", "title": "one colour per pane (a switch, measured on the kept pictures)", "round": "Round 1", "column": "doing", "dispatched": "2026-09-26 21:02", "kind": "feature", "grade": "S", "origin": "Generated glass reads as a solid blue block. F3c2 (docs/design/F3c2-air.md, Result) showed that taking the clear fill away behind the glass removes 72% of the bottle's seams, yet the bottle with air still reads solid: 72% of the glass faces left are still seams, now between the pane's own voxels.", "raisedBy": "Ben", "parent": "F3c", "machine": "ben-3070", "status": "Claimed by Ben's Win (RTX 3070 8GB); starting.", "statusAuto": "claimed:ben-3070", "repairRounds": 0,
