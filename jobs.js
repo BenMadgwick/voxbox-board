@@ -1,5 +1,5 @@
 window.VOX_BOARD = {
-"updated": "2026-09-26 07:25 UTC",
+"updated": "2026-09-26 07:29 UTC",
 "machines": {
   "ben-3070": "Ben's Win (RTX 3070 8GB)",
   "james-3080": "James Win (RTX 3080 10GB)",
@@ -329,9 +329,10 @@ window.VOX_BOARD = {
 {"id": "F5", "title": "Sound", "round": "Round 1", "column": "backlog", "kind": "feature", "origin": "Nobody mentioned sound, because there isn't any.", "raisedBy": "the triage", "status": "Roadmap, not this round.", "repairRounds": 0,
  "involved": []},
 
-{"id": "F6", "title": "Save a template from a selection", "round": "Round 1", "column": "doing", "dispatched": "2026-09-26 00:23", "machine": "james-3080", "statusAuto": "building:OpenRouter stealth/space-bunny-alpha@ben-3070", "prio": 2, "grade": "M", "kind": "feature", "origin": "Saving the whole table as a template is unusable while others are playing on it.", "raisedBy": "Ben", "summary": "Hold a key and click objects to select them, then save just those as a template.", "status": "Being built by OpenRouter stealth/space-bunny-alpha on Ben's Win (RTX 3070 8GB).", "repairRounds": 0,
+{"id": "F6", "title": "Save a template from a selection", "round": "Round 1", "column": "doing", "dispatched": "2026-09-26 00:23", "machine": "james-3080", "statusAuto": "reviewed:1", "prio": 2, "grade": "M", "kind": "feature", "origin": "Saving the whole table as a template is unusable while others are playing on it.", "raisedBy": "Ben", "summary": "Hold a key and click objects to select them, then save just those as a template.", "status": "Built; reviewed by 1 model; waiting for the orchestrator's check.", "repairRounds": 0,
  "involved": [
-   {"role":"implemented","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"}
+   {"role":"implemented","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"},
+   {"role":"reviewed","model":"Grok (grok-4.5)","machine":"james-3080"}
  ]},
 
 {"id": "F8", "title": "Round things bounce like balls", "round": "Round 1", "column": "done", "merged": "2026-09-26", "dispatched": "2026-09-26 02:24", "machine": "james-3080", "statusAuto": "merged:2026-09-26", "tokens": 14242758, "tokensWritten": 80046, "workMinutes": 55, "prio": 3, "grade": "M", "kind": "feature", "origin": "A voxel sphere's flat facets knock a rubber ball sideways on its second bounce. Ben asked for a neat solution.", "raisedBy": "Ben", "summary": "The game measures how round each object is when it is made; very round things get a true sphere collider, and nearly round ones bounce more smoothly.", "status": "Merged 2026-09-26.", "repairRounds": 0,
@@ -577,10 +578,11 @@ window.VOX_BOARD = {
    {"role":"implemented","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"},
    {"role":"reviewed","model":"Claude Opus (orchestrator)","machine":"ben-3070"}
  ]},
-{"id": "F10b", "title": "Growing and restoring in the game and on friends' screens", "round": "Round 1", "column": "doing", "statusAuto": "building:OpenRouter stealth/space-bunny-alpha@ben-3070", "machine": "james-3080", "dispatched": "2026-09-25 05:46", "kind": "feature", "grade": "L", "origin": "Part of F10.", "raisedBy": "Ben", "summary": "The host grows or restores an object in place without it jumping or dropping quick strokes, and everyone else's copy follows exactly, including objects made of several parts.", "status": "Being built by OpenRouter stealth/space-bunny-alpha on Ben's Win (RTX 3070 8GB).", "parent": "F10", "repairRounds": 0, "blockedBy": [], "blocking": ["F10c"], "involved": [
+{"id": "F10b", "title": "Growing and restoring in the game and on friends' screens", "round": "Round 1", "column": "doing", "statusAuto": "reviewed:1", "machine": "james-3080", "dispatched": "2026-09-25 05:46", "kind": "feature", "grade": "L", "origin": "Part of F10.", "raisedBy": "Ben", "summary": "The host grows or restores an object in place without it jumping or dropping quick strokes, and everyone else's copy follows exactly, including objects made of several parts.", "status": "Built; reviewed by 1 model; waiting for the orchestrator's check.", "parent": "F10", "repairRounds": 0, "blockedBy": [], "blocking": ["F10c"], "involved": [
    {"role":"implemented","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"},
    {"role":"reviewed","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"},
-   {"role":"repaired","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"}
+   {"role":"repaired","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"},
+   {"role":"reviewed","model":"Grok (grok-4.5)","machine":"james-3080"}
  ]},
 {"id": "F10c", "title": "The Sculpt tool", "round": "Round 1", "column": "todo", "kind": "feature", "grade": "S", "origin": "Part of F10.", "raisedBy": "Ben", "summary": "The carve tool is renamed Sculpt with its buttons: left carves, right grows, Ctrl and right restores; a key chooses how grown voxels are coloured; the cursor and the hints show which action you have.", "status": "Approved: waits for the game side (F10b).", "parent": "F10", "repairRounds": 0, "blockedBy": ["F10b"], "involved": []},
 {"id": "F27", "title": "Custom colours", "round": "Round 1", "column": "done", "statusAuto": "merged:2026-09-25", "merged": "2026-09-25", "kind": "feature", "raisedBy": "Ben", "repairRounds": 0, "grade": "M", "origin": "Ben, 24 September: he wants colours of his own to paint with, an opacity slider, and a way to copy a colour off anything in the scene.", "summary": "A second row of 16 custom colour swatches under the fixed ones. With the cursor free, Tab and Shift+Tab move through every swatch and Return opens an editor on a custom one: a colour wheel, brightness, opacity, and R G B A numbers you can type. A pipette button in the editor copies a colour from anything you click.", "status": "Merged 2026-09-25.", "blocking": [], "involved": []},
