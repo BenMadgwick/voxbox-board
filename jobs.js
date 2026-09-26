@@ -1,5 +1,5 @@
 window.VOX_BOARD = {
-"updated": "2026-09-26 03:53 UTC",
+"updated": "2026-09-26 04:27 UTC",
 "machines": {
   "ben-3070": "Ben's Win (RTX 3070 8GB)",
   "james-3080": "James Win (RTX 3080 10GB)",
@@ -333,8 +333,10 @@ window.VOX_BOARD = {
    {"role":"implemented","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"}
  ]},
 
-{"id": "F8", "title": "Round things bounce like balls", "round": "Round 1", "column": "doing", "dispatched": "2026-09-26 02:24", "machine": "james-3080", "statusAuto": "claimed:james-3080", "prio": 3, "grade": "M", "kind": "feature", "origin": "A voxel sphere's flat facets knock a rubber ball sideways on its second bounce. Ben asked for a neat solution.", "raisedBy": "Ben", "summary": "The game measures how round each object is when it is made; very round things get a true sphere collider, and nearly round ones bounce more smoothly.", "status": "Claimed by James Win (RTX 3080 10GB); starting.", "repairRounds": 0,
- "involved": []},
+{"id": "F8", "title": "Round things bounce like balls", "round": "Round 1", "column": "doing", "dispatched": "2026-09-26 02:24", "machine": "james-3080", "statusAuto": "building:OpenRouter stealth/space-bunny-alpha@james-3080", "prio": 3, "grade": "M", "kind": "feature", "origin": "A voxel sphere's flat facets knock a rubber ball sideways on its second bounce. Ben asked for a neat solution.", "raisedBy": "Ben", "summary": "The game measures how round each object is when it is made; very round things get a true sphere collider, and nearly round ones bounce more smoothly.", "status": "Being built by OpenRouter stealth/space-bunny-alpha on James Win (RTX 3080 10GB).", "repairRounds": 0,
+ "involved": [
+   {"role":"implemented","model":"OpenRouter stealth/space-bunny-alpha","machine":"james-3080"}
+ ]},
 
 {"id": "F9", "title": "Primitives: place, then scale; colour before spawning", "round": "Round 1", "column": "backlog", "kind": "feature", "origin": "Place a primitive and then scale it (growing it with more voxels, not stretching), and choose its colour before spawning.", "raisedBy": "Ben", "status": "Roadmap; Ben has more ideas.", "repairRounds": 0,
  "involved": []},
