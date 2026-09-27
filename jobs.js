@@ -1,5 +1,5 @@
 window.VOX_BOARD = {
-"updated": "2026-09-27 07:41 UTC",
+"updated": "2026-09-27 07:47 UTC",
 "machines": {
   "ben-3070": "Ben's Win (RTX 3070 8GB)",
   "james-3080": "James Win (RTX 3080 10GB)",
@@ -90,7 +90,7 @@ window.VOX_BOARD = {
    {"role":"reviewed","model":"Claude Opus","machine":"ben-3070"}
  ]},
 
-{"id": "F3", "title": "See-through objects", "round": "Round 1", "column": "doing", "statusAuto": "tasks:6/7", "machine": "james-3080", "kind": "feature", "origin": "The generator (TRELLIS) works out how see-through each voxel is, but the game throws that away. Ben: \"Trellis should do see-through ok\".", "raisedBy": "Ben", "summary": "Split in two: first measure whether the see-through data is good enough to be worth keeping (F3a), then build the real feature from those numbers (F3b).", "status": "6 of 7 tasks done.", "repairRounds": 0,
+{"id": "F3", "title": "See-through objects", "round": "Round 1", "column": "done", "merged": "2026-09-27", "statusAuto": "merged:2026-09-27", "machine": "james-3080", "kind": "feature", "origin": "The generator (TRELLIS) works out how see-through each voxel is, but the game throws that away. Ben: \"Trellis should do see-through ok\".", "raisedBy": "Ben", "summary": "Split in two: first measure whether the see-through data is good enough to be worth keeping (F3a), then build the real feature from those numbers (F3b).", "status": "6 of 7 tasks done.", "merged": "2026-09-27", "repairRounds": 0,
  "involved": [
    {"role":"researched","model":"Claude Opus (orchestrator)","machine":"ben-3070"}
  ]},
@@ -109,7 +109,7 @@ window.VOX_BOARD = {
    {"role":"researched","model":"Claude Opus (subagent)","machine":"ben-3070"}
  ]},
 
-{"id": "F3c", "title": "Air behind glass, not clear filling", "round": "Round 1", "column": "doing", "kind": "feature", "origin": "F3b fills the space behind glass with clear glass, because telling trapped air apart reliably proved fragile. Ben would rather it were air.", "raisedBy": "Ben", "summary": "Work out reliably which voxels behind glass are air, so a bottle is hollow instead of full of clear glass.", "status": "2 of 3 tasks done.", "parent": "F3", "machine": "ben-3070", "statusAuto": "tasks:2/3", "repairRounds": 0,
+{"id": "F3c", "title": "Air behind glass, not clear filling", "round": "Round 1", "column": "done", "merged": "2026-09-27", "kind": "feature", "origin": "F3b fills the space behind glass with clear glass, because telling trapped air apart reliably proved fragile. Ben would rather it were air.", "raisedBy": "Ben", "summary": "Work out reliably which voxels behind glass are air, so a bottle is hollow instead of full of clear glass.", "status": "Merged 2026-09-27: all three tasks done; both switches (air, one colour per pane) stay off until Ben decides.", "parent": "F3", "machine": "ben-3070", "statusAuto": "merged:2026-09-27", "merged": "2026-09-27", "repairRounds": 0,
  "involved": []},
 
 {"id": "F3b2", "title": "Work out which voxels are see-through", "round": "Round 1", "column": "done", "statusAuto": "merged:2026-09-24", "machine": "ben-3070", "dispatched": "2026-09-24 15:52", "kind": "feature", "grade": "L", "origin": "The first half of F3b: something has to turn the generator's see-through numbers into a yes-or-no rule before anything can be drawn with them.", "raisedBy": "Ben", "summary": "The game can now tell which outer voxels of a generated object are glass and which are empty space the generator filled in, and rebuild the inside to match. Nothing uses it yet: hooking it into generation is the next part (F3b4).", "status": "Merged. Checked against the 22 real pictures from F3a; nothing to see in the game yet.", "parent": "F3b", "blocking": [], "repairRounds": 0,
@@ -811,7 +811,7 @@ window.VOX_BOARD = {
    {"role":"reviewed","model":"Grok (grok-4.5)","machine":"james-3080"}
  ]},
 
-{"id": "F3c3", "title": "one colour per pane (a switch, measured on the kept pictures)", "round": "Round 1", "column": "doing", "dispatched": "2026-09-26 21:02", "kind": "feature", "grade": "S", "origin": "Generated glass reads as a solid blue block. F3c2 (docs/design/F3c2-air.md, Result) showed that taking the clear fill away behind the glass removes 72% of the bottle's seams, yet the bottle with air still reads solid: 72% of the glass faces left are still seams, now between the pane's own voxels.", "raisedBy": "Ben", "parent": "F3c", "machine": "james-3080", "status": "Being built by OpenRouter stealth/space-bunny-alpha on Ben's Win (RTX 3070 8GB).", "statusAuto": "building:OpenRouter stealth/space-bunny-alpha@ben-3070", "handedFrom": "ben-3070", "repairRounds": 0,
+{"id": "F3c3", "title": "one colour per pane (a switch, measured on the kept pictures)", "round": "Round 1", "forPlaytesters": "Nothing changes by default. The switch (-VoxSeePaneColour) gives each pane of glass one colour, so it stops drawing a seam between every pair of its voxels; it is off until Ben decides, alongside -VoxSeeAir.", "column": "done", "merged": "2026-09-27", "dispatched": "2026-09-26 21:02", "summary": "One colour per pane of glass, as a switch that is off by default: each pane takes its median colour, so the faces inside it stop being drawn. On all five glass pictures that took the internal glass faces to 0 (the bottle from 751,030); with air on too, the bottle reads as real glass. Ben decides both switches next week.", "kind": "feature", "grade": "S", "origin": "Generated glass reads as a solid blue block. F3c2 (docs/design/F3c2-air.md, Result) showed that taking the clear fill away behind the glass removes 72% of the bottle's seams, yet the bottle with air still reads solid: 72% of the glass faces left are still seams, now between the pane's own voxels.", "raisedBy": "Ben", "parent": "F3c", "machine": "james-3080", "status": "Merged 2026-09-27.", "statusAuto": "merged:2026-09-27", "handedFrom": "ben-3070", "tokens": 6708778, "tokensWritten": 43548, "workMinutes": 26, "repairRounds": 0,
  "involved": [
    {"role":"implemented","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"}
  ]}
