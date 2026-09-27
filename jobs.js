@@ -1,5 +1,5 @@
 window.VOX_BOARD = {
-"updated": "2026-09-27 09:41 UTC",
+"updated": "2026-09-27 10:22 UTC",
 "machines": {
   "ben-3070": "Ben's Win (RTX 3070 8GB)",
   "james-3080": "James Win (RTX 3080 10GB)",
@@ -297,7 +297,7 @@ window.VOX_BOARD = {
    {"role":"reviewed","model":"deepseek-flash","machine":"ben-3070"}
  ]},
 
-{"id": "F7k", "title": "Keep a glued build as a library object", "round": "Round 1", "column": "doing", "statusAuto": "repaired:Grok (grok-4.7)@james-3080", "dispatched": "2026-09-25 23:30", "machine": "james-3080", "kind": "feature", "grade": "L", "origin": "Part of F7.", "raisedBy": "Ben", "summary": "Press K on something you glued together to save it to your library as one object.", "status": "In its repair round.", "parent": "F7", "blocking": ["F26"], "repairRounds": 0,
+{"id": "F7k", "title": "Keep a glued build as a library object", "round": "Round 1", "column": "doing", "statusAuto": "building:Grok (grok-4.7)@james-3080", "dispatched": "2026-09-25 23:30", "machine": "james-3080", "kind": "feature", "grade": "L", "origin": "Part of F7.", "raisedBy": "Ben", "summary": "Press K on something you glued together to save it to your library as one object.", "status": "Being built by Grok (grok-4.7) on James Win (RTX 3080 10GB).", "parent": "F7", "blocking": ["F26"], "repairRounds": 0,
  "involved": [
    {"role":"researched","model":"Claude Opus (subagent)","machine":"ben-3070"},
    {"role":"implemented","model":"Grok (grok-4.7)","machine":"james-3080"},
