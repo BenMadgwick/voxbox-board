@@ -302,7 +302,8 @@ window.VOX_BOARD = {
    {"role":"researched","model":"Claude Opus (subagent)","machine":"ben-3070"},
    {"role":"implemented","model":"Grok (grok-4.7)","machine":"james-3080"},
    {"role":"reviewed","model":"Grok (grok-4.7)","machine":"james-3080"},
-   {"role":"repaired","model":"Grok (grok-4.7)","machine":"james-3080"}
+   {"role":"repaired","model":"Grok (grok-4.7)","machine":"james-3080"},
+   {"role":"reviewed","model":"Claude Opus (orchestrator)","machine":"james-3080"}
  ]},
 
 {"id": "F7f", "title": "Glued builds stay light", "round": "Round 1", "column": "done", "statusAuto": "merged:2026-09-24", "merged": "2026-09-24 21:36", "machine": "ben-3070", "dispatched": "2026-09-24 07:53", "kind": "feature", "grade": "M", "origin": "Part of F7.", "raisedBy": "Ben", "summary": "Parts that line up exactly on the voxel grid -- the same size and material, whole quarter turns apart, whole voxels apart, and unpainted (or cut from the same object and put back where they were) -- are folded into one part when glued, so a wall of 64 crates is one part, not 64. Erase still restores exactly what was there.", "status": "Merged. Built and tested by script (64-crate wall -> 1 part, erase round-trip, all 24 turns in the unit test); the picture was looked at. Not yet played, and not yet tried between two players.", "parent": "F7", "repairRounds": 2,
