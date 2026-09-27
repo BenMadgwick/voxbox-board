@@ -1,5 +1,5 @@
 window.VOX_BOARD = {
-"updated": "2026-09-27 15:31 UTC",
+"updated": "2026-09-27 15:32 UTC",
 "machines": {
   "ben-3070": "Ben's Win (RTX 3070 8GB)",
   "james-3080": "James Win (RTX 3080 10GB)",
@@ -578,7 +578,7 @@ window.VOX_BOARD = {
    {"role":"reviewed","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"},
    {"role":"repaired","model":"OpenRouter stealth/space-bunny-alpha","machine":"ben-3070"}
  ]},
-{"id": "F26", "title": "Parts that move", "round": "Round 1", "column": "done", "kind": "feature", "grade": "L", "origin": "Ben, 24 September: once an object has parts, they could move: a glass that topples, a lid that opens, crude limbs on a character.", "raisedBy": "Ben", "summary": "Parts of an object can rotate, slide and scale (scaled to nothing, a part hides), driven by time, by a use key, or left to physics like a hinge. Parts can hang from other parts, so an arm moves its hand. Saved with the object, so it still moves when thrown out of the library. A broken part stops moving, and so do the parts hanging from it. Not built: the Animate panel in the Parts tool (section 6, best effort) -- for now anims come only from demos and code; a question for Ben.", "status": "Merged 2026-09-27.", "tokens": 18977982, "tokensWritten": 111418, "workMinutes": 46, "repairRounds": 1, "involved": [
+{"id": "F26", "title": "Parts that move", "round": "Round 1", "column": "done", "kind": "feature", "grade": "L", "origin": "Ben, 24 September: once an object has parts, they could move: a glass that topples, a lid that opens, crude limbs on a character.", "raisedBy": "Ben", "summary": "Parts of an object can rotate, slide and scale (scaled to nothing, a part hides), driven by time, by a use key, or left to physics like a hinge. Parts can hang from other parts, so an arm moves its hand. Saved with the object, so it still moves when thrown out of the library. A broken part stops moving, and so do the parts hanging from it. Not built: the Animate panel in the Parts tool (section 6, best effort) -- for now anims come only from demos and code; a question for Ben.", "status": "Merged 2026-09-27.", "questionKind": "decide", "questionFor": "Ben", "questionAsked": "2026-09-27 15:31", "questionBlocks": "nothing: F26 is merged; only authoring anims in game waits", "tokens": 18977982, "tokensWritten": 111418, "workMinutes": 46, "question": "F26 merged without section 6 (the Animate panel in the Parts tool and its Server_ edit RPCs; the brief called it best effort): players cannot yet make a part move. Brief it as a follow-up (F26b), or leave anims to demos and code for now?", "repairRounds": 1, "involved": [
    {"role":"implemented","model":"OpenRouter stealth/space-bunny-alpha","machine":"james-3080"},
    {"role":"reviewed","model":"Grok (grok-4.5)","machine":"james-3080"},
    {"role":"repaired","model":"OpenRouter stealth/space-bunny-alpha","machine":"james-3080"}
